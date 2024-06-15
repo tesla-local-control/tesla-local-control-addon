@@ -1,0 +1,28 @@
+volumes:
+  tesla_ble_mqtt:
+    external: true
+
+services:   
+  tesla_ble_mqtt:
+    container_name: tesla_ble_mqtt
+    # image: "iainbullock/tesla_ble_mqtt:latest"
+ 
+    # environment:
+      # - TZ='Europe/London'
+
+    stdin_open: true
+    tty: true    
+    
+    entrypoint: "/rootfs/app/run.sh"
+    working_dir: /data
+    
+    volumes:
+      - tesla_ble_mqtt:/data
+      - /run/dbus:/run/dbus
+      - /share/tesla_ble_mqtt:/share/tesla_ble_mqtt
+        
+    network_mode: host
+    privileged: true 
+
+    restart: no
+    #restart: unless-stopped  

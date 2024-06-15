@@ -1,0 +1,37 @@
+name: "Tesla Local Commands"
+version: "0.0.1o"
+slug: "tesla_local_commands"
+description: "Local BLE calls to control your Tesla."
+# url: "tbc"
+stage: experimental
+host_network: true
+# host_dbus: true
+homeassistant_api: true
+privileged: [NET_ADMIN]
+arch:
+  - aarch64
+  - amd64
+hassio_role: homeassistant
+init: false
+# full_access: true
+map:
+  - share:rw
+startup: services
+options:
+  vin: ""
+  mqtt_ip: ""
+  mqtt_port: ""
+  mqtt_user: ""
+  mqtt_pwd: ""
+schema:
+  vin: str?
+  mqtt_ip: str?
+  mqtt_port: str?
+  mqtt_user: str?
+  mqtt_pwd: password?
+# ingress: true
+# panel_icon: mdi:forward
+# backup_exclude:
+  # - /data/gnugpg
+  # - /data/password-store
+# hassio_api: true
