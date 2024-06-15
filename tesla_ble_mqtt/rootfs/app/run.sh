@@ -22,6 +22,12 @@ echo MQTT_PORT=$MQTT_PORT
 echo MQTT_USER=$MQTT_USER
 echo "MQTT_PWD=Not Shown"
 
+if [ ! -d /share/tesla_ble_mqtt ]
+then
+    mkdir /share/tesla_ble_mqtt
+else
+    echo "/share/tesla_ble_mqtt already exists, existing keys can be reused"
+fi
 
 send_command() {
  for i in $(seq 5); do
