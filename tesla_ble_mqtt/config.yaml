@@ -1,5 +1,5 @@
 name: "Tesla Local Commands"
-version: "0.0.2a"
+version: "0.0.2"
 slug: "tesla_local_commands"
 description: "Local BLE calls to control your Tesla."
 # url: "tbc"
