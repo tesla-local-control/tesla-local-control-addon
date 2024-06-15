@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # fill these values according to your settings #############
-VIN=""
+TESLA_VIN=""
 MQTT_IP=127.0.0.1
 MQTT_PORT=1883
 MQTT_USER=""
@@ -34,7 +34,7 @@ docker volume create tesla_ble_mqtt
 
 echo "Start main docker container with configuration Options:"
 
-echo TESLA_VIN=$VIN
+echo TESLA_VIN=$TESLA_VIN
 echo MQTT_IP=$MQTT_IP
 echo MQTT_PORT=$MQTT_PORT
 echo MQTT_USER=$MQTT_USER
@@ -43,7 +43,7 @@ echo SEND_CMD_RETRY_DELAY=$SEND_CMD_RETRY_DELAY
 echo BLE_MAC=$BLE_MAC
 
 docker-compose up -d \
-	-e VIN=$VIN \
+	-e TESLA_VIN=$TESLA_VIN \
 	-e MQTT_IP=$MQTT_IP \
 	-e MQTT_PORT=$MQTT_PORT \
 	-e MQTT_USER=$MQTT_USER \
