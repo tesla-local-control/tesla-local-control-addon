@@ -22,6 +22,7 @@ echo MQTT_PORT=$MQTT_PORT
 echo MQTT_USER=$MQTT_USER
 echo "MQTT_PWD=Not Shown"
 
+
 send_command() {
  for i in $(seq 5); do
   echo "Attempt $i/5"
@@ -52,10 +53,10 @@ do
       generate_keys)
        echo "Generating the private key"
        openssl ecparam -genkey -name prime256v1 -noout > /share/tesla_ble_mqtt/private.pem
-       cat private.pem
+       cat /share/tesla_ble_mqtt/private.pem
        echo "Generating the public key"
-       openssl ec -in private.pem -pubout > /share/tesla_ble_mqtt/public.pem
-       cat public.pem
+       openssl ec -in /share/tesla_ble_mqtt/private.pem -pubout > /share/tesla_ble_mqtt/public.pem
+       cat /share/tesla_ble_mqtt/public.pem
        echo "Keys generated, ready to deploy to vehicle. Remove any previously deployed keys from vehicle before deploying this one";;
       deploy_key) 
        echo "Deploying public key to vehicle"  
@@ -102,6 +103,3 @@ do
   done
  sleep 1
 done
-
-
-

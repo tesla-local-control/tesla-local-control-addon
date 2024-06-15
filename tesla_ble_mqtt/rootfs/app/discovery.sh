@@ -1,7 +1,5 @@
 #!/bin/ash
 
-echo "Setting up mqtt entities"
-
 mosquitto_pub -h $MQTT_IP -p $MQTT_PORT -u $MQTT_USER -P $MQTT_PWD -t homeassistant/button/tesla_ble/generate_keys/config -m \
  '{
   "command_topic": "tesla_ble/config",
@@ -120,3 +118,4 @@ mosquitto_pub -h $MQTT_IP -p $MQTT_PORT -u $MQTT_USER -P $MQTT_PWD -t homeassist
   "retain": "true",
   "icon": "mdi:current-ac"
  }' 
+
