@@ -19,10 +19,13 @@ listen_to_mqtt() {
        echo "Generating the public key"
        openssl ec -in /share/tesla_ble_mqtt/private.pem -pubout > /share/tesla_ble_mqtt/public.pem
        cat public.pem
-       echo "Keys generated, ready to deploy to vehicle. Remove any previously deployed BLE keys from vehicle before deploying this one";;
+       echo "KEYS GENERATED. Next:"
+	   echo "1/ Remove any previously deployed BLE keys from vehicle before deploying this one"
+	   echo "2/ Wake the car up with your Tesla App"
+	   echo "3/ Push the button Deploy Key";;
       deploy_key)
        echo "Deploying public key to vehicle"
-        tesla-control -ble -vin $TESLA_VIN add-key-request /share/tesla_ble_mqtt/public.pem owner cloud_key;;
+        send_key;
       *)
        echo "Invalid Configuration request. Topic: $topic Message: $msg";;
      esac;;
@@ -54,8 +57,8 @@ listen_to_mqtt() {
        auto-seat-and-climate)
         echo "Start Auto Seat and Climate"
         send_command $msg;;
-       climate-off)
-        echo "Stop Climate"
+       climate-on)
+        echo "Start Climate"
         send_command $msg;;
        climate-off)
         echo "Stop Climate"
@@ -71,9 +74,6 @@ listen_to_mqtt() {
         send_command $msg;;
        lock)
         echo "Lock Car"
-        send_command $msg;;
-       unlock)
-        echo "Unlock Car"
         send_command $msg;;
        unlock)
         echo "Unlock Car"

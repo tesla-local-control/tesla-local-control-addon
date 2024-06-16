@@ -51,6 +51,22 @@ send_command() {
  done
 }
 
+send_key() {
+ for i in $(seq 5); do
+  echo "Attempt $i/5"
+  tesla-control -ble -vin $TESLA_VIN add-key-request /share/tesla_ble_mqtt/public.pem owner cloud_key
+  EXIT_STATUS=$?
+  set -e
+  if [ $EXIT_STATUS -eq 0 ]; then
+    echo "KEY SENT TO VEHICLE: PLEASE CHECK YOU TESLA'S SCREEN AND ACCEPT WITH YOUR CARD"
+    break
+  else
+    echo "COULD NOT SEND THE KEY. Is the car awake and sufficiently close to the bluetooth device?"
+    sleep $SEND_CMD_RETRY_DELAY
+  fi
+ done 
+}
+
 listen_to_ble() {
  echo "Listening to BLE"
  set +e
@@ -76,15 +92,16 @@ setup_auto_discovery
 echo "Connecting to MQTT to discard any unread messages"
 mosquitto_sub -E -i tesla_ble_mqtt -h $MQTT_IP -p $MQTT_PORT -u $MQTT_USER -P $MQTT_PWD -t tesla_ble/+
 
-echo "Initialize counter"
+echo "Initialize BLE listening loop counter"
 counter=0
-echo "Entering listening loop"
+echo "Entering main MQTT & BLE listening loop"
 while true
 do
+ set +e
  listen_to_mqtt
  ((counter++))
  if [[ $counter -gt 90 ]]; then
-  echo "Reached 90 loops (~3min): scanning car presence"
+  echo "Reached 90 MQTT loops (~3min): Launch BLE scanning for car presence"
   listen_to_ble
   counter=0
  fi

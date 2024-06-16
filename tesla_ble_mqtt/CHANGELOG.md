@@ -1,5 +1,15 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.0.5
+
+### Changed
+
+- Fix extension stopping at first MQTT listening
+- Update logging and documentation
+- Improve pairing procedure doc and logging
+- Improve HA entities classification
+- Cleanup
+
 ## 0.0.4
 
 ### Changed
