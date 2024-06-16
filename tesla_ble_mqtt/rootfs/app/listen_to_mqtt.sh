@@ -19,7 +19,7 @@ listen_to_mqtt() {
        openssl ec -in /share/tesla_ble_mqtt/private.pem -pubout > /share/tesla_ble_mqtt/public.pem
        cat public.pem
        echo "Keys generated, ready to deploy to vehicle. Remove any previously deployed BLE keys from vehicle before deploying this one";;
-      deploy_key) 
+      deploy_key)
        echo "Deploying public key to vehicle"  
         tesla-control -ble -vin $TESLA_VIN add-key-request /share/tesla_ble_mqtt/public.pem owner cloud_key;;
       *)

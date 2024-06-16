@@ -19,6 +19,7 @@ map:
 startup: services
 options:
   vin: ""
+  ble_mac: ""
   mqtt_ip: ""
   mqtt_port: ""
   mqtt_user: ""
@@ -26,6 +27,7 @@ options:
   send_cmd_retry_delay: ""
 schema:
   vin: str?
+  ble_mac: str?
   mqtt_ip: str?
   mqtt_port: str?
   mqtt_user: str?
