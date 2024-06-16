@@ -96,7 +96,7 @@ listen_to_mqtt() {
     tesla_ble/charging-set-amps)
      echo "Set Charging Amps to $msg requested"
      # https://github.com/iainbullock/tesla_ble_mqtt_docker/issues/4
-	 if [[ (($msg-5)) -gt 0 ]]; then
+	 if [ $msg -gt 4 ]; then
 	  echo "Set amps"
       send_command "charging-set-amps $msg"
 	 else
