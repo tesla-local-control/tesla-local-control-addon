@@ -68,6 +68,7 @@ listen_to_ble() {
  fi
 }
 
+echo "Sourcing functions"
 . /app/listen_to_mqtt.sh
 . /app/discovery.sh
 

@@ -6,9 +6,7 @@ setup_auto_discovery() {
   '{
    "state_topic": "tesla_ble/binary_sensor/presence",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -22,9 +20,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/config",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -40,9 +36,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/config",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -58,9 +52,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/config",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -76,9 +68,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/command",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -93,9 +83,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/command",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -110,9 +98,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/command",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -127,9 +113,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/command",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -144,9 +128,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/command",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -161,9 +143,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/command",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -178,9 +158,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/command",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -195,9 +173,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/command",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -212,9 +188,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/command",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -229,9 +203,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/command",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -246,9 +218,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/command",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -263,9 +233,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/command",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -280,9 +248,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/command",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -297,9 +263,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/command",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -314,9 +278,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/command",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -331,9 +293,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/command",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -348,9 +308,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/command",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -365,9 +323,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/command",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -383,9 +339,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/command",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -401,9 +355,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/charging-amps",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -422,9 +374,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/charging-set-limit",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -443,9 +393,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/climate-set-temp",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -464,9 +412,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/seat-heater",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -484,9 +430,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/sw-heater",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"
@@ -501,9 +445,7 @@ setup_auto_discovery() {
   '{
    "command_topic": "tesla_ble/sentry-mode",
    "device": {
-    "identifiers": [
-    "tesla_ble_mqtt"
-    ],
+    "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",
     "model": "tesla_ble_mqtt",
     "name": "Tesla_BLE_MQTT"

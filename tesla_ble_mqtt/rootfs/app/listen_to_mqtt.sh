@@ -120,4 +120,3 @@ listen_to_mqtt() {
    esac
   done
 }
-
