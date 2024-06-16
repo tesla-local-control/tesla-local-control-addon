@@ -11,6 +11,7 @@ if [ -n "${HASSIO_TOKEN:-}" ]; then
   MQTT_USER="$(bashio::config 'mqtt_user')"; export MQTT_USER
   MQTT_PWD="$(bashio::config 'mqtt_pwd')"; export MQTT_PWD
   SEND_CMD_RETRY_DELAY="$(bashio::config 'send_cmd_retry_delay')"; export SEND_CMD_RETRY_DELAY
+  TESLA_PRESENCE_DELAY="$(bashio::config 'tesla_presence_delay')"; export TESLA_PRESENCE_DELAY
 fi
 
 echo "tesla_ble_mqtt_docker by Iain Bullock 2024 https://github.com/iainbullock/tesla_ble_mqtt_docker"
@@ -25,6 +26,7 @@ echo MQTT_PORT=$MQTT_PORT
 echo MQTT_USER=$MQTT_USER
 echo "MQTT_PWD=Not Shown"
 echo SEND_CMD_RETRY_DELAY=$SEND_CMD_RETRY_DELAY
+echo TESLA_PRESENCE_DELAY=$TESLA_PRESENCE_DELAY
 
 if [ ! -d /share/tesla_ble_mqtt ]
 then
@@ -92,18 +94,25 @@ setup_auto_discovery
 echo "Connecting to MQTT to discard any unread messages"
 mosquitto_sub -E -i tesla_ble_mqtt -h $MQTT_IP -p $MQTT_PORT -u $MQTT_USER -P $MQTT_PWD -t tesla_ble/+
 
-echo "Initialize BLE listening loop counter"
-counter=0
-echo "Entering main MQTT & BLE listening loop"
+ble_listening_loop() {
+
+ bashio::log.green "Initializing BLE scanning loop for car presence"
+
+ while :
+ do
+   bashio::log.green "Launch BLE scanning for car presence every $TESLA_PRESENCE_DELAY"
+   listen_to_ble
+   sleep $TESLA_PRESENCE_DELAY
+  fi
+ done
+
+}
+
+ble_listening_loop &
+
+echo "Entering main listening MQTT loop"
 while true
 do
  set +e
  listen_to_mqtt
- ((counter++))
- if [[ $counter -gt 90 ]]; then
-  echo "Reached 90 MQTT loops (~3min): Launch BLE scanning for car presence"
-  listen_to_ble
-  counter=0
- fi
- sleep 2
 done

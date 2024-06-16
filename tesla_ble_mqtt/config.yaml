@@ -24,7 +24,8 @@ options:
   mqtt_port: "1883"
   mqtt_user: ""
   mqtt_pwd: ""
-  send_cmd_retry_delay: "5"
+  send_cmd_retry_delay: "5s"
+  tesla_presence_delay: "3m"
 schema:
   vin: str?
   ble_mac: str?
@@ -33,6 +34,7 @@ schema:
   mqtt_user: str?
   mqtt_pwd: password?
   send_cmd_retry_delay: str?
+  tesla_presence_delay: str?
 # ingress: true
 # panel_icon: mdi:forward
 # backup_exclude:
