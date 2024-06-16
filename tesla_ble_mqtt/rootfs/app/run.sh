@@ -35,10 +35,15 @@ fi
 send_command() {
  for i in $(seq 5); do
   echo "Attempt $i/5"
+  set +e
   tesla-control -ble -vin $TESLA_VIN -key-name /share/tesla_ble_mqtt/private.pem -key-file /share/tesla_ble_mqtt/private.pem $1
-  if [ $? -eq 0 ]; then
+  EXIT_STATUS=$?
+  set -e
+  if [ $EXIT_STATUS -eq 0 ]; then
     echo "Ok"
     break
+  else
+    echo "Error calling tesla-control: $EXIT_STATUS"
   fi
   sleep $SEND_CMD_RETRY_DELAY
  done 
