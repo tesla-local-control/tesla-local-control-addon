@@ -75,8 +75,9 @@ setup_auto_discovery
 echo "Discard any unread MQTT messages"
 mosquitto_sub -E -i tesla_ble_mqtt -h $MQTT_IP -p $MQTT_PORT -u $MQTT_USER -P $MQTT_PWD -t tesla_ble/+ 
 
-echo "Entering listening loop"
+echo "Initialize counter"
 counter=0
+echo "Entering listening loop"
 while true
 do
  listen_to_mqtt
@@ -88,3 +89,4 @@ do
  fi
  sleep 2
 done
+
