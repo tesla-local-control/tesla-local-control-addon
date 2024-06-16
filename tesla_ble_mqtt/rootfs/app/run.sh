@@ -1,5 +1,5 @@
 #!/command/with-contenv bashio
-set -e
+#set -e
 
 
 # read options in case of HA addon. Otherwise, they will be sent as environment variables
