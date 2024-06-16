@@ -76,8 +76,8 @@ echo "Discard any unread MQTT messages"
 mosquitto_sub -E -i tesla_ble_mqtt -h $MQTT_IP -p $MQTT_PORT -u $MQTT_USER -P $MQTT_PWD -t tesla_ble/+ 
 
 echo "Entering listening loop"
-while true
 counter=0
+while true
 do
  listen_to_mqtt
  ((counter++))
