@@ -79,7 +79,7 @@ setup_auto_discovery() {
    "unique_id": "tesla_ble_wake"
   }' 
 
- mosquitto_pub -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t homeassistant/button/tesla_ble/flash-lights/config -m \ 
+ mosquitto_pub -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t homeassistant/button/tesla_ble/flash-lights/config -m \
   '{
    "command_topic": "tesla_ble/command",
    "device": {
@@ -94,7 +94,7 @@ setup_auto_discovery() {
    "unique_id": "tesla_ble_flash_lights"
   }'  
 
- mosquitto_pub -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t homeassistant/button/tesla_ble/honk/config -m \ 
+ mosquitto_pub -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t homeassistant/button/tesla_ble/honk/config -m \
   '{
    "command_topic": "tesla_ble/command",
    "device": {
@@ -109,7 +109,7 @@ setup_auto_discovery() {
    "unique_id": "tesla_ble_honk"
   }' 
  
- mosquitto_pub -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t homeassistant/button/tesla_ble/lock/config -m \ 
+ mosquitto_pub -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t homeassistant/button/tesla_ble/lock/config -m \
   '{
    "command_topic": "tesla_ble/command",
    "device": {
@@ -335,7 +335,7 @@ setup_auto_discovery() {
    "unique_id": "tesla_ble_product-info"
    }' 
 
- mosquitto_pub -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t homeassistant/button/tesla_ble/session-info/config -m \ 
+ mosquitto_pub -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t homeassistant/button/tesla_ble/session-info/config -m \
   '{
    "command_topic": "tesla_ble/command",
    "device": {
@@ -389,7 +389,7 @@ setup_auto_discovery() {
    "icon": "mdi:battery-90"
    }' 
 
- mosquitto_pub -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t homeassistant/number/tesla_ble/climate-set-temp/config -m \ 
+ mosquitto_pub -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t homeassistant/number/tesla_ble/climate-set-temp/config -m \
   '{
    "command_topic": "tesla_ble/climate-set-temp",
    "device": {
@@ -408,7 +408,7 @@ setup_auto_discovery() {
    "icon": "mdi:temperature"
    }' 
 
- mosquitto_pub -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t homeassistant/number/tesla_ble/seat-heater/config -m \ 
+ mosquitto_pub -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t homeassistant/number/tesla_ble/seat-heater/config -m \
   '{
    "command_topic": "tesla_ble/seat-heater",
    "device": {
