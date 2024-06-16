@@ -56,9 +56,6 @@ listen_to_mqtt() {
        climate-off)
         echo "Stop Climate"
         send_command $msg;;
-       climate-off)
-        echo "Stop Climate"
-        send_command $msg;;
        flash-lights)
         echo "Flash Lights"
         send_command $msg;;
@@ -71,9 +68,6 @@ listen_to_mqtt() {
        lock)
         echo "Lock Car"
         send_command $msg;; 
-       unlock)
-        echo "Unlock Car"
-        send_command $msg;;
        unlock)
         echo "Unlock Car"
         send_command $msg;;
