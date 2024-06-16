@@ -19,6 +19,7 @@ echo "Instructions by Shankar Kumarasamy https://shankarkumarasamy.blog/2024/01/
 
 echo "Configuration Options are:"
 echo TESLA_VIN=$TESLA_VIN
+echo BLE_MAC=$BLE_MAC
 echo MQTT_IP=$MQTT_IP
 echo MQTT_PORT=$MQTT_PORT
 echo MQTT_USER=$MQTT_USER
@@ -44,10 +45,10 @@ send_command() {
     echo "Ok"
     break
   else
-    echo "Error calling tesla-control: $EXIT_STATUS"
+    echo "Error calling $tesla_ctrl_cmd, exit code=$EXIT_STATUS- will retry in $SEND_CMD_RETRY_DELAY"
+    sleep $SEND_CMD_RETRY_DELAY
   fi
-  sleep $SEND_CMD_RETRY_DELAY
- done 
+ done
 }
 
 listen_to_ble() {
@@ -70,10 +71,10 @@ echo "Sourcing functions"
 . /app/discovery.sh
 
 echo "Setting up auto discovery for Home Assistant"
-setup_auto_discovery 
+setup_auto_discovery
 
-echo "Discard any unread MQTT messages"
-mosquitto_sub -E -i tesla_ble_mqtt -h $MQTT_IP -p $MQTT_PORT -u $MQTT_USER -P $MQTT_PWD -t tesla_ble/+ 
+echo "Connecting to MQTT to discard any unread messages"
+mosquitto_sub -E -i tesla_ble_mqtt -h $MQTT_IP -p $MQTT_PORT -u $MQTT_USER -P $MQTT_PWD -t tesla_ble/+
 
 echo "Initialize counter"
 counter=0
@@ -89,4 +90,3 @@ do
  fi
  sleep 2
 done
-

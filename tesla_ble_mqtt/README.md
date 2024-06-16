@@ -28,7 +28,7 @@ Note that in both cases below, if you have already created a key pair that you w
 
 You will need to provide:
 - TESLA_VIN (car VIN)
-- BLE_MAC: to be used for proximity discovery, you can use "BLE scanner" Android App to identify it. The Tesla BLE device is identifiable starting with "S" and ending with "C" in the list of devices.
+- BLE_MAC: Used for proximity discovery. Tesla's BLE MAC starts with "S" and ends with "C". To find the address, use "BLE scanner" on Android or "nRF Connect" on iOS.
 - MQTT_IP: ip of your MQTT server
 - MQTT_PORT
 - MQTT_USER
