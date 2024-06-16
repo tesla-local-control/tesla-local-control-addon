@@ -96,11 +96,17 @@ listen_to_mqtt() {
     tesla_ble/charging-set-amps)
      echo "Set Charging Amps to $msg requested"
      # https://github.com/iainbullock/tesla_ble_mqtt_docker/issues/4
-     echo First Amp set
-     send_command "charging-set-amps $msg"
-     sleep 1
-     echo Second Amp set
-     send_command "charging-set-amps $msg";;
+	 if [[ (($msg-5)) -gt 0 ]]; then
+	  echo "Set amps"
+      send_command "charging-set-amps $msg"
+	 else
+      echo "First Amp set"
+      send_command "charging-set-amps $msg"
+      sleep 1
+      echo "Second Amp set"
+      send_command "charging-set-amps $msg"
+	 fi
+	 ;;
 
     tesla_ble/climate-set-temp)
      echo "Set Climate Temp to $msg requested"

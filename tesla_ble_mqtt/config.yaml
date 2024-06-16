@@ -1,12 +1,12 @@
 name: "Tesla Local Commands"
-version: "0.0.3a"
+version: "0.0.3b"
 slug: "tesla_local_commands"
 description: "Local BLE calls to control your Tesla."
 # url: "tbc"
 stage: experimental
 host_network: true
 host_dbus: true
-homeassistant_api: true
+# homeassistant_api: true
 privileged: [NET_ADMIN]
 arch:
   - aarch64
