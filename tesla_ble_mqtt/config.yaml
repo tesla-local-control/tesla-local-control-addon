@@ -21,7 +21,7 @@ options:
   vin: ""
   ble_mac: ""
   mqtt_ip: ""
-  mqtt_port: ""
+  mqtt_port: "1883"
   mqtt_user: ""
   mqtt_pwd: ""
   send_cmd_retry_delay: "5"
