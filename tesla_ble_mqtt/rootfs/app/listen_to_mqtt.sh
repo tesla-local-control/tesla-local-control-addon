@@ -25,7 +25,7 @@ listen_to_mqtt() {
 	   echo "3/ Push the button Deploy Key";;
       deploy_key)
        echo "Deploying public key to vehicle"
-        send_key;
+        send_key;;
       *)
        echo "Invalid Configuration request. Topic: $topic Message: $msg";;
      esac;;
