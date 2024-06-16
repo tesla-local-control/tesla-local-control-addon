@@ -68,8 +68,8 @@ listen_to_ble() {
  fi
 }
 
-. /app/discovery.sh
 . /app/listen_to_mqtt.sh
+. /app/discovery.sh
 
 echo "Setting up auto discovery for Home Assistant"
 setup_auto_discovery 
