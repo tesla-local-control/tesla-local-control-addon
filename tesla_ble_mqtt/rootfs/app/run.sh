@@ -80,8 +80,8 @@ while true
 counter=0
 do
  listen_to_mqtt
- counter=$((counter+1))
- if [[ "$counter" -gt 90 ]]; then
+ ((counter++))
+ if [[ $counter -gt 90 ]]; then
   echo "Reached 90 loops (~3min): scanning car presence"
   listen_to_ble
   counter=0

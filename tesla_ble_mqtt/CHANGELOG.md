@@ -1,5 +1,12 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.0.4
+
+### Changed
+
+- Fix periodicity of BLE discovery (to cope with HA limits)
+- Fix set-amps for current above 5A
+
 ## 0.0.3
 
 ### Changed
