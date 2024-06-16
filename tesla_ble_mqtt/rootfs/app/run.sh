@@ -5,6 +5,7 @@
 # read options in case of HA addon. Otherwise, they will be sent as environment variables
 if [ -n "${HASSIO_TOKEN:-}" ]; then
   TESLA_VIN="$(bashio::config 'vin')"; export TESLA_VIN
+  BLE_MAC="$(bashio::config 'ble_mac')"; export BLE_MAC
   MQTT_IP="$(bashio::config 'mqtt_ip')"; export MQTT_IP
   MQTT_PORT="$(bashio::config 'mqtt_port')"; export MQTT_PORT
   MQTT_USER="$(bashio::config 'mqtt_user')"; export MQTT_USER
@@ -49,17 +50,17 @@ send_command() {
  done 
 }
 
-# listen_to_ble() {
- # echo "Listening to BLE"
- # bluetoothctl --timeout 2 scan on | grep $BLE_MAC
- # if [ $? -eq 0 ]; then
-   # echo "$BLE_MAC presence detected"
-   # mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m ON
- # else
-   # echo "$BLE_MAC presence not detected"
-   # mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m OFF
- # fi
-# }
+listen_to_ble() {
+ echo "Listening to BLE"
+ bluetoothctl --timeout 2 scan on | grep $BLE_MAC
+ if [ $? -eq 0 ]; then
+   echo "$BLE_MAC presence detected"
+   mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m ON
+ else
+   echo "$BLE_MAC presence not detected"
+   mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m OFF
+ fi
+}
 
 echo "Sourcing functions"
 . /app/listen_to_mqtt.sh
@@ -75,6 +76,6 @@ echo "Entering listening loop"
 while true
 do
  listen_to_mqtt
- # listen_to_ble
+ listen_to_ble
  sleep 2
 done
