@@ -93,7 +93,7 @@ listen_to_mqtt() {
         echo "Invalid Command Request. Topic: $topic Message: $msg";;
       esac;;
       
-    tesla_ble/charging-amps)
+    tesla_ble/charging-set-amps)
      echo "Set Charging Amps to $msg requested"
      # https://github.com/iainbullock/tesla_ble_mqtt_docker/issues/4
      echo First Amp set
