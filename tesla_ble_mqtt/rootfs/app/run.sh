@@ -45,7 +45,7 @@ send_command() {
     echo "Ok"
     break
   else
-    echo "Error calling $tesla_ctrl_cmd, exit code=$EXIT_STATUS- will retry in $SEND_CMD_RETRY_DELAY"
+    echo "Error calling tesla-control, exit code=$EXIT_STATUS - will retry in $SEND_CMD_RETRY_DELAY seconds"
     sleep $SEND_CMD_RETRY_DELAY
   fi
  done
