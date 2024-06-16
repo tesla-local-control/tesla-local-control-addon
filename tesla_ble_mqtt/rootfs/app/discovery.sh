@@ -353,7 +353,7 @@ setup_auto_discovery() {
 
  mosquitto_pub -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t homeassistant/number/tesla_ble/charging-set-amps/config -m \
   '{
-   "command_topic": "tesla_ble/charging-amps",
+   "command_topic": "tesla_ble/charging-set-amps",
    "device": {
     "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "iainbullock",

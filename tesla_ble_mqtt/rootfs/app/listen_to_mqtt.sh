@@ -111,7 +111,7 @@ listen_to_mqtt() {
      send_command "seat-heater $msg";;      
      
     tesla_ble/charging-set-limit)
-     echo "Set Seat Heater to $msg requested"
+     echo "Set Charging limit to $msg requested"
      send_command "charging-set-limit $msg";;      
      
     homeassistant/status)

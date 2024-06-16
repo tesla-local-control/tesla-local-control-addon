@@ -31,23 +31,11 @@ else
     echo "/share/tesla_ble_mqtt already exists, existing keys can be reused"
 fi
 
+
 send_command() {
  for i in $(seq 5); do
   echo "Attempt $i/5"
   tesla-control -ble -vin $TESLA_VIN -key-name /share/tesla_ble_mqtt/private.pem -key-file /share/tesla_ble_mqtt/private.pem $1
-  if [ $? -eq 0 ]; then
-    echo "Ok"
-    break
-  fi
-  sleep 5
- done 
-}
-
-
-send_command() {
- for i in $(seq 5); do
-  echo "Attempt $i/5"
-  tesla-control -ble -key-name -vin $TESLA_VIN /share/tesla_ble_mqtt/private.pem -key-file /share/tesla_ble_mqtt/private.pem $1
   if [ $? -eq 0 ]; then
     echo "Ok"
     break
