@@ -32,7 +32,7 @@ fi
 send_command() {
  for i in $(seq 5); do
   echo "Attempt $i/5"
-  tesla-control -ble -key-name /share/tesla_ble_mqtt/private.pem -key-file /share/tesla_ble_mqtt/private.pem $1
+  tesla-control -ble -vin $TESLA_VIN -key-name /share/tesla_ble_mqtt/private.pem -key-file /share/tesla_ble_mqtt/private.pem $1
   if [ $? -eq 0 ]; then
     echo "Ok"
     break
@@ -66,7 +66,7 @@ do
        echo "Keys generated, ready to deploy to vehicle. Remove any previously deployed keys from vehicle before deploying this one";;
       deploy_key) 
        echo "Deploying public key to vehicle"  
-        tesla-control -ble add-key-request /share/tesla_ble_mqtt/public.pem owner cloud_key;;
+        tesla-control -ble -vin $TESLA_VIN add-key-request /share/tesla_ble_mqtt/public.pem owner cloud_key;;
       *)
        echo "Invalid Configuration request";;
      esac;;
