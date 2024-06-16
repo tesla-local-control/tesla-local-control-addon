@@ -24,7 +24,7 @@ options:
   mqtt_port: ""
   mqtt_user: ""
   mqtt_pwd: ""
-  send_cmd_retry_delay: ""
+  send_cmd_retry_delay: "5"
 schema:
   vin: str?
   ble_mac: str?
