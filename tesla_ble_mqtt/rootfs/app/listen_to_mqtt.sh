@@ -1,7 +1,7 @@
 #!/bin/ash
 
 listen_to_mqtt() {
- echo "Listening to MQTT"
+ # echo "Listening to MQTT"
  mosquitto_sub --nodelay -E -c -i tesla_ble_mqtt -q 1 -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/+ -t homeassistant/status -F "%t %p" | while read -r payload
   do
    topic=$(echo "$payload" | cut -d ' ' -f 1)
@@ -109,6 +109,10 @@ listen_to_mqtt() {
     tesla_ble/seat-heater)
      echo "Set Seat Heater to $msg requested"
      send_command "seat-heater $msg";;      
+     
+    tesla_ble/charging-set-limit)
+     echo "Set Seat Heater to $msg requested"
+     send_command "charging-set-limit $msg";;      
      
     homeassistant/status)
      # https://github.com/iainbullock/tesla_ble_mqtt_docker/discussions/6
