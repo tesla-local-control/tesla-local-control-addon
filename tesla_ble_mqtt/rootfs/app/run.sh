@@ -9,6 +9,7 @@ if [ -n "${HASSIO_TOKEN:-}" ]; then
   MQTT_PORT="$(bashio::config 'mqtt_port')"; export MQTT_PORT
   MQTT_USER="$(bashio::config 'mqtt_user')"; export MQTT_USER
   MQTT_PWD="$(bashio::config 'mqtt_pwd')"; export MQTT_PWD
+  SEND_CMD_RETRY_DELAY="$(bashio::config 'send_cmd_retry_delay')"; export SEND_CMD_RETRY_DELAY
 fi
 
 echo "tesla_ble_mqtt_docker by Iain Bullock 2024 https://github.com/iainbullock/tesla_ble_mqtt_docker"
@@ -21,6 +22,7 @@ echo MQTT_IP=$MQTT_IP
 echo MQTT_PORT=$MQTT_PORT
 echo MQTT_USER=$MQTT_USER
 echo "MQTT_PWD=Not Shown"
+echo SEND_CMD_RETRY_DELAY=$SEND_CMD_RETRY_DELAY
 
 if [ ! -d /share/tesla_ble_mqtt ]
 then
@@ -41,71 +43,44 @@ send_command() {
  done 
 }
 
-echo "Setting up auto discovery for Home Assistant"
-. /app/discovery.sh
 
-echo "Listening to MQTT"
+send_command() {
+ for i in $(seq 5); do
+  echo "Attempt $i/5"
+  tesla-control -ble -key-name -vin $TESLA_VIN /share/tesla_ble_mqtt/private.pem -key-file /share/tesla_ble_mqtt/private.pem $1
+  if [ $? -eq 0 ]; then
+    echo "Ok"
+    break
+  fi
+  sleep $SEND_CMD_RETRY_DELAY
+ done 
+}
+
+listen_to_ble() {
+ echo "Listening to BLE"
+ bluetoothctl --timeout 2 scan on | grep $BLE_MAC
+ if [ $? -eq 0 ]; then
+   echo "$BLE_MAC presence detected"
+   mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m ON
+ else
+   echo "$BLE_MAC presence not detected"
+   mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m OFF
+ fi
+}
+
+. /app/discovery.sh
+. /app/listen_to_mqtt.sh
+
+echo "Setting up auto discovery for Home Assistant"
+setup_auto_discovery 
+
+echo "Discard any unread MQTT messages"
+mosquitto_sub -E -i tesla_ble_mqtt -h $MQTT_IP -p $MQTT_PORT -u $MQTT_USER -P $MQTT_PWD -t tesla_ble/+ 
+
+echo "Entering listening loop"
 while true
 do
- mosquitto_sub -h $MQTT_IP -p $MQTT_PORT -u $MQTT_USER -P $MQTT_PWD -t tesla_ble/+ -t homeassistant/status -F "%t %p" | while read -r payload
-  do
-   topic=$(echo "$payload" | cut -d ' ' -f 1)
-   msg=$(echo "$payload" | cut -d ' ' -f 2-)
-   echo "Received MQTT message: $topic $msg"
-   case $topic in
-    tesla_ble/config)
-     echo "Configuration $msg requested"
-     case $msg in
-      generate_keys)
-       echo "Generating the private key"
-       openssl ecparam -genkey -name prime256v1 -noout > /share/tesla_ble_mqtt/private.pem
-       cat /share/tesla_ble_mqtt/private.pem
-       echo "Generating the public key"
-       openssl ec -in /share/tesla_ble_mqtt/private.pem -pubout > /share/tesla_ble_mqtt/public.pem
-       cat /share/tesla_ble_mqtt/public.pem
-       echo "Keys generated, ready to deploy to vehicle. Remove any previously deployed keys from vehicle before deploying this one";;
-      deploy_key) 
-       echo "Deploying public key to vehicle"  
-        tesla-control -ble -vin $TESLA_VIN add-key-request /share/tesla_ble_mqtt/public.pem owner cloud_key;;
-      *)
-       echo "Invalid Configuration request";;
-     esac;;
-    
-    tesla_ble/command)
-     echo "Command $msg requested"
-     case $msg in
-       trunk-open)
-        echo "Opening Trunk"
-        send_command $msg;;
-       trunk-close)
-        echo "Closing Trunk"
-        send_command $msg;;
-       charging-start)
-        echo "Start Charging"
-        send_command $msg;; 
-       charging-stop)
-        echo "Stop Charging"
-        send_command $msg;;         
-       *)
-        echo "Invalid Command Request";;
-      esac;;
-      
-    tesla_ble/charging-amps)
-     echo Set Charging Amps to $msg requested
-     # https://github.com/iainbullock/tesla_ble_mqtt_docker/issues/4
-     echo First Amp set
-     send_command "charging-set-amps $msg"
-     sleep 1
-     echo Second Amp set
-     send_command "charging-set-amps $msg";;
-
-    homeassistant/status)
-     # https://github.com/iainbullock/tesla_ble_mqtt_docker/discussions/6
-     echo "Home Assistant is stopping or starting, re-running auto-discovery setup"
-     . /app/discovery.sh;;
-    *)
-     echo "Invalid MQTT topic";;
-   esac
-  done
- sleep 1
+ listen_to_mqtt
+ listen_to_ble
+ sleep 2
 done
