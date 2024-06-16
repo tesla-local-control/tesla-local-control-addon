@@ -31,7 +31,7 @@ Note that in both cases below, if you have already created a key pair that you w
 2.2 For the standalone version, it has been tested on RPi 3B so far. Here are the assumptions and way forward:
 - You already have Docker working on the host device, and you are familiar with basic Docker concepts and actions
 - Clone the self packaged shell script: `https://github.com/raphmur/tesla-local-control-addon/blob/main/standalone/start_tesla_ble_mqtt.sh`
-- Edit the script to input your own settings: VIN, MQTT_IP (ip of your MQTT server), MQTT_PORT, MQTT_USER, MQTT_PWD, _optional_ _SEND_CMD_RETRY_DELAY_ (delay between retries in case BLE fails), _optional_ _BLE_MAC_ (to be used for proximity discovery)
+- Edit the script to input your own settings: TESLA_VIN, MQTT_IP (ip of your MQTT server), MQTT_PORT, MQTT_USER, MQTT_PWD, _optional_ _SEND_CMD_RETRY_DELAY_ (delay between retries in case BLE fails), _optional_ _BLE_MAC_ (to be used for proximity discovery)
 - run the script: `./start_tesla_ble_mqtt.sh`, it will download the rest of the elements, build and deploy the container
 
 3 THEN:

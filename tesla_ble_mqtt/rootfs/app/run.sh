@@ -4,7 +4,7 @@ set -e
 
 # read options in case of HA addon. Otherwise, they will be sent as environment variables
 if [ -n "${HASSIO_TOKEN:-}" ]; then
-  VIN="$(bashio::config 'vin')"; export VIN
+  TESLA_VIN="$(bashio::config 'vin')"; export TESLA_VIN
   MQTT_IP="$(bashio::config 'mqtt_ip')"; export MQTT_IP
   MQTT_PORT="$(bashio::config 'mqtt_port')"; export MQTT_PORT
   MQTT_USER="$(bashio::config 'mqtt_user')"; export MQTT_USER
@@ -16,7 +16,7 @@ echo "Inspiration by Raphael Murray https://github.com/raphmur"
 echo "Instructions by Shankar Kumarasamy https://shankarkumarasamy.blog/2024/01/28/tesla-developer-api-guide-ble-key-pair-auth-and-vehicle-commands-part-3"
 
 echo "Configuration Options are:"
-echo TESLA_VIN=$VIN
+echo TESLA_VIN=$TESLA_VIN
 echo MQTT_IP=$MQTT_IP
 echo MQTT_PORT=$MQTT_PORT
 echo MQTT_USER=$MQTT_USER
@@ -32,7 +32,7 @@ fi
 send_command() {
  for i in $(seq 5); do
   echo "Attempt $i/5"
-  tesla-control -ble -vin $VIN -key-name /share/tesla_ble_mqtt/private.pem -key-file /share/tesla_ble_mqtt/private.pem $1
+  tesla-control -ble -key-name /share/tesla_ble_mqtt/private.pem -key-file /share/tesla_ble_mqtt/private.pem $1
   if [ $? -eq 0 ]; then
     echo "Ok"
     break
