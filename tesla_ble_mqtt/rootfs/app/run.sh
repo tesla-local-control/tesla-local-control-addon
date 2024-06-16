@@ -52,12 +52,15 @@ send_command() {
 
 listen_to_ble() {
  echo "Listening to BLE"
- bluetoothctl --timeout 2 scan on | grep $BLE_MAC
+ set +e
+ bluetoothctl --timeout 5 scan on | grep $BLE_MAC
+ EXIT_STATUS=$?
+ set -e
  if [ $? -eq 0 ]; then
    echo "$BLE_MAC presence detected"
    mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m ON
  else
-   echo "$BLE_MAC presence not detected"
+   echo "$BLE_MAC presence not detected or issue in command. Will retry"
    mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m OFF
  fi
 }
@@ -74,8 +77,14 @@ mosquitto_sub -E -i tesla_ble_mqtt -h $MQTT_IP -p $MQTT_PORT -u $MQTT_USER -P $M
 
 echo "Entering listening loop"
 while true
+counter=0
 do
  listen_to_mqtt
- listen_to_ble
+ counter=$((counter+1))
+ if [[ "$counter" -gt 90 ]]; then
+  echo "Reached 90 loops (~3min): scanning car presence"
+  listen_to_ble
+  counter=0
+ fi
  sleep 2
 done
