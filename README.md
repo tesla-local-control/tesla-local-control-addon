@@ -1,6 +1,6 @@
 # Tesla Local Control add-on
 
-This Addon is a package of iainbullock's https://github.com/iainbullock/tesla_ble_mqtt_docker
+This Addon is a package of iainbullock's [tesla_ble_mqtt_docker](https://github.com/iainbullock/tesla_ble_mqtt_docker)
 It runs the official Tesla Vehicle SDK commands via BLE to activate various entities in your Tesla.
 This is to bypass the current Fleet API rate limitation and does not rely on the API.
 
@@ -9,6 +9,23 @@ This package contains:
 - A `standalone` folder which contains a single script to run the BLE service on a separate machine
 
 [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https://github.com/raphmur/tesla-local-control-addon)
+
+## BLE Pairing with your car
+
+- Navigate to the Tesla_BLE_MQTT Device info.
+  - In HA : Settings -> Devices & Services -> Devices (tab) -> Tesla_BLE_MQTT
+- Press : Generate Keys (required once)
+- Press : Deploy Key (car may need to be awake - TBC)
+  - If the command succeed to initiate the pairing with the car, the following will show in the add-on logs:
+    `Sent add-key request to _YOUR_CAR_VIN. Confirm by tapping NFC card on center console.`
+  - Tap your NFC card on the center console
+  - On the car's screen `Phone Key pairing request`, confirm your accept the pairing
+
+  - If the command failed, the following error will show up:
+    `Error: failed to find BLE beacon for _YOUR_CAR_VIN_. (S________________C): can’t scan: context deadline exceeded`
+  - You car might just be too far from your Bluetooth adapter.
+
+- Credits : Shankar Kumarasamy's [Blog](https://shankarkumarasamy.blog/2024/01/28/tesla-developer-api-guide-ble-key-pair-auth-and-vehicle-commands-part-3/)
 
 ## Add-ons
 
