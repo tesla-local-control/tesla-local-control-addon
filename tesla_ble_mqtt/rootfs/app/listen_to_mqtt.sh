@@ -84,12 +84,6 @@ listen_to_mqtt() {
        windows-vent)
         bashio::log.green "Vent Windows"
         send_command $msg;;
-       product-info)
-        bashio::log.green "Get Product Info (experimental)"
-        send_command $msg;;
-       session-info)
-        bashio::log.green "Get Session Info (experimental)"
-        send_command $msg;;
        *)
         bashio::log.red "Invalid Command Request. Topic: $topic Message: $msg";;
       esac;;
@@ -120,6 +114,14 @@ listen_to_mqtt() {
     tesla_ble/charging-set-limit)
      bashio::log.green "Set Charging limit to $msg requested"
      send_command "charging-set-limit $msg";;
+     
+    tesla_ble/heated_seat_left)
+     bashio::log.green "Set Seat heater to front-left $msg requested"
+     send_command "seat-heater front-left $msg";;
+     
+    tesla_ble/heated_seat_right)
+     bashio::log.green "Set Seat heater to front-right $msg requested"
+     send_command "seat-heater front-right $msg";;
 
     homeassistant/status)
      # https://github.com/iainbullock/tesla_ble_mqtt_docker/discussions/6
