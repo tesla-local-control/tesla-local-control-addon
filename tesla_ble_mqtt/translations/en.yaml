@@ -1,0 +1,26 @@
+configuration:
+  mqtt_ip:
+    name: MQTT Server
+    description: MQTT Server's IP address or valid Hostname
+  mqtt_port:
+    name: MQTT Port
+    description: MQTT Listen Port
+  mqtt_user:
+    name: MQTT User
+    description: MQTT Username
+  mqtt_pwd:
+    name: MQTT Password
+    description: MQTT User's password
+  send_cmd_retry_delay:
+    name: Delay to retry a command
+    description: Delay to retry sending a command to the vehicle over BLE
+  debug:
+    name: Debug Logging
+    description: Print verbose messages to the log for debugging
+vehicle:
+  vin:
+    name: Car's VIN
+    description: Vehicle Identification Number found in Tesla app
+  ble_mac:
+    name: BLE MAC (optional for proximity detection)
+    description: Car's BLE MAC (S___________C); Use Android "BLE scanner" or iOS "nRF Connect"
