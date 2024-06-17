@@ -1,7 +1,7 @@
 #!/bin/ash
 
 listen_to_mqtt() {
- bashio::log.debug "Connecting to MQTT server; subscribe topics tesla_ble/+ and homeassistant/status"
+ bashio::log.info "Connecting to MQTT server; subscribe topics tesla_ble/+ and homeassistant/status"
  mosquitto_sub --nodelay -E -c -i tesla_ble_mqtt -q 1 -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/+ -t homeassistant/status -F "%t %p" | \
   while read -r payload
   do
