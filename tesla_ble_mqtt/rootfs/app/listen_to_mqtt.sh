@@ -22,7 +22,7 @@ listen_to_mqtt() {
        bashio::log.green "KEYS GENERATED. Next:
        1/ Remove any previously deployed BLE keys from vehicle before deploying this one
        2/ Wake the car up with your Tesla App
-       3/ Push the button 'Deploy Key'";
+       3/ Push the button 'Deploy Key'";;
       deploy_key)
        bashio::log.yellow "Deploying public key to vehicle"
         send_key;;
