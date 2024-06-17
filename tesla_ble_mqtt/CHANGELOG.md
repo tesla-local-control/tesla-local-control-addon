@@ -1,11 +1,21 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.0.7a
+
+### Changed
+
+WARNING: broken for standalone deployment, stay on 0.0.6a
+OK for HA Addon
+
+- logging fix debug and adjustment
+- prevent always updating presence topic
+- prevent checking for presence if BLE_MAC is empty
+
 ## 0.0.7
 
 ### Changed
 
 WARNING: broken for standalone deployment, stay on 0.0.6
-OK for HA Addon
 
 - Bump to latest updates from tesla_ble_mqtt_docker
 - Improve HA logging and error management
