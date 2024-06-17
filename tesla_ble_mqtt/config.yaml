@@ -20,6 +20,7 @@ startup: services
 options:
   vin: ""
   ble_mac: ""
+  debug: false
   mqtt_ip: ""
   mqtt_port: "1883"
   mqtt_user: ""
@@ -27,6 +28,7 @@ options:
   send_cmd_retry_delay: "5"
 schema:
   vin: str?
+  debug: bool
   ble_mac: str?
   mqtt_ip: str?
   mqtt_port: str?

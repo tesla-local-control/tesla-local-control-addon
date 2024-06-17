@@ -11,6 +11,7 @@ if [ -n "${HASSIO_TOKEN:-}" ]; then
   MQTT_USER="$(bashio::config 'mqtt_user')"; export MQTT_USER
   MQTT_PWD="$(bashio::config 'mqtt_pwd')"; export MQTT_PWD
   SEND_CMD_RETRY_DELAY="$(bashio::config 'send_cmd_retry_delay')"; export SEND_CMD_RETRY_DELAY
+  DEBUG="$(bashio::config 'debug')"; export DEBUG
 fi
 
 bashio::log.cyan "tesla_ble_mqtt_docker by Iain Bullock 2024 https://github.com/iainbullock/tesla_ble_mqtt_docker"
