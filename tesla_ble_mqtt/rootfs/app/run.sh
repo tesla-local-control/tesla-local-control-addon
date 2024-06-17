@@ -71,7 +71,7 @@ send_key() {
     bashio::log.error "Retrying in $SEND_CMD_RETRY_DELAY"
     sleep $SEND_CMD_RETRY_DELAY
   fi
- done 
+ done
 }
 
 PRESENCE_BINARY_SENSOR=OFF

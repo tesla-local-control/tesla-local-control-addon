@@ -115,11 +115,11 @@ listen_to_mqtt() {
     tesla_ble/charging-set-limit)
      bashio::log.info "Set Charging limit to $msg requested"
      send_command "charging-set-limit $msg";;
-     
+
     tesla_ble/heated_seat_left)
      bashio::log.info "Set Seat heater to front-left $msg requested"
      send_command "seat-heater front-left $msg";;
-     
+
     tesla_ble/heated_seat_right)
      bashio::log.info "Set Seat heater to front-right $msg requested"
      send_command "seat-heater front-right $msg";;
