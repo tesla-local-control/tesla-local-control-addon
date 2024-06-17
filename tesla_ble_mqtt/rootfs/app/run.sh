@@ -54,6 +54,7 @@ send_command() {
 send_key() {
  for i in $(seq 5); do
   echo "Attempt $i/5"
+  set +e
   tesla-control -ble -vin $TESLA_VIN add-key-request /share/tesla_ble_mqtt/public.pem owner cloud_key
   EXIT_STATUS=$?
   set -e
