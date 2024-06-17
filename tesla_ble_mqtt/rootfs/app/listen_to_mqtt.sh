@@ -54,9 +54,6 @@ listen_to_mqtt() {
        charge-port-close)
         bashio::log.green "Close Charge Port"
         send_command $msg;;
-       auto-seat-and-climate)
-        bashio::log.green "Start Auto Seat and Climate"
-        send_command $msg;;
        climate-on)
         bashio::log.green "Start Climate"
         send_command $msg;;
@@ -110,6 +107,10 @@ listen_to_mqtt() {
     tesla_ble/seat-heater)
      bashio::log.green "Set Seat Heater to $msg requested"
      send_command "seat-heater $msg";;
+
+    tesla_ble/auto-seat-and-climate)
+     bashio::log.green "Start Auto Seat and Climate"
+     send_command "auto-seat-and-climate LR on";;
 
     tesla_ble/charging-set-limit)
      bashio::log.green "Set Charging limit to $msg requested"

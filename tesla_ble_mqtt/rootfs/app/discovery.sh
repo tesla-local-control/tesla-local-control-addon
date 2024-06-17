@@ -144,7 +144,7 @@ setup_auto_discovery() {
 
  mosquitto_pub -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t homeassistant/button/tesla_ble/auto_seat-climate/config -m \
   '{
-   "command_topic": "tesla_ble/command",
+   "command_topic": "tesla_ble/auto-seat-and-climate",
    "device": {
     "identifiers": ["tesla_ble_mqtt"],
     "manufacturer": "tesla_ble_mqtt",
@@ -427,7 +427,7 @@ setup_auto_discovery() {
    "unique_id": "tesla_ble_sentry-mode"
    }'
 
- mosquitto_pub -h $MQTT_IP -p $MQTT_PORT -u "${MQTT_USER}" -P "${MQTT_PWD}" -t homeassistant/select/tesla_ble/heated_seat_left/config -m \
+ mosquitto_pub -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t homeassistant/select/tesla_ble/heated_seat_left/config -m \
   '{
    "command_topic": "tesla_ble/heated_seat_left",
    "device": {
@@ -443,7 +443,7 @@ setup_auto_discovery() {
    "unique_id": "tesla_ble_heated_seat_left"
    }'
 
- mosquitto_pub -h $MQTT_IP -p $MQTT_PORT -u "${MQTT_USER}" -P "${MQTT_PWD}" -t homeassistant/select/tesla_ble/heated_seat_right/config -m \
+ mosquitto_pub -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t homeassistant/select/tesla_ble/heated_seat_right/config -m \
   '{
    "command_topic": "tesla_ble/heated_seat_right",
    "device": {
