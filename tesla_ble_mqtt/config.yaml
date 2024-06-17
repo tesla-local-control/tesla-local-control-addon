@@ -1,5 +1,5 @@
 name: "Tesla Local Commands"
-version: "0.0.6"
+version: "0.0.6a"
 slug: "tesla_local_commands"
 description: "Local BLE calls to control your Tesla."
 # url: "tbc"
@@ -18,6 +18,12 @@ map:
   - share:rw
 startup: services
 options:
+<<<<<<< use-bashio-log
+  vin: ""
+  ble_mac: ""
+  debug: false
+=======
+>>>>>>> main
   mqtt_ip: ""
   mqtt_port: "1883"
   mqtt_user: ""
@@ -26,6 +32,12 @@ options:
   vin: ""
   ble_mac: ""
 schema:
+<<<<<<< use-bashio-log
+  vin: str?
+  debug: bool
+  ble_mac: str?
+=======
+>>>>>>> main
   mqtt_ip: str?
   mqtt_port: str?
   mqtt_user: str?

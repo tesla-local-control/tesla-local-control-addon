@@ -11,41 +11,42 @@ if [ -n "${HASSIO_TOKEN:-}" ]; then
   MQTT_USER="$(bashio::config 'mqtt_user')"; export MQTT_USER
   MQTT_PWD="$(bashio::config 'mqtt_pwd')"; export MQTT_PWD
   SEND_CMD_RETRY_DELAY="$(bashio::config 'send_cmd_retry_delay')"; export SEND_CMD_RETRY_DELAY
+  DEBUG="$(bashio::config 'debug')"; export DEBUG
 fi
 
-echo "tesla_ble_mqtt_docker by Iain Bullock 2024 https://github.com/iainbullock/tesla_ble_mqtt_docker"
-echo "Inspiration by Raphael Murray https://github.com/raphmur"
-echo "Instructions by Shankar Kumarasamy https://shankarkumarasamy.blog/2024/01/28/tesla-developer-api-guide-ble-key-pair-auth-and-vehicle-commands-part-3"
+bashio::log.cyan "tesla_ble_mqtt_docker by Iain Bullock 2024 https://github.com/iainbullock/tesla_ble_mqtt_docker"
+bashio::log.cyan "Inspiration by Raphael Murray https://github.com/raphmur"
+bashio::log.cyan "Instructions by Shankar Kumarasamy https://shankarkumarasamy.blog/2024/01/28/tesla-developer-api-guide-ble-key-pair-auth-and-vehicle-commands-part-3"
 
-echo "Configuration Options are:"
-echo TESLA_VIN=$TESLA_VIN
-echo BLE_MAC=$BLE_MAC
-echo MQTT_IP=$MQTT_IP
-echo MQTT_PORT=$MQTT_PORT
-echo MQTT_USER=$MQTT_USER
-echo "MQTT_PWD=Not Shown"
-echo SEND_CMD_RETRY_DELAY=$SEND_CMD_RETRY_DELAY
+bashio::log.green "Configuration Options are:"
+bashio::log.green TESLA_VIN=$TESLA_VIN
+bashio::log.green BLE_MAC=$BLE_MAC
+bashio::log.green MQTT_IP=$MQTT_IP
+bashio::log.green MQTT_PORT=$MQTT_PORT
+bashio::log.green MQTT_USER=$MQTT_USER
+bashio::log.green "MQTT_PWD=Not Shown"
+bashio::log.green SEND_CMD_RETRY_DELAY=$SEND_CMD_RETRY_DELAY
 
 if [ ! -d /share/tesla_ble_mqtt ]
 then
     mkdir /share/tesla_ble_mqtt
 else
-    echo "/share/tesla_ble_mqtt already exists, existing keys can be reused"
+    bashio::log.yellow "/share/tesla_ble_mqtt already exists, existing keys can be reused"
 fi
 
 
 send_command() {
  for i in $(seq 5); do
-  echo "Attempt $i/5"
+  bashio::log.yellow "Attempt $i/5"
   set +e
   tesla-control -ble -vin $TESLA_VIN -key-name /share/tesla_ble_mqtt/private.pem -key-file /share/tesla_ble_mqtt/private.pem $1
   EXIT_STATUS=$?
   set -e
   if [ $EXIT_STATUS -eq 0 ]; then
-    echo "Ok"
+    bashio::log.green "Ok"
     break
   else
-    echo "Error calling tesla-control, exit code=$EXIT_STATUS - will retry in $SEND_CMD_RETRY_DELAY seconds"
+    bashio::log.red "Error calling tesla-control, exit code=$EXIT_STATUS - will retry in $SEND_CMD_RETRY_DELAY seconds"
     sleep $SEND_CMD_RETRY_DELAY
   fi
  done
@@ -53,56 +54,60 @@ send_command() {
 
 send_key() {
  for i in $(seq 5); do
+<<<<<<< use-bashio-log
+  bashio::log.yellow "Attempt $i/5"
+=======
   echo "Attempt $i/5"
   set +e
+>>>>>>> main
   tesla-control -ble -vin $TESLA_VIN add-key-request /share/tesla_ble_mqtt/public.pem owner cloud_key
   EXIT_STATUS=$?
   set -e
   if [ $EXIT_STATUS -eq 0 ]; then
-    echo "KEY SENT TO VEHICLE: PLEASE CHECK YOU TESLA'S SCREEN AND ACCEPT WITH YOUR CARD"
+    bashio::log.yellow "KEY SENT TO VEHICLE: PLEASE CHECK YOU TESLA'S SCREEN AND ACCEPT WITH YOUR CARD"
     break
   else
-    echo "COULD NOT SEND THE KEY. Is the car awake and sufficiently close to the bluetooth device?"
+    bashio::log.red "COULD NOT SEND THE KEY. Is the car awake and sufficiently close to the bluetooth device?"
     sleep $SEND_CMD_RETRY_DELAY
   fi
  done 
 }
 
 listen_to_ble() {
- echo "Listening to BLE"
+ bashio::log.green "Listening to BLE"
  set +e
  bluetoothctl --timeout 5 scan on | grep $BLE_MAC
  EXIT_STATUS=$?
  set -e
  if [ $? -eq 0 ]; then
-   echo "$BLE_MAC presence detected"
+   bashio::log.green "$BLE_MAC presence detected"
    mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m ON
  else
-   echo "$BLE_MAC presence not detected or issue in command. Will retry"
+   bashio::log.yellow "$BLE_MAC presence not detected or issue in command, retrying now"
    mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m OFF
  fi
 }
 
-echo "Sourcing functions"
+bashio::log.green "Sourcing functions"
 . /app/listen_to_mqtt.sh
 . /app/discovery.sh
 
-echo "Setting up auto discovery for Home Assistant"
+bashio::log.green "Setting up auto discovery for Home Assistant"
 setup_auto_discovery
 
-echo "Connecting to MQTT to discard any unread messages"
+bashio::log.green "Connecting to MQTT to discard any unread messages"
 mosquitto_sub -E -i tesla_ble_mqtt -h $MQTT_IP -p $MQTT_PORT -u $MQTT_USER -P $MQTT_PWD -t tesla_ble/+
 
-echo "Initialize BLE listening loop counter"
+bashio::log.green "Initialize BLE listening loop counter"
 counter=0
-echo "Entering main MQTT & BLE listening loop"
+bashio::log.green "Entering main MQTT & BLE listening loop"
 while true
 do
  set +e
  listen_to_mqtt
  ((counter++))
  if [[ $counter -gt 90 ]]; then
-  echo "Reached 90 MQTT loops (~3min): Launch BLE scanning for car presence"
+  bashio::log.green "Reached 90 MQTT loops (~3min): Launch BLE scanning for car presence"
   listen_to_ble
   counter=0
  fi
