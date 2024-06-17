@@ -15,10 +15,10 @@ listen_to_mqtt() {
       generate_keys)
        bashio::log.green "Generating the private key"
        openssl ecparam -genkey -name prime256v1 -noout > /share/tesla_ble_mqtt/private.pem
-       cat private.pem
+       cat /share/tesla_ble_mqtt/private.pem
        bashio::log.green "Generating the public key"
        openssl ec -in /share/tesla_ble_mqtt/private.pem -pubout > /share/tesla_ble_mqtt/public.pem
-       cat public.pem
+       cat /share/tesla_ble_mqtt/public.pem
        bashio::log.green "KEYS GENERATED. Next:
        1/ Remove any previously deployed BLE keys from vehicle before deploying this one
        2/ Wake the car up with your Tesla App
