@@ -12,6 +12,18 @@ if [ -n "${HASSIO_TOKEN:-}" ]; then
   MQTT_PWD="$(bashio::config 'mqtt_pwd')"; export MQTT_PWD
   SEND_CMD_RETRY_DELAY="$(bashio::config 'send_cmd_retry_delay')"; export SEND_CMD_RETRY_DELAY
   DEBUG="$(bashio::config 'debug')"; export DEBUG
+else
+  function bashio::log.debug { echo "$1"; }
+  function bashio::log.info { echo "$1"; }
+  function bashio::log.notice { echo "$1"; }
+  function bashio::log.warning { echo "$1"; }
+  function bashio::log.error { echo "$1"; }
+  function bashio::log.fatal { echo "$1"; }
+
+  function bashio::log.cyan { echo "$1"; }
+  function bashio::log.green { echo "$1"; }
+  function bashio::log.red { echo "$1"; }
+  function bashio::log.yellow { echo "$1"; }
 fi
 
 bashio::log.cyan "tesla_ble_mqtt_docker by Iain Bullock 2024 https://github.com/iainbullock/tesla_ble_mqtt_docker"
