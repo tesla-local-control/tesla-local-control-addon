@@ -27,14 +27,14 @@ options:
   vin: ""
   ble_mac: ""
 schema:
-  mqtt_ip: str?
-  mqtt_port: str?
-  mqtt_user: str?
-  mqtt_pwd: password?
-  send_cmd_retry_delay: str?
+  mqtt_ip: str
+  mqtt_port: str
+  mqtt_user: str
+  mqtt_pwd: password
+  send_cmd_retry_delay: int
   debug: bool
-  vin: str?
-  ble_mac: str?
+  vin: str
+  ble_mac: "str?"
 # ingress: true
 # panel_icon: mdi:forward
 # backup_exclude:

@@ -23,14 +23,14 @@ bashio::log.cyan "tesla_ble_mqtt_docker by Iain Bullock 2024 https://github.com/
 bashio::log.cyan "Inspiration by Raphael Murray https://github.com/raphmur"
 bashio::log.cyan "Instructions by Shankar Kumarasamy https://shankarkumarasamy.blog/2024/01/28/tesla-developer-api-guide-ble-key-pair-auth-and-vehicle-commands-part-3"
 
-bashio::log.green "Configuration Options are:"
-bashio::log.green TESLA_VIN=$TESLA_VIN
-bashio::log.green BLE_MAC=$BLE_MAC
-bashio::log.green MQTT_IP=$MQTT_IP
-bashio::log.green MQTT_PORT=$MQTT_PORT
-bashio::log.green MQTT_USER=$MQTT_USER
-bashio::log.green "MQTT_PWD=Not Shown"
-bashio::log.green SEND_CMD_RETRY_DELAY=$SEND_CMD_RETRY_DELAY
+bashio::log.green "Configuration Options are:
+  TESLA_VIN=$TESLA_VIN
+  BLE_MAC=$BLE_MAC
+  MQTT_IP=$MQTT_IP
+  MQTT_PORT=$MQTT_PORT
+  MQTT_USER=$MQTT_USER
+  MQTT_PWD=Not Shown
+  SEND_CMD_RETRY_DELAY=$SEND_CMD_RETRY_DELAY"
 
 if [ ! -d /share/tesla_ble_mqtt ]
 then
@@ -69,7 +69,7 @@ send_key() {
     bashio::log.yellow "KEY SENT TO VEHICLE: PLEASE CHECK YOU TESLA'S SCREEN AND ACCEPT WITH YOUR CARD"
     break
   else
-    bashio::log.error "tesla-control could not send the key; make sure the car is awake and sufficiently close to the bluetooth device. Retrying in $SEND_CMD_RETRY_DELAY"
+    bashio::log.error "tesla-control could not send the pubkey; make sure the car is awake and sufficiently close to the bluetooth device. Retrying in $SEND_CMD_RETRY_DELAY"
     bashio::log.error "Retrying in $SEND_CMD_RETRY_DELAY"
     sleep $SEND_CMD_RETRY_DELAY
   fi
@@ -85,7 +85,7 @@ listen_to_ble() {
  set -e
  if [ $? -eq 0 ]; then
    bashio::log.info "$BLE_MAC presence detected"
-   if [ $PRESENCE_BINARY_SENSOR == "OFF" || $PRESENCE_BINARY_SENSOR == "Unknown" ]; then
+   if [[ $PRESENCE_BINARY_SENSOR == "OFF" || $PRESENCE_BINARY_SENSOR == "Unknown" ]]; then
      bashio::log.info "Updating topic tesla_ble/binary_sensor/presence ON"
      mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m ON
      PRESENCE_BINARY_SENSOR=ON
@@ -94,7 +94,7 @@ listen_to_ble() {
    fi
  else
    bashio::log.warning "$BLE_MAC presence not detected or issue in command, will retry later"
-   if [ $PRESENCE_BINARY_SENSOR == "ON" || $PRESENCE_BINARY_SENSOR == "Unknown" ]; then
+   if [[ $PRESENCE_BINARY_SENSOR == "ON" || $PRESENCE_BINARY_SENSOR == "Unknown" ]]; then
      bashio::log.info "Updating topic tesla_ble/binary_sensor/presence OFF"
      mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m OFF
      PRESENCE_BINARY_SENSOR=OFF
@@ -114,14 +114,21 @@ setup_auto_discovery
 bashio::log.info "Connecting to MQTT to discard any unread messages"
 mosquitto_sub -E -i tesla_ble_mqtt -h $MQTT_IP -p $MQTT_PORT -u $MQTT_USER -P $MQTT_PWD -t tesla_ble/+
 
-bashio::log.info "Initialize BLE listening loop counter"
-counter=0
-bashio::log.info "Entering main MQTT & BLE listening loop"
+if [ -z "$BLE_MAC" ]; then
+  bashio::log.notice "BLE_MAC being undefined, presence detection for the car will not run"
+  counter=-1
+  bashio::log.info "Entering main MQTT loop"
+else
+  bashio::log.info "BLE_MAC is defined, initializing BLE listening loop counter"
+  bashio::log.info "Entering main MQTT & BLE listening loop"
+  counter=0
+fi
+
 while true
 do
  set +e
  listen_to_mqtt
- if [ -z "$BLE_MAC" ]; then
+ if [ $counter -ge 0 ]; then
    ((counter++))
    if [[ $counter -gt 90 ]]; then
     bashio::log.info "Reached 90 MQTT loops (~3min): Launch BLE scanning for car presence"

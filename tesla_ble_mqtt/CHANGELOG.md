@@ -4,7 +4,7 @@
 
 ### Changed
 
-WARNING: broken for standalone deployment, stay on 0.0.6a
+WARNING: broken for standalone deployment, stay on 0.0.6
 OK for HA Addon
 
 - logging fix debug and adjustment
@@ -16,6 +16,7 @@ OK for HA Addon
 ### Changed
 
 WARNING: broken for standalone deployment, stay on 0.0.6
+OK for HA Addon
 
 - Bump to latest updates from tesla_ble_mqtt_docker
 - Improve HA logging and error management
