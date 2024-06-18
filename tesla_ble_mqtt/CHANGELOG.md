@@ -1,5 +1,17 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.0.7
+
+### Changed
+
+WARNING: broken for standalone deployment, stay on 0.0.6
+OK for HA Addon
+
+- Bump to latest updates from tesla_ble_mqtt_docker
+- Improve HA logging and error management
+- Add FR translation
+- Fix auto climate command
+
 ## 0.0.6
 
 ### Changed
