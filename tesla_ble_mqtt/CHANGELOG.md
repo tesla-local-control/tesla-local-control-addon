@@ -7,9 +7,7 @@
 WARNING: broken for standalone deployment, stay on 0.0.6
 OK for HA Addon
 
-- logging fix debug and adjustment
-- prevent always updating presence topic
-- prevent checking for presence if BLE_MAC is empty
+- logging adjustment and fix debug
 
 ## 0.0.7
 

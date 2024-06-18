@@ -14,8 +14,6 @@ if [ -n "${HASSIO_TOKEN:-}" ]; then
   DEBUG="$(bashio::config 'debug')"; export DEBUG
 fi
 
-PRESENCE_BINARY_SENSOR=Unknown
-
 # Set log level to debug
 bashio::config.true debug && bashio::log.level debug
 
@@ -70,7 +68,6 @@ send_key() {
     break
   else
     bashio::log.error "tesla-control could not send the pubkey; make sure the car is awake and sufficiently close to the bluetooth device. Retrying in $SEND_CMD_RETRY_DELAY"
-    bashio::log.error "Retrying in $SEND_CMD_RETRY_DELAY"
     sleep $SEND_CMD_RETRY_DELAY
   fi
  done
@@ -80,27 +77,26 @@ listen_to_ble() {
  PRESENCE_TIMEOUT=5
  bashio::log.info "Listening to BLE for presence"
  set +e
+ if [ $? -eq 0 ]; then
+   bashio::log.green "$BLE_MAC presence detected"
+   mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/bin
+ry_sensor/presence -m ON
+ else
+   bashio::log.yellow "$BLE_MAC presence not detected or issue in command, retrying now"
+   mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/bin
+ary_sensor/presence -m OFF
+ fi
+
  bluetoothctl --timeout $PRESENCE_TIMEOUT scan on | grep $BLE_MAC
  EXIT_STATUS=$?
  set -e
- if [ $? -eq 0 ]; then
-   bashio::log.info "$BLE_MAC presence detected"
-   if [[ $PRESENCE_BINARY_SENSOR == "OFF" || $PRESENCE_BINARY_SENSOR == "Unknown" ]]; then
-     bashio::log.info "Updating topic tesla_ble/binary_sensor/presence ON"
-     mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m ON
-     PRESENCE_BINARY_SENSOR=ON
-   else
-     bashio::log.debug "Topic tesla_ble/binary_sensor/presence already ON"
-   fi
- else
-   bashio::log.warning "$BLE_MAC presence not detected or issue in command, will retry later"
-   if [[ $PRESENCE_BINARY_SENSOR == "ON" || $PRESENCE_BINARY_SENSOR == "Unknown" ]]; then
-     bashio::log.info "Updating topic tesla_ble/binary_sensor/presence OFF"
-     mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m OFF
-     PRESENCE_BINARY_SENSOR=OFF
-   else
-     bashio::log.debug "Topic tesla_ble/binary_sensor/presence already OFF"
-   fi
+ bashio::log.info "$BLE_MAC presence detected"
+ mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m ON
+
+ bashio::log.warning "$BLE_MAC presence not detected or issue in command, will retry later"
+ bashio::log.info "Updating topic tesla_ble/binary_sensor/presence OFF"
+ mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m OFF
+ bashio::log.debug "Topic tesla_ble/binary_sensor/presence already OFF"
  fi
 }
 
