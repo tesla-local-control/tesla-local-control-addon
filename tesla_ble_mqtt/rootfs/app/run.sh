@@ -75,7 +75,7 @@ listen_to_ble() {
  bluetoothctl --timeout 5 scan on | grep $BLE_MAC
  EXIT_STATUS=$?
  set -e
- if [ $? -eq 0 ]; then
+ if [ $EXIT_STATUS -eq 0 ]; then
    bashio::log.green "$BLE_MAC presence detected"
    mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m ON
  else
