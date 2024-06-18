@@ -1,5 +1,15 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.0.7a
+
+### Changed
+
+WARNING: broken for standalone deployment, stay on 0.0.6
+OK for HA Addon
+
+- logging msg adjustments & fix logic for log.debug
+- logging add logic for log.debug to properly work
+
 ## 0.0.7
 
 ### Changed

@@ -11,16 +11,15 @@ configuration:
   mqtt_pwd:
     name: MQTT Password
     description: MQTT User's password
-  send_cmd_retry_delay:
-    name: Delay to retry a command
-    description: Delay to retry sending a command to the vehicle over BLE
-  debug:
-    name: Debug Logging
-    description: Print verbose messages to the log for debugging
-vehicle:
   vin:
     name: Car's VIN
     description: Vehicle Identification Number found in Tesla app
   ble_mac:
     name: BLE MAC (optional for proximity detection)
     description: Car's BLE MAC (S___________C); Use Android "BLE scanner" or iOS "nRF Connect"
+  debug:
+    name: Debug Logging
+    description: Print verbose messages to the log for debugging
+  send_cmd_retry_delay:
+    name: Delay to retry a command
+    description: Delay to retry sending a command to the vehicle over BLE
