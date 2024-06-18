@@ -20,7 +20,7 @@ else
   MAGENTA='\033[0;35m'
   RED='\033[0;31m'
 
-  function bashio::log.debug   { echo -e "${NOCOLOR}$1"; }
+  function bashio::log.debug   { [ $DEBUG == "true" ] && echo -e "${NOCOLOR}$1"; }
   function bashio::log.info    { echo -e "${GREEN}$1${NOCOLOR}"; }
   function bashio::log.notice  { echo -e "${CYAN}$1${NOCOLOR}"; }
   function bashio::log.warning { echo -e "${YELLOW}$1${NOCOLOR}"; }
