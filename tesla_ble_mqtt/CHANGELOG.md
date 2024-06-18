@@ -7,7 +7,8 @@
 WARNING: broken for standalone deployment, stay on 0.0.6
 OK for HA Addon
 
-- logging adjustment and fix debug
+- logging msg adjustments & fix logic for log.debug
+- logging add logic for log.debug to properly work
 
 ## 0.0.7
 
