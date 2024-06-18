@@ -13,17 +13,25 @@ if [ -n "${HASSIO_TOKEN:-}" ]; then
   SEND_CMD_RETRY_DELAY="$(bashio::config 'send_cmd_retry_delay')"; export SEND_CMD_RETRY_DELAY
   DEBUG="$(bashio::config 'debug')"; export DEBUG
 else
-  function bashio::log.debug { echo "$1"; }
-  function bashio::log.info { echo "$1"; }
-  function bashio::log.notice { echo "$1"; }
-  function bashio::log.warning { echo "$1"; }
-  function bashio::log.error { echo "$1"; }
-  function bashio::log.fatal { echo "$1"; }
+  NOCOLOR='\033[0m'
+  GREEN='\033[0;32m'
+  CYAN='\033[0;36m'
+  YELLOW='\033[1;32m'
+  MAGENTA='\033[0;35m'
+  RED='\033[0;31m'
 
-  function bashio::log.cyan { echo "$1"; }
-  function bashio::log.green { echo "$1"; }
-  function bashio::log.red { echo "$1"; }
-  function bashio::log.yellow { echo "$1"; }
+  function bashio::log.debug   { echo -e "${NOCOLOR}$1"; }
+  function bashio::log.info    { echo -e "${GREEN}$1${NOCOLOR}"; }
+  function bashio::log.notice  { echo -e "${CYAN}$1${NOCOLOR}"; }
+  function bashio::log.warning { echo -e "${YELLOW}$1${NOCOLOR}"; }
+  function bashio::log.error   { echo -e "${MAGENTA}$1${NOCOLOR}"; }
+  function bashio::log.fatal   { echo -e "${RED}$1${NOCOLOR}"; }
+
+  function bashio::log.cyan    { echo -e "${CYAN}$1${NOCOLOR}"; }
+  function bashio::log.green   { echo -e "${GREEN}$1${NOCOLOR}"; }
+  function bashio::log.magenta { echo -e "${GREEN}$1${NOCOLOR}"; }
+  function bashio::log.red     { echo -e "${RED}$1${NOCOLOR}"; }
+  function bashio::log.yellow  { echo -e "${YELLOW}$1${NOCOLOR}"; }
 fi
 
 bashio::log.cyan "tesla_ble_mqtt_docker by Iain Bullock 2024 https://github.com/iainbullock/tesla_ble_mqtt_docker"
