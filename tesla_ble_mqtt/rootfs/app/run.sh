@@ -41,26 +41,8 @@ bashio::log.cyan "tesla_ble_mqtt_docker by Iain Bullock 2024 https://github.com/
 bashio::log.cyan "Inspiration by Raphael Murray https://github.com/raphmur"
 bashio::log.cyan "Instructions by Shankar Kumarasamy https://shankarkumarasamy.blog/2024/01/28/tesla-developer-api-guide-ble-key-pair-auth-and-vehicle-commands-part-3"
 
-# Generate BLE_MAC from TESLA_VIN
-function ble_mac_generate() {
-
-python3 - << __END_PY__
-from cryptography.hazmat.primitives import hashes;
-vin = bytes("$TESLA_VIN", "UTF8");
-digest = hashes.Hash(hashes.SHA1())
-digest.update(vin)
-vinSHA = digest.finalize().hex()
-middleSection = vinSHA[0:16]
-bleName = "S" + middleSection + "C"
-print(bleName)
-__END_PY__
-}
-
-export BLE_MAC=$(ble_mac_generate)
-
 bashio::log.green "Configuration Options are:
   TESLA_VIN=$TESLA_VIN
-  BLE_MAC=$BLE_MAC
   MQTT_IP=$MQTT_IP
   MQTT_PORT=$MQTT_PORT
   MQTT_USER=$MQTT_USER
@@ -116,18 +98,19 @@ listen_to_ble() {
  bashio::log.info "Listening to BLE for presence"
  PRESENCE_TIMEOUT=5
  set +e
- bluetoothctl --timeout $PRESENCE_TIMEOUT scan on | grep $BLE_MAC
+ bluetoothctl --timeout $PRESENCE_TIMEOUT scan on | grep $BLE_SC_NAME
  EXIT_STATUS=$?
  set -e
  if [ $EXIT_STATUS -eq 0 ]; then
-   bashio::log.info "$BLE_MAC presence detected"
+   bashio::log.info "$BLE_SC_NAME presence detected"
    mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m ON
  else
-   bashio::log.notice "$BLE_MAC presence not detected or issue in command"
+   bashio::log.notice "$BLE_SC_NAME presence not detected or issue in command"
    mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m OFF
  fi
 
 }
+
 
 bashio::log.notice "Sourcing functions"
 . /app/listen_to_mqtt.sh
@@ -140,33 +123,37 @@ bashio::log.info "Connecting to MQTT to discard any unread messages"
 mosquitto_sub -E -i tesla_ble_mqtt -h $MQTT_IP -p $MQTT_PORT -u $MQTT_USER -P $MQTT_PWD -t tesla_ble/+
 
 
-# Run BLE presence if BLE_MAC is defined and BLE_PRESENCE_ENABLE=true
-if [ -z "$BLE_MAC" ]; then
-  bashio::log.notice "BLE_MAC being undefined, presence detection for the car will not run"
-  counter=-1
-else
-  if [ $BLE_PRESENCE_ENABLE == "true" ]; then
-    bashio::log.info "BLE_MAC is defined, initializing BLE listening loop counter"
-    counter=0
-  else
-    bashio::log.notice "Will not run proximity presence detection BLE_PRESENCE_ENABLE=false"
-    counter=-1
-  fi
-fi
-[ $counter -eq 0 ] && \
-  bashio::log.info "Entering main MQTT & BLE listening loop" || \
-  bashio::log.info "Entering main MQTT loop, not running BLE listening"
+# Run BLE presence if BLE_PRESENCE_ENABLE is true
+if [ $BLE_PRESENCE_ENABLE == "true" ]; then
 
+    # Generate BLE_SC_NAME from TESLA_VIN
+    TESLA_VIN_HASH=$(echo -n "$TESLA_VIN" | sha1sum)
+    BLE_SC_NAME=S${TESLA_VIN_HASH:0:16}C
+    bashio::log.info "BLE_SC_NAME=$BLE_SC_NAME"
+
+    bashio::log.info "BLE_PRESENCE_ENABLE is true, initializing BLE listening loop counter"
+    ble_listen_counter=0
+
+    bashio::log.info "Entering main MQTT & BLE listening loop"
+
+  else
+    bashio::log.notice "BLE_PRESENCE_ENABLE is false, Will not run proximity presence detection"
+    bashio::log.info "Entering main MQTT loop, not running BLE listening"
+
+    ble_listen_counter=-1
+fi
+
+# Main loop
 while true
 do
  set +e
  listen_to_mqtt
- if [ $counter -ge 0 ]; then
-   ((counter++))
-   if [[ $counter -gt 90 ]]; then
-    bashio::log.green "Reached 90 MQTT loops (~3min): Launch BLE scanning for car presence"
+ if [ $ble_listen_counter -ge 0 ]; then
+   ((ble_listen_counter++))
+   if [[ $ble_listen_counter -gt 90 ]]; then
+    bashio::log.notice "Reached 90 MQTT loops (~3min): Launch BLE scanning for car presence"
     listen_to_ble
-    counter=0
+    ble_listen_counter=0
    fi
  fi
  sleep 2
