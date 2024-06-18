@@ -1,5 +1,5 @@
 name: "Tesla Local Commands"
-version: "0.0.7a"
+version: "0.0.8a"
 slug: "tesla_local_commands"
 description: "Local BLE calls to control your Tesla."
 # url: "tbc"
@@ -19,22 +19,22 @@ map:
 startup: services
 options:
   vin: ""
-  ble_mac: ""
   debug: false
   mqtt_ip: ""
   mqtt_port: "1883"
   mqtt_user: ""
   mqtt_pwd: ""
   send_cmd_retry_delay: "5"
+  ble_presence_enable: true
 schema:
   vin: str?
   debug: bool
-  ble_mac: str?
   mqtt_ip: str?
   mqtt_port: str?
   mqtt_user: str?
   mqtt_pwd: password?
   send_cmd_retry_delay: str?
+  ble_presence_enable: bool
 # ingress: true
 # panel_icon: mdi:forward
 # backup_exclude:

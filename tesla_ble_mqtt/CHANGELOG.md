@@ -1,5 +1,20 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.0.8a
+
+### Changed
+
+- [ble presence] Add functionality to enable or not presence detection via config UI
+- [ble presence] Add function to calculate BLE_MAC
+- [ble presence] Remove BLE_MAC config option
+
+## 0.0.8
+
+### Changed
+
+- [Standalone] Fix broken deployment introduced in 0.0.7
+- [Standalone] Add colored logging based on log level
+
 ## 0.0.7a
 
 ### Changed

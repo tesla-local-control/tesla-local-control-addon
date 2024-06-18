@@ -19,7 +19,8 @@ RUN apk add --no-cache \
   openssl \
   bluez \
   mosquitto-clients \
-  python3
+  python3 \
+  py3-cryptography
 
 # Python 3 HTTP Server serves the current working dir
 WORKDIR /data

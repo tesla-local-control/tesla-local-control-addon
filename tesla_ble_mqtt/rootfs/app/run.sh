@@ -5,13 +5,33 @@
 # read options in case of HA addon. Otherwise, they will be sent as environment variables
 if [ -n "${HASSIO_TOKEN:-}" ]; then
   TESLA_VIN="$(bashio::config 'vin')"; export TESLA_VIN
-  BLE_MAC="$(bashio::config 'ble_mac')"; export BLE_MAC
   MQTT_IP="$(bashio::config 'mqtt_ip')"; export MQTT_IP
   MQTT_PORT="$(bashio::config 'mqtt_port')"; export MQTT_PORT
   MQTT_USER="$(bashio::config 'mqtt_user')"; export MQTT_USER
   MQTT_PWD="$(bashio::config 'mqtt_pwd')"; export MQTT_PWD
   SEND_CMD_RETRY_DELAY="$(bashio::config 'send_cmd_retry_delay')"; export SEND_CMD_RETRY_DELAY
+  BLE_PRESENCE_ENABLE="$(bashio::config 'ble_presence_enable')"; export BLE_PRESENCE_ENABLE
   DEBUG="$(bashio::config 'debug')"; export DEBUG
+else
+  NOCOLOR='\033[0m'
+  GREEN='\033[0;32m'
+  CYAN='\033[0;36m'
+  YELLOW='\033[1;32m'
+  MAGENTA='\033[0;35m'
+  RED='\033[0;31m'
+
+  function bashio::log.debug   { [ $DEBUG == "true" ] && echo -e "${NOCOLOR}$1"; }
+  function bashio::log.info    { echo -e "${GREEN}$1${NOCOLOR}"; }
+  function bashio::log.notice  { echo -e "${CYAN}$1${NOCOLOR}"; }
+  function bashio::log.warning { echo -e "${YELLOW}$1${NOCOLOR}"; }
+  function bashio::log.error   { echo -e "${MAGENTA}$1${NOCOLOR}"; }
+  function bashio::log.fatal   { echo -e "${RED}$1${NOCOLOR}"; }
+
+  function bashio::log.cyan    { echo -e "${CYAN}$1${NOCOLOR}"; }
+  function bashio::log.green   { echo -e "${GREEN}$1${NOCOLOR}"; }
+  function bashio::log.magenta { echo -e "${GREEN}$1${NOCOLOR}"; }
+  function bashio::log.red     { echo -e "${RED}$1${NOCOLOR}"; }
+  function bashio::log.yellow  { echo -e "${YELLOW}$1${NOCOLOR}"; }
 fi
 
 # Set log level to debug
@@ -21,6 +41,23 @@ bashio::log.cyan "tesla_ble_mqtt_docker by Iain Bullock 2024 https://github.com/
 bashio::log.cyan "Inspiration by Raphael Murray https://github.com/raphmur"
 bashio::log.cyan "Instructions by Shankar Kumarasamy https://shankarkumarasamy.blog/2024/01/28/tesla-developer-api-guide-ble-key-pair-auth-and-vehicle-commands-part-3"
 
+# Generate BLE_MAC from TESLA_VIN
+function ble_mac_generate() {
+
+python3 - << __END_PY__
+from cryptography.hazmat.primitives import hashes;
+vin = bytes("$TESLA_VIN", "UTF8");
+digest = hashes.Hash(hashes.SHA1())
+digest.update(vin)
+vinSHA = digest.finalize().hex()
+middleSection = vinSHA[0:16]
+bleName = "S" + middleSection + "C"
+print(bleName)
+__END_PY__
+}
+
+export BLE_MAC=$(ble_mac_generate)
+
 bashio::log.green "Configuration Options are:
   TESLA_VIN=$TESLA_VIN
   BLE_MAC=$BLE_MAC
@@ -28,7 +65,9 @@ bashio::log.green "Configuration Options are:
   MQTT_PORT=$MQTT_PORT
   MQTT_USER=$MQTT_USER
   MQTT_PWD=Not Shown
-  SEND_CMD_RETRY_DELAY=$SEND_CMD_RETRY_DELAY"
+  SEND_CMD_RETRY_DELAY=$SEND_CMD_RETRY_DELAY
+  BLE_PRESENCE_ENABLE=$BLE_PRESENCE_ENABLE
+  DEBUG=$DEBUG"
 
 if [ ! -d /share/tesla_ble_mqtt ]
 then
@@ -100,18 +139,35 @@ setup_auto_discovery
 bashio::log.info "Connecting to MQTT to discard any unread messages"
 mosquitto_sub -E -i tesla_ble_mqtt -h $MQTT_IP -p $MQTT_PORT -u $MQTT_USER -P $MQTT_PWD -t tesla_ble/+
 
-bashio::log.green "Initialize BLE listening loop counter"
-counter=0
-bashio::log.green "Entering main MQTT & BLE listening loop"
+
+# Run BLE presence if BLE_MAC is defined and BLE_PRESENCE_ENABLE=true
+if [ -z "$BLE_MAC" ]; then
+  bashio::log.notice "BLE_MAC being undefined, presence detection for the car will not run"
+  counter=-1
+else
+  if [ $BLE_PRESENCE_ENABLE == "true" ]; then
+    bashio::log.info "BLE_MAC is defined, initializing BLE listening loop counter"
+    counter=0
+  else
+    bashio::log.notice "Will not run proximity presence detection BLE_PRESENCE_ENABLE=false"
+    counter=-1
+  fi
+fi
+[ $counter -eq 0 ] && \
+  bashio::log.info "Entering main MQTT & BLE listening loop" || \
+  bashio::log.info "Entering main MQTT loop, not running BLE listening"
+
 while true
 do
  set +e
  listen_to_mqtt
- ((counter++))
- if [[ $counter -gt 90 ]]; then
-  bashio::log.green "Reached 90 MQTT loops (~3min): Launch BLE scanning for car presence"
-  listen_to_ble
-  counter=0
+ if [ $counter -ge 0 ]; then
+   ((counter++))
+   if [[ $counter -gt 90 ]]; then
+    bashio::log.green "Reached 90 MQTT loops (~3min): Launch BLE scanning for car presence"
+    listen_to_ble
+    counter=0
+   fi
  fi
  sleep 2
 done
