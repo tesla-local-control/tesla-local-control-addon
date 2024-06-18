@@ -69,7 +69,7 @@ send_key() {
     bashio::log.yellow "KEY SENT TO VEHICLE: PLEASE CHECK YOU TESLA'S SCREEN AND ACCEPT WITH YOUR CARD"
     break
   else
-    bashio::log.error "tesla-control could not send the key; make sure the car is awake and sufficiently close to the bluetooth device. Retrying in $SEND_CMD_RETRY_DELAY""
+    bashio::log.error "tesla-control could not send the key; make sure the car is awake and sufficiently close to the bluetooth device. Retrying in $SEND_CMD_RETRY_DELAY"
     bashio::log.error "Retrying in $SEND_CMD_RETRY_DELAY"
     sleep $SEND_CMD_RETRY_DELAY
   fi
