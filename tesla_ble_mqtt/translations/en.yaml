@@ -14,12 +14,13 @@ configuration:
   vin:
     name: Car's VIN
     description: Vehicle Identification Number found in Tesla app
-  ble_mac:
-    name: BLE MAC (optional for proximity detection)
-    description: Car's BLE MAC (S___________C); Use Android "BLE scanner" or iOS "nRF Connect"
   debug:
     name: Debug Logging
     description: Print verbose messages to the log for debugging
   send_cmd_retry_delay:
     name: Delay to retry a command
     description: Delay to retry sending a command to the vehicle over BLE
+  ble_presence_enable:
+    name: BLE proximity presence detection
+    description: Controls if BLE proximity presence is enable or not
+    description: Detection over BLE of proximity presence

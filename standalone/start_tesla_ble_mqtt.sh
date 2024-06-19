@@ -7,7 +7,8 @@ MQTT_PORT=1883
 MQTT_USER=""
 MQTT_PWD=""
 SEND_CMD_RETRY_DELAY=5
-BLE_MAC=00:00:00:00:00:00
+BLE_PRESENCE_ENABLE=true
+DEBUG=false
 ############################################################
 
 
@@ -32,21 +33,22 @@ fi
 echo "Create docker structure..."
 docker volume create tesla_ble_mqtt
 
-echo "Start main docker container with configuration Options:"
-
-echo TESLA_VIN=$TESLA_VIN
-echo MQTT_IP=$MQTT_IP
-echo MQTT_PORT=$MQTT_PORT
-echo MQTT_USER=$MQTT_USER
-echo "MQTT_PWD=Not Shown"
-echo SEND_CMD_RETRY_DELAY=$SEND_CMD_RETRY_DELAY
-echo BLE_MAC=$BLE_MAC
+echo "Start main docker container with configuration Options:
+  TESLA_VIN=$TESLA_VIN
+  MQTT_IP=$MQTT_IP
+  MQTT_PORT=$MQTT_PORT
+  MQTT_USER=$MQTT_USER
+  MQTT_PWD=Not Shown
+  SEND_CMD_RETRY_DELAY=$SEND_CMD_RETRY_DELAY
+  BLE_PRESENCE_ENABLE=$BLE_PRESENCE_ENABLE
+  DEBUG=$DEBUG"
 
 docker-compose up -d \
-	-e TESLA_VIN=$TESLA_VIN \
-	-e MQTT_IP=$MQTT_IP \
-	-e MQTT_PORT=$MQTT_PORT \
-	-e MQTT_USER=$MQTT_USER \
-	-e MQTT_PWD=$MQTT_PWD \
-	-e SEND_CMD_RETRY_DELAY=$SEND_CMD_RETRY_DELAY \
-	-e BLE_MAC=$BLE_MAC
+  -e TESLA_VIN=$TESLA_VIN \
+  -e MQTT_IP=$MQTT_IP \
+  -e MQTT_PORT=$MQTT_PORT \
+  -e MQTT_USER=$MQTT_USER \
+  -e MQTT_PWD=$MQTT_PWD \
+  -e SEND_CMD_RETRY_DELAY=$SEND_CMD_RETRY_DELAY \
+  -e BLE_PRESENCE_ENABLE=$BLE_PRESENCE_ENABLE \
+  -e DEBUG=$DEBUG

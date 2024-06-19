@@ -14,12 +14,12 @@ configuration:
   vin:
     name: NIV du véhicule
     description: Numéro d'Identification de Véhicule affiché dans l'application Tesla
-  ble_mac:
-    name: BLE MAC (optionnel pour détection de proximité)
-    description: BLE MAC (S___________C) du véhicule; Utiliser Android "BLE scanner" ou iOS "nRF Connect"
   debug:
     name: Journalisation du débogage
     description: Imprimer des messages détaillés dans le journal pour le débogage
   send_cmd_retry_delay:
     name: Délai pour re-essayer une commande
     description: Délai pour re-essayer d'envoyer une command au véhicule via BLE
+  ble_presence_enable:
+    name: Détection de présence BLE par proximitée
+    description: Contrôle de la détection de présence par proximité basé sur BLE
