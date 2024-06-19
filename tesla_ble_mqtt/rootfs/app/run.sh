@@ -122,7 +122,6 @@ setup_auto_discovery
 bashio::log.info "Connecting to MQTT to discard any unread messages"
 mosquitto_sub -E -i tesla_ble_mqtt -h $MQTT_IP -p $MQTT_PORT -u $MQTT_USER -P $MQTT_PWD -t tesla_ble/+
 
-
 # Run BLE presence if BLE_PRESENCE_ENABLE is true
 if [ $BLE_PRESENCE_ENABLE == "true" ]; then
 
