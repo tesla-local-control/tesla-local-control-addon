@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Note: in case you get "permission denied" on docker commands: see: https://stackoverflow.com/questions/48957195/how-to-fix-docker-got-permission-denied-issue
 # fill these values according to your settings #############
 TESLA_VIN=""
 MQTT_IP=127.0.0.1
@@ -8,7 +9,7 @@ MQTT_USER=""
 MQTT_PWD=""
 SEND_CMD_RETRY_DELAY=5
 BLE_MAC=00:00:00:00:00:00
-DEBUG=false
+DEBUG="false"
 ############################################################
 
 
@@ -18,6 +19,7 @@ cd "$(dirname "$0")"
 echo "Fetch addon files..."
 mkdir tesla_ble_mqtt && cd tesla_ble_mqtt
 git clone --ignore standalone/start_tesla_ble_mqtt.sh https://github.com/raphmur/tesla-local-control-addon
+cd tesla-local-control-addon
 mv standalone/docker-compose.yml .
 
 echo "Making sure we have a clean start ..."

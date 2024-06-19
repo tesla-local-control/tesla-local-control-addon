@@ -26,10 +26,9 @@ else
   function bashio::log.warning { echo -e "${YELLOW}$1${NOCOLOR}"; }
   function bashio::log.error   { echo -e "${MAGENTA}$1${NOCOLOR}"; }
   function bashio::log.fatal   { echo -e "${RED}$1${NOCOLOR}"; }
-
   function bashio::log.cyan    { echo -e "${CYAN}$1${NOCOLOR}"; }
   function bashio::log.green   { echo -e "${GREEN}$1${NOCOLOR}"; }
-  function bashio::log.magenta { echo -e "${GREEN}$1${NOCOLOR}"; }
+  function bashio::log.magenta { echo -e "${MAGENTA}$1${NOCOLOR}"; }
   function bashio::log.red     { echo -e "${RED}$1${NOCOLOR}"; }
   function bashio::log.yellow  { echo -e "${YELLOW}$1${NOCOLOR}"; }
 fi
@@ -46,6 +45,7 @@ bashio::log.green MQTT_PORT=$MQTT_PORT
 bashio::log.green MQTT_USER=$MQTT_USER
 bashio::log.green "MQTT_PWD=Not Shown"
 bashio::log.green SEND_CMD_RETRY_DELAY=$SEND_CMD_RETRY_DELAY
+bashio::log.green DEBUG=$DEBUG
 
 if [ ! -d /share/tesla_ble_mqtt ]
 then
