@@ -12,6 +12,25 @@ if [ -n "${HASSIO_TOKEN:-}" ]; then
   MQTT_PWD="$(bashio::config 'mqtt_pwd')"; export MQTT_PWD
   SEND_CMD_RETRY_DELAY="$(bashio::config 'send_cmd_retry_delay')"; export SEND_CMD_RETRY_DELAY
   DEBUG="$(bashio::config 'debug')"; export DEBUG
+else
+  NOCOLOR='\033[0m'
+  GREEN='\033[0;32m'
+  CYAN='\033[0;36m'
+  YELLOW='\033[1;32m'
+  MAGENTA='\033[0;35m'
+  RED='\033[0;31m'
+
+  function bashio::log.debug   { [ $DEBUG == "true" ] && echo -e "${NOCOLOR}$1"; }
+  function bashio::log.info    { echo -e "${GREEN}$1${NOCOLOR}"; }
+  function bashio::log.notice  { echo -e "${CYAN}$1${NOCOLOR}"; }
+  function bashio::log.warning { echo -e "${YELLOW}$1${NOCOLOR}"; }
+  function bashio::log.error   { echo -e "${MAGENTA}$1${NOCOLOR}"; }
+  function bashio::log.fatal   { echo -e "${RED}$1${NOCOLOR}"; }
+  function bashio::log.cyan    { echo -e "${CYAN}$1${NOCOLOR}"; }
+  function bashio::log.green   { echo -e "${GREEN}$1${NOCOLOR}"; }
+  function bashio::log.magenta { echo -e "${MAGENTA}$1${NOCOLOR}"; }
+  function bashio::log.red     { echo -e "${RED}$1${NOCOLOR}"; }
+  function bashio::log.yellow  { echo -e "${YELLOW}$1${NOCOLOR}"; }
 fi
 
 # Set log level to debug
@@ -28,7 +47,8 @@ bashio::log.green "Configuration Options are:
   MQTT_PORT=$MQTT_PORT
   MQTT_USER=$MQTT_USER
   MQTT_PWD=Not Shown
-  SEND_CMD_RETRY_DELAY=$SEND_CMD_RETRY_DELAY"
+  SEND_CMD_RETRY_DELAY=$SEND_CMD_RETRY_DELAY
+  DEBUG=$DEBUG"
 
 if [ ! -d /share/tesla_ble_mqtt ]
 then
