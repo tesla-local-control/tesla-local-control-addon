@@ -5,9 +5,9 @@
 ### Changed
 
 - [ble presence] Add functionality to enable or not presence detection via config UI
-- [ble presence] Rename BLE_MAC to BLE_SC_NAME
-- [ble presence] Add logic to calculate BLE_SC_NAME
-- [ble presence] Remove BLE_MAC config option
+- [ble presence] Remove BLE_MAC from config option
+- [ble presence] Rename BLE_MAC to BLE_LOCAL_NAME
+- [ble presence] Add logic to generate BLE_LOCAL_NAME
 
 ## 0.0.8
 

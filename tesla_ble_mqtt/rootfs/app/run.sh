@@ -98,14 +98,14 @@ listen_to_ble() {
  bashio::log.info "Listening to BLE for presence"
  PRESENCE_TIMEOUT=5
  set +e
- bluetoothctl --timeout $PRESENCE_TIMEOUT scan on | grep $BLE_SC_NAME
+ bluetoothctl --timeout $PRESENCE_TIMEOUT scan on | grep $BLE_LOCAL_NAME
  EXIT_STATUS=$?
  set -e
  if [ $EXIT_STATUS -eq 0 ]; then
-   bashio::log.info "$BLE_SC_NAME presence detected"
+   bashio::log.info "$BLE_LOCAL_NAME presence detected"
    mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m ON
  else
-   bashio::log.notice "$BLE_SC_NAME presence not detected or issue in command"
+   bashio::log.notice "$BLE_LOCAL_NAME presence not detected or issue in command"
    mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m OFF
  fi
 
@@ -125,10 +125,10 @@ mosquitto_sub -E -i tesla_ble_mqtt -h $MQTT_IP -p $MQTT_PORT -u $MQTT_USER -P $M
 # Run BLE presence if BLE_PRESENCE_ENABLE is true
 if [ $BLE_PRESENCE_ENABLE == "true" ]; then
 
-    # Generate BLE_SC_NAME from TESLA_VIN
+    # Generate BLE_LOCAL_NAME from TESLA_VIN
     TESLA_VIN_HASH=$(echo -n "$TESLA_VIN" | sha1sum)
-    BLE_SC_NAME=S${TESLA_VIN_HASH:0:16}C
-    bashio::log.info "BLE_SC_NAME=$BLE_SC_NAME"
+    BLE_LOCAL_NAME=S${TESLA_VIN_HASH:0:16}C
+    bashio::log.info "BLE_LOCAL_NAME=$BLE_LOCAL_NAME"
 
     bashio::log.info "BLE_PRESENCE_ENABLE is true, initializing BLE listening loop counter"
     ble_listen_counter=0
