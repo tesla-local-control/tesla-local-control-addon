@@ -1,11 +1,11 @@
 #!/command/with-contenv bashio
 #set -e
 
-
+### INITIALIZE VARIABLES AND FUNCTIONS TO MAKE THIS .sh RUN ALSO STANDALONE ##########################################
 # read options in case of HA addon. Otherwise, they will be sent as environment variables
 if [ -n "${HASSIO_TOKEN:-}" ]; then
   TESLA_VIN="$(bashio::config 'vin')"; export TESLA_VIN
-  BLE_MAC="$(bashio::config 'ble_mac')"; export BLE_MAC
+  # BLE_MAC="$(bashio::config 'ble_mac')"; export BLE_MAC
   MQTT_IP="$(bashio::config 'mqtt_ip')"; export MQTT_IP
   MQTT_PORT="$(bashio::config 'mqtt_port')"; export MQTT_PORT
   MQTT_USER="$(bashio::config 'mqtt_user')"; export MQTT_USER
@@ -33,6 +33,7 @@ else
   function bashio::log.yellow  { echo -e "${YELLOW}$1${NOCOLOR}"; }
 fi
 
+### INITIALIZE AND LOG CONFIG VARS ##################################################################################
 # Set log level to debug
 bashio::config.true debug && bashio::log.level debug
 
@@ -42,7 +43,6 @@ bashio::log.cyan "Instructions by Shankar Kumarasamy https://shankarkumarasamy.b
 
 bashio::log.green "Configuration Options are:
   TESLA_VIN=$TESLA_VIN
-  BLE_MAC=$BLE_MAC
   MQTT_IP=$MQTT_IP
   MQTT_PORT=$MQTT_PORT
   MQTT_USER=$MQTT_USER
@@ -58,7 +58,7 @@ else
     bashio::log.debug "/share/tesla_ble_mqtt already exists, existing keys can be reused"
 fi
 
-
+### DEFINE FUNCTIONS ###############################################################################################
 send_command() {
  for i in $(seq 5); do
   bashio::log.notice "Attempt $i/5 to send command"
@@ -94,7 +94,7 @@ send_key() {
 }
 
 listen_to_ble() {
- bashio::log.info "Listening to BLE for presence"
+ bashio::log.notice "Listening to BLE for presence"
  PRESENCE_TIMEOUT=5
  set +e
  bluetoothctl --timeout $PRESENCE_TIMEOUT scan on | grep $BLE_MAC
@@ -104,34 +104,55 @@ listen_to_ble() {
    bashio::log.info "$BLE_MAC presence detected"
    mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m ON
  else
-   bashio::log.notice "$BLE_MAC presence not detected or issue in command"
+   bashio::log.info "$BLE_MAC presence not detected or issue in command"
    mosquitto_pub --nodelay -h $MQTT_IP -p $MQTT_PORT -u "$MQTT_USER" -P "$MQTT_PWD" -t tesla_ble/binary_sensor/presence -m OFF
  fi
-
 }
 
+### SETUP ENVIRONMENT ###########################################################################################
 bashio::log.notice "Sourcing functions"
 . /app/listen_to_mqtt.sh
 . /app/discovery.sh
 
-bashio::log.info "Setting up auto discovery for Home Assistant"
+bashio::log.notice "Setting up auto discovery for Home Assistant"
 setup_auto_discovery
 
-bashio::log.info "Connecting to MQTT to discard any unread messages"
+bashio::log.notice "Connecting to MQTT to discard any unread messages"
 mosquitto_sub -E -i tesla_ble_mqtt -h $MQTT_IP -p $MQTT_PORT -u $MQTT_USER -P $MQTT_PWD -t tesla_ble/+
 
-bashio::log.info "Initialize BLE listening loop counter"
+bashio::log.info "Start finding the BLE MAC address from VIN (will work only if Tesla is in BLE range)"
+set +e
+. /app/calc_ble_from_vin.sh
+set -e
+
+echo $BLE_MAC
+
+### START MAIN PROGRAM LOOP ######################################################################################
+# bashio::log.info "Initialize BLE listening loop counter"
+bashio::log.notice "Entering main MQTT & BLE listening loop"
 counter=0
-bashio::log.info "Entering main MQTT & BLE listening loop"
 while true
 do
  set +e
  listen_to_mqtt
+ # set -e
  ((counter++))
  if [[ $counter -gt 90 ]]; then
   bashio::log.info "Reached 90 MQTT loops (~3min): Launch BLE scanning for car presence"
-  listen_to_ble
-  counter=0
+  if [ -z ${BLE_MAC-} ]; then
+   bashio::log.notice "Retry finding the BLE MAC address"
+   # set +e
+   . /app/calc_ble_from_vin.sh
+   # set -e
+  fi
+  if [ -z ${BLE_MAC-} ]; then continue
+  else
+	# set +e
+	listen_to_ble
+	# set -e
+	counter=0
+  fi
  fi
  sleep 2
+ set -e
 done
