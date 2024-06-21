@@ -16,7 +16,7 @@ configuration:
     description: Numéro d'Identification de Véhicule affiché dans l'application Tesla
   ble_mac:
     name: BLE MAC (optionnel pour détection de proximité)
-    description: BLE MAC (S___________C) du véhicule; Utiliser Android "BLE scanner" ou iOS "nRF Connect"
+    description: Adresse MAC BLE (aa:bb:cc:dd:ee:ff) ou Nom BLE  (S___________C) du véhicule"; Utiliser Android "BLE scanner" ou iOS "nRF Connect
   debug:
     name: Journalisation du débogage
     description: Imprimer des messages détaillés dans le journal pour le débogage
