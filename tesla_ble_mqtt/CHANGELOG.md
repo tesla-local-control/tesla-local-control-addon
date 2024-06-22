@@ -1,5 +1,11 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.0.8a
+
+### Changed
+
+- Updated doc for MAC addresses config
+
 ## 0.0.8
 
 ### Changed
