@@ -3,22 +3,12 @@
 # Generate BLE_MAC from TESLA_VIN
 bashio::log.notice "TESLA_VIN: $TESLA_VIN. Calculating BLE_LOCAL_NAME..."
 
-function ble_mac_generate() {
-python3 - << __END_PY__
-from cryptography.hazmat.primitives import hashes;
-vin = bytes("$TESLA_VIN", "UTF8");
-digest = hashes.Hash(hashes.SHA1())
-digest.update(vin)
-vinSHA = digest.finalize().hex()
-middleSection = vinSHA[0:16]
-bleName = "S" + middleSection + "C"
-print(bleName)
-__END_PY__
-}
+# reset file and calculate LNAME from VIN
+rm -f tesla_vin.txt
+echo -n $TESLA_VIN > tesla_vin.txt
 
-BLE_LOCAL_NAME=$(ble_mac_generate)
-
-
+VIN_SHA1=`sha1sum tesla_vin.txt`
+BLE_LOCAL_NAME="S${VIN_SHA1:0:16}C"
 
 # print BLE Local Name for which we want the MAC
 bashio::log.notice "BLE_LOCAL_NAME: $BLE_LOCAL_NAME. Start MAC finding..."
@@ -36,7 +26,7 @@ bluetoothctl --timeout 20 scan on > /dev/zero &
 
 #xargs -0 -n 1 bluetoothctl info  < <(tr \\n \\0 <scan-macs.txt) | grep "Name: $BLE_LOCAL_NAME"
 
-# cycle through all scanned MACs to find our MAC
+bashio::log.notice "Cycling through all scanned MACs to find the vehicle"
 BLE_MAC=""
 while read mac; do
         INFO=$(bluetoothctl --timeout 1 info $mac)
