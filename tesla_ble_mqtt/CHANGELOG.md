@@ -7,6 +7,12 @@
 - Add option to deactivate BLE proximity scanner (by default, periodicity is around 4 min)
 - Implement MAC address detection from VIN (MAC can still be input if prefered)
 
+## 0.0.8a
+
+### Changed
+
+- Updated doc for MAC addresses
+
 ## 0.0.8
 
 ### Changed
