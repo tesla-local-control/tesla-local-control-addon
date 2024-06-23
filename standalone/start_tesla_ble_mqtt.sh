@@ -8,8 +8,9 @@ MQTT_PORT=1883
 MQTT_USER=""
 MQTT_PWD=""
 SEND_CMD_RETRY_DELAY=5
-BLE_MAC=00:00:00:00:00:00
 DEBUG="false"
+PRESENCE_DETECTION="false"
+BLE_MAC=""
 ############################################################
 
 
@@ -42,8 +43,9 @@ echo "Start main docker container with configuration Options:
   MQTT_USER=$MQTT_USER
   MQTT_PWD=Not Shown
   SEND_CMD_RETRY_DELAY=$SEND_CMD_RETRY_DELAY
-  BLE_MAC=$BLE_MAC
-  DEBUG=$DEBUG"
+  DEBUG=$DEBUG
+  PRESENCE_DETECTION=$PRESENCE_DETECTION
+  BLE_MAC=$BLE_MAC"
 
 docker-compose up -d \
   -e TESLA_VIN=$TESLA_VIN \
@@ -52,5 +54,6 @@ docker-compose up -d \
   -e MQTT_USER=$MQTT_USER \
   -e MQTT_PWD=$MQTT_PWD \
   -e SEND_CMD_RETRY_DELAY=$SEND_CMD_RETRY_DELAY \
-  -e BLE_MAC=$BLE_MAC \
-  -e DEBUG=$DEBUG
+  -e DEBUG=$DEBUG \
+  -e PRESENCE_DETECTION=$PRESENCE_DETECTION \
+  -e BLE_MAC=$BLE_MAC

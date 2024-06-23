@@ -20,6 +20,9 @@ configuration:
   debug:
     name: Debug Logging
     description: Print verbose messages to the log for debugging
+  presence_detection:
+    name: Proximity detector
+    description: Scan for vehicle proximity to the bluetooth device
   send_cmd_retry_delay:
     name: Delay to retry a command
     description: Delay to retry sending a command to the vehicle over BLE
