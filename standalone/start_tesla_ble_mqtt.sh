@@ -18,7 +18,7 @@ cd "$(dirname "$0")"
 
 echo "Fetch addon files..."
 mkdir tesla_ble_mqtt && cd tesla_ble_mqtt
-git clone --ignore standalone/start_tesla_ble_mqtt.sh https://github.com/raphmur/tesla-local-control-addon
+git clone --ignore standalone/start_tesla_ble_mqtt.sh https://github.com/tesla-local-control/tesla-local-control-addon
 cd tesla-local-control-addon
 mv standalone/docker-compose.yml .
 

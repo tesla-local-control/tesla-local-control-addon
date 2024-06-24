@@ -1,3 +1,5 @@
+_The project has moved to an open source organisation "tesla-local-control". Please update the repo in HA to: https://github.com/tesla-local-control/tesla-local-control-addon_
+
 # Home Assistant Add-on: Tesla Local Commands
 
 Send commands via MQTT to a Tesla car using Bluetooth Low Energy (BLE)
