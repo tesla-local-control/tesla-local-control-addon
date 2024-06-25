@@ -38,7 +38,7 @@ cp -p standalone/docker-compose.yml .
 echo "Making sure we have a clean start; stop & delete docker container $PROJECT"
 docker rm -f $PROJECT
 
-SHARE_TESLA_BLE_MQTT_PATH=/usr/share/$PROJECT
+SHARE_TESLA_BLE_MQTT_PATH=~/share/$PROJECT
 if [ ! -d $SHARE_TESLA_BLE_MQTT_PATH ]; then
   echo "Create $SHARE_TESLA_BLE_MQTT_PATH directory..."
   mkdir -p $SHARE_TESLA_BLE_MQTT_PATH
