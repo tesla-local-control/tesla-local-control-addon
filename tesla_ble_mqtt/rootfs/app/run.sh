@@ -12,6 +12,10 @@ if [ -n "${HASSIO_TOKEN:-}" ]; then
   MQTT_PWD="$(bashio::config 'mqtt_pwd')"; export MQTT_PWD
   SEND_CMD_RETRY_DELAY="$(bashio::config 'send_cmd_retry_delay')"; export SEND_CMD_RETRY_DELAY
   DEBUG="$(bashio::config 'debug')"; export DEBUG
+
+  # Set log level to debug
+  bashio::config.true debug && bashio::log.level debug
+
 else
   NOCOLOR='\033[0m'
   GREEN='\033[0;32m'
@@ -33,8 +37,6 @@ else
   function bashio::log.yellow  { echo -e "${YELLOW}$1${NOCOLOR}"; }
 fi
 
-# Set log level to debug
-bashio::config.true debug && bashio::log.level debug
 
 bashio::log.cyan "tesla_ble_mqtt_docker by Iain Bullock 2024 https://github.com/iainbullock/tesla_ble_mqtt_docker"
 bashio::log.cyan "Inspiration by Raphael Murray https://github.com/raphmur"
