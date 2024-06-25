@@ -59,8 +59,8 @@ echo "Will start the docker container with the following settings:
   TESLA_VIN=$TESLA_VIN
   DEBUG=$DEBUG"
 
-echo "Launching the docker container with docker-compose up -d"
-docker-compose up -d \
+echo "Launching the docker container with docker compose up -d"
+docker compose up -d \
   -e TESLA_VIN=$TESLA_VIN \
   -e MQTT_IP=$MQTT_IP \
   -e MQTT_PORT=$MQTT_PORT \
