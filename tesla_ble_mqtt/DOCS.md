@@ -9,7 +9,7 @@ The advantage of the MQTT setup is that it can run on a device separate to your 
 
 If you have already created a key pair that you want to reuse, place the private key in `/share/tesla_ble_mqtt`
 
-## 1.1 HA Add-on: install below and configure
+## Install below and configure
 
 [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https://github.com/tesla-local-control/tesla-local-control-addon)
 
@@ -22,15 +22,6 @@ You will need to provide:
 - MQTT_USER
 - MQTT_PWD
 - SEND_CMD_RETRY_DELAY: delay between retries in case BLE fails. Use 5 by default
-
-
-## 1.2 For the standalone version
-
-It has been tested on RPi 3B so far. Here are the assumptions and way forward:
-- You already have Docker working on the host device, and you are familiar with basic Docker concepts and actions
-- Clone the self packaged shell script: `wget https://github.com/raphmur/tesla-local-control-addon/blob/main/standalone/start_tesla_ble_mqtt.sh`
-- Edit the script to input your own settings (same as for HA Add on)
-- run the script: `./start_tesla_ble_mqtt.sh`, it will download the rest of the elements, build and deploy the container
 
 
 ## 2 THEN

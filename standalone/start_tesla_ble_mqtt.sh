@@ -18,17 +18,17 @@ cd "$(dirname "$0")"
 
 echo "Fetch addon files..."
 mkdir tesla_ble_mqtt && cd tesla_ble_mqtt
-git clone --ignore standalone/start_tesla_ble_mqtt.sh https://github.com/tesla-local-control/tesla-local-control-addon
+git clone https://github.com/tesla-local-control/tesla-local-control-addon
 cd tesla-local-control-addon
 mv standalone/docker-compose.yml .
 
 echo "Making sure we have a clean start ..."
 docker rm -f tesla_ble_mqtt
-if [ ! -d /share/tesla_ble_mqtt ]
+if [ ! -d /usr/share/tesla_ble_mqtt ]
 then
-    mkdir /share/tesla_ble_mqtt
+    mkdir /usr/share/tesla_ble_mqtt
 else
-    echo "/share/tesla_ble_mqtt already exists, existing keys can be reused"
+    echo "/usr/share/tesla_ble_mqtt already exists, existing keys can be reused"
 fi
 
 
