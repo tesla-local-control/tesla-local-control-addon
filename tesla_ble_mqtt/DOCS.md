@@ -28,7 +28,7 @@ You will need to provide:
 
 It has been tested on RPi 3B so far. Here are the assumptions and way forward:
 - You already have Docker working on the host device, and you are familiar with basic Docker concepts and actions
-- Clone the self packaged shell script: `wget https://github.com/raphmur/tesla-local-control-addon/blob/main/standalone/start_tesla_ble_mqtt.sh`
+- Clone the self packaged shell script: `wget https://raw.githubusercontent.com/tesla-local-control/tesla-local-control-addon/main/standalone/start_tesla_ble_mqtt.sh`
 - Edit the script to input your own settings (same as for HA Add on)
 - run the script: `./start_tesla_ble_mqtt.sh`, it will download the rest of the elements, build and deploy the container
 
