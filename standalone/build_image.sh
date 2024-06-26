@@ -5,6 +5,7 @@ set -e
 # Following 3 values should come from a common file
 PROJECT=tesla_local_control_addon
 PROJECT_STATE=dev
+VERSION=0.0.8
 
 ALPINE_RELEASE=alpine:latest
 
@@ -23,4 +24,4 @@ cd tesla-local-control-addon/tesla_ble_mqtt
 git pull
 
 # Bulding docker image
-docker build -t ${PROJECT}:${PROJECT_STATE} --build-arg BUILD_FROM=${ALPINE_RELEASE} .
+docker build -t ${PROJECT}:${VERSION}${PROJECT_STATE} --build-arg BUILD_FROM=${ALPINE_RELEASE} .
