@@ -1,7 +1,6 @@
 #!/command/with-contenv bashio
-#set -e
 
-
+### INITIALIZE VARIABLES AND FUNCTIONS TO MAKE THIS .sh RUN ALSO STANDALONE ##########################################
 # read options in case of HA addon. Otherwise, they will be sent as environment variables
 if [ -n "${HASSIO_TOKEN:-}" ]; then
   TESLA_VIN="$(bashio::config 'vin')"; export TESLA_VIN
@@ -33,6 +32,7 @@ else
   function bashio::log.yellow  { echo -e "${YELLOW}$1${NOCOLOR}"; }
 fi
 
+### INITIALIZE AND LOG CONFIG VARS ##################################################################################
 # Set log level to debug
 bashio::config.true debug && bashio::log.level debug
 
@@ -58,19 +58,27 @@ else
     bashio::log.debug "/share/tesla_ble_mqtt already exists, existing keys can be reused"
 fi
 
-
+### DEFINE FUNCTIONS ###############################################################################################
 send_command() {
  for i in $(seq 5); do
   bashio::log.notice "Attempt $i/5 to send command"
   set +e
-  tesla-control -ble -vin $TESLA_VIN -key-name /share/tesla_ble_mqtt/private.pem -key-file /share/tesla_ble_mqtt/private.pem $1
+  message=$(tesla-control -ble -vin $TESLA_VIN -key-name /share/tesla_ble_mqtt/private.pem -key-file /share/tesla_ble_mqtt/private.pem $1 2>&1)
   EXIT_STATUS=$?
   set -e
   if [ $EXIT_STATUS -eq 0 ]; then
     bashio::log.info "tesla-control send command succeeded"
     break
   else
-    bashio::log.error "tesla-control send command failed exit status $EXIT_STATUS. Retrying in $SEND_CMD_RETRY_DELAY"
+	if [[ $message == *"Failed to execute command: car could not execute command"* ]]; then
+	  bashio::log.error $message
+	  bashio::log.notice "Skipping command $1"
+	  break
+	else
+      bashio::log.error "tesla-control send command failed exit status $EXIT_STATUS."
+	  bashio::log.info $message
+	  bashio::log.notice "Retrying in $SEND_CMD_RETRY_DELAY"
+	fi
     sleep $SEND_CMD_RETRY_DELAY
   fi
  done
@@ -110,7 +118,8 @@ listen_to_ble() {
 
 }
 
-bashio::log.notice "Sourcing functions"
+### SETUP ENVIRONMENT ###########################################################################################
+bashio::log.notice "Load functions"
 . /app/listen_to_mqtt.sh
 . /app/discovery.sh
 
@@ -120,7 +129,7 @@ setup_auto_discovery
 bashio::log.info "Connecting to MQTT to discard any unread messages"
 mosquitto_sub -E -i tesla_ble_mqtt -h $MQTT_IP -p $MQTT_PORT -u $MQTT_USER -P $MQTT_PWD -t tesla_ble/+
 
-bashio::log.info "Initialize BLE listening loop counter"
+### START MAIN PROGRAM LOOP ######################################################################################
 counter=0
 bashio::log.info "Entering main MQTT & BLE listening loop"
 while true
