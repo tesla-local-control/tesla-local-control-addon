@@ -3,27 +3,16 @@ version: '3.8'
 services:
   tesla_local_control_addon:
     container_name: tesla_local_control_addon
-    image: tesla_local_control_addon
+    image: tesla_local_control_addon:0.0.8dev
 
-### NOT NEEDED - SEE THE MOD IN run.sh ... but NICER TO PUT THIS LOGIC HERE
-### Yeah I think we should keep it :)
-    entrypoint: "[ -L /command/with-contenv ] \
-                  && /app/run.sh \
-                  || /usr/bin/sh /app/run.sh"
+### THIS DOESN'T WORK ... maybe the double quotes aren't needed?
+### This logic is now in run.sh BUT it would be nicer somehow to have it in here.
+#    entrypoint: "[ -L /command/with-contenv ] \
+#                  && /app/run.sh \
+#                  || /usr/bin/sh /app/run.sh"
 
     env_file:
       - ./env
-
-#    environment:
-#      - BLE_MAC=${BLE_MAC}
-#      - DEBUG=${DEBUG}
-#      - MQTT_IP=${MQTT_HOST}
-#      - MQTT_PORT=${MQTT_PORT}
-#      - MQTT_USER=${MQTT_USERNAME}
-#      - MQTT_PWD=${MQTT_PASSWORD}
-#      - SEND_CMD_RETRY_DELAY=${SEND_CMD_RETRY_DELAY}
-#      - TESLA_VIN=${TESLA_VIN}
-#      - TZ=${TZ}
 
     network_mode: host
     privileged: true

@@ -5,17 +5,23 @@
 #       https://stackoverflow.com/questions/48957195/how-to-fix-docker-got-permission-denied-issue
 set -e
 
-# Installation root directory
-INSTALL_ROOT_PATH=~/test-tesla_local_control_addon
-
 # Following 3 values should come from a common file
+# Project's Name
 PROJECT=tesla_local_control_addon
-PROJECT_STATE=dev
+# Projet's Version
 VERSION=0.0.8
+# Project's State (dev, prod?)
+PROJECT_STATE=dev
+
+# Docker Root Directory
+DOCKER_ROOT_PATH=/volume/docker
+
+# Project's Final Installation PATH
+PROJECT_ROOT_PATH=${DOCKER_ROOT_PATH}/${PROJECT}
 
 # create dir
-[ ! -d $INSTALL_ROOT_PATH ] && mkdir $INSTALL_ROOT_PATH
-cd $INSTALL_ROOT_PATH
+[ ! -d $PROJECT_ROOT_PATH ] && mkdir $PROJECT_ROOT_PATH
+cd $PROJECT_ROOT_PATH
 
 # Clone tesla-local-control-addon repo
 if [ ! -d tesla-local-control-addon ]; then
@@ -28,24 +34,20 @@ cd tesla-local-control-addon \
 
 # Backup files
 ###################################### BEFORE FINAL RELEASE WE REMOVE THE env FILE
-###################################### BEFORE FINAL RELEASE WE REMOVE THE env FILE
-###################################### BEFORE FINAL RELEASE WE REMOVE THE env FILE
 BACKUP_TIME=$(date +%s)
-BACKUP_LIST="build_image.sh Dockerfile docker-compose.yml env install.sh"
+BACKUP_LIST="build_image.sh Dockerfile docker-compose.yml install.sh"
 for file in $BACKUP_LIST; do
   [ -f $file ] && mv $file $file.$BACKUP_TIME
   cp -p tesla-local-control-addon/standalone/$file .
 done
+# Copy once env
+[ ! -f env ] && cp -p tesla-local-control-addon/standalone/env .
 
 echo "Making sure we have a clean start; stop & delete docker container $PROJECT"
 docker rm -f $PROJECT
 
 [ ! -d data ] && mkdir data
-##################################  WE NEED TO USE THE docker create volume "share"
 [ ! -d share ] && mkdir share
-
-echo "Create docker volume structure..."
-docker volume create $PROJECT
 
 # Pick docker-compose or docker compose
 if [ type -a docker-compose > /dev/null ]; then
