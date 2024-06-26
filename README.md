@@ -12,7 +12,7 @@ This is to bypass the current Fleet API rate limitation and does not rely on the
 
 This repository contains the following add-ons
 
-### [Tesla BLE Command](./tesla_ble_commands)
+### [Tesla BLE MQTT](./tesla_ble_mqtt_docker)
 
 ![Supports aarch64 Architecture][aarch64-shield]
 ![Supports amd64 Architecture][amd64-shield]
