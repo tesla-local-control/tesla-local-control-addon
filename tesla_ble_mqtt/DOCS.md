@@ -24,7 +24,7 @@ You will need to provide:
 - SEND_CMD_RETRY_DELAY: delay between retries in case BLE fails. Use 5 by default
 
 
-## 1.2 For the standalone version **BROKEN - please see https://github.com/iainbullock/tesla_ble_mqtt_docker for temporary workaround**
+## 1.2 For the standalone version
 
 It has been tested on RPi 3B so far. Here are the assumptions and way forward:
 - You already have Docker working on the host device, and you are familiar with basic Docker concepts and actions
