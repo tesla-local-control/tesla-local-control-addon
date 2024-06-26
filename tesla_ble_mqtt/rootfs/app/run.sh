@@ -77,7 +77,7 @@ send_command() {
 	else
       bashio::log.error "tesla-control send command failed exit status $EXIT_STATUS."
 	  bashio::log.info $message
-	  bashio::log.notice "Retrying in $SEND_CMD_RETRY_DELAY"
+	  bashio::log.notice "Retrying in $SEND_CMD_RETRY_DELAY seconds"
 	fi
     sleep $SEND_CMD_RETRY_DELAY
   fi
