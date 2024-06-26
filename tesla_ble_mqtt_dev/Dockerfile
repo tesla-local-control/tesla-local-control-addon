@@ -18,14 +18,10 @@ COPY --from=builder /root/go/bin/tesla-control /usr/bin/
 RUN apk add --no-cache \
   openssl \
   bluez \
-  mosquitto-clients \
-  python3
-
-# Python 3 HTTP Server serves the current working dir
-WORKDIR /data
+  mosquitto-clients
 
 # Copy data for add-on
-COPY rootfs /
+COPY app /app
 RUN chmod a+x /app/run.sh
 
 CMD [ "/app/run.sh" ]
