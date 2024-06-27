@@ -1,5 +1,11 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.0.9
+
+### Changed
+
+- Fixed useless tesla-control retries
+
 ## 0.0.8b
 
 ### Changed
