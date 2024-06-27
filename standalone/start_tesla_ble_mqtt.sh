@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Note: in case you get "permission denied" on docker commands: see: https://stackoverflow.com/questions/48957195/how-to-fix-docker-got-permission-denied-issue
 # fill these values according to your settings #############
