@@ -1,5 +1,13 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.0.10
+
+### Changed
+
+- Rework project files structure
+- Add support for 3 VINs
+- Improve logging
+
 ## 0.0.9
 
 ### Changed
