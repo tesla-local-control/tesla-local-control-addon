@@ -4,8 +4,9 @@
 
 ### Changed
 
+- **WARNING**: Now supports 3 VINS. You will need to adjust configuration (VIN1/2/3 & BLE MAC)
+- **WARNING**: Presence detection only works for VIN1
 - Rework project files structure
-- Add support for 3 VINs
 - Improve logging
 
 ## 0.0.9
