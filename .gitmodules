@@ -1,0 +1,3 @@
+[submodule "tesla_ble_mqtt/app"]
+	path = tesla_ble_mqtt/app
+	url = https://github.com/tesla-local-control/tesla_ble_mqtt_core
