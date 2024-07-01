@@ -15,13 +15,16 @@ If you have already created a key pair that you want to reuse, place the private
 
 
 You will need to provide:
-- TESLA_VIN (car VIN)
-- BLE_MAC: Used for proximity discovery. Tesla's BLE MAC is in the form AA:BB:CC:DD:EE:FF. To find the address, use "BLE scanner" on Android or "nRF Connect" on iOS and look for a device with a name starting with "S" and ending with "C".
-- MQTT_IP: ip of your MQTT server
-- MQTT_PORT
-- MQTT_USER
-- MQTT_PWD
-- SEND_CMD_RETRY_DELAY: delay between retries in case BLE fails. Use 5 by default
+- TESLA_VIN_LIST            : VIN single or multiple separated by a | (pipe); Required
+- BLE_MAC_LIST              : BLE MAC Addr list single or multiple separated by a | (pipe); Optional for car presence detection
+- PRESENCE_DETECTION_TTL    : TTL in seconds when car is considered gone after last received BLE advertisement; 0 to disable detection
+- MQTT_IP                   : Hostname or IP of your MQTT server; Default 127.0.0.1
+- MQTT_PORT                 : MQTT service port; Default 1883
+- MQTT_USER                 : MQTT Username; Default anonymous
+- MQTT_PWD                  : MQTT Password
+- SEND_CMD_RETRY_DELAY      : Delay to retry sending a command to the car over BLE; Default 5
+
+ATTENTION: If you have multiple cars and require presence detection, TESLA_VIN_LIST TESLA_VIN{n} and BLE_MAC_LIST BLE_MAC{n} must match the same car. For example, the BLE MAC Addr in the 2nd position must match the same car's VIN in the 2nd position of the TESLA_VIN_LIST.
 
 
 ## 1.2 For the standalone version **BROKEN - please see https://github.com/iainbullock/tesla_ble_mqtt_docker for temporary workaround**
