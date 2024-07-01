@@ -16,7 +16,7 @@ configuration:
     name: MQTT Port
     description: Port d'écoute pour le service MQTT
   mqtt_username:
-    name: Utilisateur MQTT
+    name: Utilisateur MQTT; Par défault si vide, c'est le mode "anonyme"
     description: Now d'utilisateur MQTT
   mqtt_password:
     name: Mot de passe MQTT

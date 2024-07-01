@@ -15,8 +15,8 @@ configuration:
     name: MQTT Port
     description: MQTT Listen Port
   mqtt_username:
-    name: MQTT Username
-    description: MQTT Username
+    name: MQTT Username; Default empty is "anonymous" mode
+    description: MQTT Username;
   mqtt_password:
     name: MQTT Password
     description: MQTT User's password
