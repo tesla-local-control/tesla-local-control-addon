@@ -8,21 +8,21 @@ configuration:
   ble_mac_list:
     name: Single or multiple BLE MACs (aa:bb:cc:dd:ee:ff) separated by a | (pipe); Optional for proximity detection
     description: Use Android "BLE scanner" or iOS "nRF Connect"; First locate your car's BLE Local Name, it starts with letter S and ends with C. In the app for the car, find the MAC address. If you have multiple Twsla cars, use the signal strength to figure out which one to pick.
-  mqtt_ip:
+  mqtt_server:
     name: MQTT Server
     description: MQTT Server's IP address or valid Hostname
   mqtt_port:
     name: MQTT Port
     description: MQTT Listen Port
-  mqtt_user:
-    name: MQTT User
+  mqtt_username:
+    name: MQTT Username
     description: MQTT Username
-  mqtt_pwd:
+  mqtt_password:
     name: MQTT Password
     description: MQTT User's password
   debug:
     name: Debug Logging
     description: Print verbose messages to the log for debugging
-  send_cmd_retry_delay:
+  ble_cmd_retry_delay:
     name: Delay to retry a command
     description: Delay to retry sending a command to the vehicle over BLE
