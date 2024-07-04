@@ -17,15 +17,13 @@ See tab **Documentation** for more details
 > How to know you are affected?
 > - Commands are not getting to the car, you see a lot of 
 > - In HA Core logs, you see this, especially the last one:
-> '''
-> ERROR (MainThread) [habluetooth.scanner] hci0 (xx:xx:xx:xx:xx:xx): Error stopping scanner: [org.freedesktop.DBus.Error.UnknownObject] Method "StopDiscovery" with signature "" on interface "org.bluez.Adapter1" doesn't exist
+> '''ERROR (MainThread) [habluetooth.scanner] hci0 (xx:xx:xx:xx:xx:xx): Error stopping scanner: [org.freedesktop.DBus.Error.UnknownObject] Method "StopDiscovery" with signature "" on interface "org.bluez.Adapter1" doesn't exist
 > WARNING (MainThread) [bluetooth_auto_recovery.recover] Could not determine the power state of the Bluetooth adapter hci0 [xx:xx:xx:xx:xx:xx] due to timeout after 5 seconds
 > WARNING (MainThread) [bluetooth_auto_recovery.recover] Could not cycle the Bluetooth adapter hci0 [xx:xx:xx:xx:xx:xx]: [Errno 16] Resource busy
 > WARNING (MainThread) [bluetooth_auto_recovery.recover] Bluetooth management socket connection lost: [Errno 22] Invalid argument
 > WARNING (MainThread) [bluetooth_auto_recovery.recover] Could not reset the power state of the Bluetooth adapter hci0 [xx:xx:xx:xx:xx:xx] due to timeout after 5 seconds
 > WARNING (MainThread) [bluetooth_auto_recovery.recover] Closing Bluetooth adapter hci0 [xx:xx:xx:xx:xx:xx] failed: [Errno 9] Bad file descriptor
-> ERROR (MainThread) [habluetooth.scanner] hci0 (E4:5F:01:D9:EC:B5): Failed to restart Bluetooth scanner: hci0 (xx:xx:xx:xx:xx:xx): Failed to start Bluetooth: adapter 'hci0' not found; Try power cycling the Bluetooth hardware.
-> '''
+> ERROR (MainThread) [habluetooth.scanner] hci0 (E4:5F:01:D9:EC:B5): Failed to restart Bluetooth scanner: hci0 (xx:xx:xx:xx:xx:xx): Failed to start Bluetooth: adapter 'hci0' not found; Try power cycling the Bluetooth hardware.'''
 
 
 ## Credits
