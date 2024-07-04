@@ -7,7 +7,12 @@ This Addon is a package of [tesla_ble_mqtt_core]https://github.com/tesla-local-c
 It runs the official Tesla Vehicle SDK commands via BLE to activate various entities in your Tesla.
 This is to bypass the current Fleet API rate limitation as it does not rely on the API.
 
-See tab "Documentation" for more details
+See tab **Documentation** for more details
+
+> [!WARNING]
+> Using onboard bluetooth on Raspberry Pi has proven to be sensitive to overheating, especially if your car is far from the device.
+> You can try setting up the integration iBeacons and check that the signal strength is above -80 dBm.
+> If you don't have it already, you can add a small fan to cool down the RPi Wifi/Bluetooth chipset
 
 
 ## Credits
