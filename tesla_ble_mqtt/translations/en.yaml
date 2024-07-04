@@ -1,25 +1,29 @@
 configuration:
-  mqtt_ip:
+  mqtt_server:
     name: MQTT Server
     description: MQTT Server's IP address or valid Hostname
   mqtt_port:
     name: MQTT Port
     description: MQTT Listen Port
-  mqtt_user:
+  mqtt_username:
     name: MQTT User
     description: MQTT Username
-  mqtt_pwd:
+  mqtt_password:
     name: MQTT Password
     description: MQTT User's password
-  vin:
-    name: Car's VIN
-    description: Vehicle Identification Number found in Tesla app
-  ble_mac:
-    name: BLE MAC (optional for proximity detection)
-    description: Car's BLE MAC (aa:bb:cc:dd:ee:ff). Use Android "BLE scanner" or iOS "nRF Connect" to find the MAC of the Tesla BLE Device which looks like S___________C
+  vin_list:
+    name: Cars VINs. Separated by ";"
+    description: Vehicle Identification Number found in Tesla app.
+  ble_mac_list:
+    name: Corresponding BLE MAC (optional for proximity detection)
+    description: Cars BLE MAC (aa:bb:cc:dd:ee:ff). Use Android "BLE scanner" or iOS "nRF Connect" to find the MAC of the Tesla BLE Device which looks like S___________C
   debug:
     name: Debug Logging
     description: Print verbose messages to the log for debugging
   send_cmd_retry_delay:
     name: Delay to retry a command
-    description: Delay to retry sending a command to the vehicle over BLE
+    description: Delay to retry sending a command to the vehicle over BLE, in seconds.
+  presence_detection_ttl:
+    name: Delay to refresh presence detection
+    description: Delay to scan for cars presence, in seconds. Can be set to 0 to disable. Default 180s
+
