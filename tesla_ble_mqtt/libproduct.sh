@@ -16,5 +16,6 @@ function productInit() {
   fi
 
   export COLOR=true
+  export HA_BACKEND_DISABLE=false
 
 }
