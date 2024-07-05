@@ -18,11 +18,12 @@ COPY --from=builder /root/go/bin/tesla-control /usr/bin/
 RUN apk add --no-cache \
   bluez \
   bluez-deprecated \
-  openssl \
-  mosquitto-clients
+  mosquitto-clients \
+  openssl
 
-# Copy data for add-on
+# Copy files for add-on
 COPY app /app/
+COPY libproduct.sh /app/
 RUN chmod a+x /app/run.sh
 RUN sed -i 's|#!/bin/ash|#!/command/with-contenv bashio|' /app/run.sh
 

@@ -1,14 +1,24 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
-## X.X.X
+## 0.0.11
+
+### Changed
 
 ### Breaking change & Upgrade Instruction
+- No need to provide MAC addresses anymore for presence detection
+- **BREAKING CHANGE - save config before update**: Now supports **list** of VINS. You will need to adjust configuration. Existing **entities** from v0.0.10f will not be affected.
 - Cut & Paste your current vin to vin_list
 - Cut & Paste your current mac_addr to mac_addr_list
 
 ### Changed
 - Added support for multi-cars
 - Added toggle to enable or disable vehicule detection
+- Fix mosquitto calls
+- Add bluez-deprecated pkg (ciptool hciattach hciconfig hcidump hcitool meshctl rfcomm sdptool)
+- Improved presence detection
+- Improved logging (bashio timestamps, verbosity, colors)
+- Added "debug" entity which sends only one charge amps command: https://github.com/tesla-local-control/tesla_ble_mqtt_core/issues/19
+- Clarified issues with BLE device overheating causing performance issues: https://github.com/tesla-local-control/tesla-local-control-addon/issues/27
 
 ## 0.0.10f
 
