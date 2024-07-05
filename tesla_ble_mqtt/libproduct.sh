@@ -5,7 +5,7 @@ function productInit() {
 
   if [ -n "${HASSIO_TOKEN:-}" ]; then
     export BLE_CMD_RETRY_DELAY="$(bashio::config 'ble_cmd_retry_delay')"
-    export BLE_MAC_LIST="$(bashio::config 'ble_mac3')"
+    export BLE_MAC_LIST="$(bashio::config 'ble_mac_list')"
     export DEBUG="$(bashio::config 'debug')"
     export MQTT_SERVER="$(bashio::config 'mqtt_server')"
     export MQTT_PORT="$(bashio::config 'mqtt_port')"
