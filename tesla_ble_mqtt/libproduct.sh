@@ -15,7 +15,10 @@ function productInit() {
     export VIN_LIST="$(bashio::config 'vin_list')"
   fi
 
+  # Prevent bashio to complain for "unbound variable"
+  export BLE_LN_LIST=""
   export COLOR=true
   export HA_BACKEND_DISABLE=false
+  export PRESENCE_EXPIRE_TIME_LIST=""
 
 }
