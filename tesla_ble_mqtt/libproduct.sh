@@ -17,6 +17,7 @@ function productInit() {
 
   # Prevent bashio to complain for "unbound variable"
   export BLE_LN_LIST=""
+  export BLECTL_FILE_INPUT=""
   export COLOR=true
   export HA_BACKEND_DISABLE=false
   export PRESENCE_EXPIRE_TIME_LIST=""
