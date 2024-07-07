@@ -36,16 +36,11 @@ function initProduct() {
     export PRESENCE_DETECTION_LOOP_DELAY=""
   fi
 
-  if bashio::config.exists 'ha_backend_disable'; then
-    export HA_BACKEND_DISABLE="$(bashio::config 'ha_backend_disable')"
-  else
-    export HA_BACKEND_DISABLE=""
-  fi
-
   # Prevent bashio to complain for "unbound variable"
   export BLE_LN_LIST=""
   export BLECTL_FILE_INPUT=""
   export COLOR=true
+  export HA_BACKEND_DISABLE=""
   export PRESENCE_EXPIRE_TIME_LIST=""
 
 }

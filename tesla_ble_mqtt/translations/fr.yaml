@@ -32,9 +32,6 @@ configuration:
   ble_cmd_retry_delay:
     name: Délai pour re-essayer une commande
     description: Délai en seconde pour re-essayer d'envoyer une commande au véhicule via BLE; Défault 5
-  ha_backend_disable:
-    name: Désactiver le backend Home Assistant
-    description: Permet de faire fonctionner le add-on sans Home Assistant logic;
   presence_detection_loop_delay:
     name: Délai pour re-essayer la détection
     description: Délai en seconde pour la détection de présence de véhicule par proximitée BLE; Défault 120

@@ -26,9 +26,6 @@ configuration:
   ble_cmd_retry_delay:
     name: Delay to retry a command
     description: Delay in second to retry sending a command to the vehicle over BLE; Default 5
-  ha_backend_disable:
-    name: Disable Home Assistant Backend
-    description: Allows to completely disable Home Assistant logic; Default false
   presence_detection_loop_delay:
     name: Presence detection Loop Delay
     description: How often to check over BLE the presence of your car(s); Default 120
