@@ -28,8 +28,8 @@ options:
   send_cmd_retry_delay: "5"
 
 schema:
-  vin_list: "match(^([A-HJ-NPR-Z0-9]{17})(\|[A-HJ-NPR-Z0-9]{17})*$)"
-  ble_mac_list: "match(^([0-9A-Fa-f]{2}(:[0-9A-Fa-f]{2}){5})(\|[0-9A-Fa-f]{2}(:[0-9A-Fa-f]{2}){5})*$)?"
+  vin_list: 'match(^([A-HJ-NPR-Z0-9]{17})(\|[A-HJ-NPR-Z0-9]{17})*$)'
+  ble_mac_list: 'match(^([0-9A-Fa-f]{2}(:[0-9A-Fa-f]{2}){5})(\|[0-9A-Fa-f]{2}(:[0-9A-Fa-f]{2}){5})*$)?'
   presence_detection_ttl: "int(0,)"
   debug: bool
   mqtt_server: str
