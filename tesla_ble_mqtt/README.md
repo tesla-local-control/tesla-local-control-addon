@@ -3,7 +3,7 @@
 Send commands via MQTT to a Tesla car using Bluetooth Low Energy (BLE)
 
 
-This Addon is a package of [tesla_ble_mqtt_core]https://github.com/tesla-local-control/tesla_ble_mqtt_core
+This Addon is a package of [tesla_ble_mqtt_core](https://github.com/tesla-local-control/tesla_ble_mqtt_core)
 It runs the official Tesla Vehicle SDK commands via BLE to activate various entities in your Tesla.
 This is to bypass the current Fleet API rate limitation as it does not rely on the API.
 
