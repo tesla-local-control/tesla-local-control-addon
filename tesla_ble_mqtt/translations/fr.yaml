@@ -4,7 +4,7 @@ configuration:
     description: Ex. Simple 5YJ3E1EB6JF111222; Multiple 5YJ3E1EB6JF111222|5YJ3E1EB6JF333444|...
   ble_presence_detection_ttl:
     name: TTL pour la détection de présence de véhicule par proximitée BLE
-    description: TTL en secondes pour véhicule non présent; Utiliser 0 pour désactivé la détection
+    description: TTL en seconde pour véhicule non présent; Défault 240, Utiliser 0 pour désactivé la détection
   ble_mac_list:
     name: Un ou plusieurs BLE MACs (aa:bb:cc:dd:ee:ff) séparés par un | (pipe); Optionnel pour la détection de véhicule
     description: Utilisez Android "BLE scanner" ou iOS "nRF Connect"; 1) localiser le BLE Local Name de votre véhicule. Le nom commence par la lettre S et termine par C. Trouvez pour cette entrée le MAC Address. Si vous avez plusieurs véhicules, utiliser la puissance du signal pour déterminer lequel d'entre-eux chosir.
@@ -31,4 +31,10 @@ configuration:
     description: Imprimer des messages détaillés dans le journal pour le débogage
   ble_cmd_retry_delay:
     name: Délai pour re-essayer une commande
-    description: Délai pour re-essayer d'envoyer une command au véhicule via BLE
+    description: Délai en seconde pour re-essayer d'envoyer une commande au véhicule via BLE; Défault 5
+  ha_backend_disable:
+    name: Désactiver le backend Home Assistant
+    description: Permet de faire fonctionner le add-on sans Home Assistant logic;
+  presence_detection_loop_delay:
+    name: Délai pour re-essayer la détection
+    description: Délai en seconde pour la détection de présence de véhicule par proximitée BLE; Défault 120

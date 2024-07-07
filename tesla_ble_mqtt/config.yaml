@@ -33,8 +33,10 @@ schema:
   mqtt_password: password?
 
   debug: bool?
+  presence_detection_loop_delay: "int(1,)?"
   presence_detection_ttl: "int(0,)?"
   ble_cmd_retry_delay: "int(1,)?"
+  ha_backend_disable: bool?
 
 # ingress: true
 # panel_icon: mdi:forward

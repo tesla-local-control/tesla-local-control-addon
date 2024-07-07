@@ -4,7 +4,7 @@ configuration:
     description: Single 5YJ3E1EB6JF111222; Multiple 5YJ3E1EB6JF111222|5YJ3E1EB6JF333444|...
   presence_detection_ttl:
     name: BLE proximity presence detection TTL
-    description: TTL in seconds when the car is considered gone; Use 0 to disable detection
+    description: TTL in second when the car is considered gone; Default 240; 0 to disable detection
   ble_mac_list:
     name: Single or multiple BLE MACs (aa:bb:cc:dd:ee:ff) separated by a | (pipe); Optional for proximity detection
     description: Use Android "BLE scanner" or iOS "nRF Connect"; First locate your car's BLE Local Name, it starts with letter S and ends with C. In the app for the car, find the MAC address. If you have multiple Twsla cars, use the signal strength to figure out which one to pick.
@@ -25,4 +25,10 @@ configuration:
     description: Print verbose messages to the log for debugging
   ble_cmd_retry_delay:
     name: Delay to retry a command
-    description: Delay to retry sending a command to the vehicle over BLE
+    description: Delay in second to retry sending a command to the vehicle over BLE; Default 5
+  ha_backend_disable:
+    name: Disable Home Assistant Backend
+    description: Allows to completely disable Home Assistant logic; Default false
+  presence_detection_loop_delay:
+    name: Presence detection Loop Delay
+    description: How often to check over BLE the presence of your car(s); Default 120
