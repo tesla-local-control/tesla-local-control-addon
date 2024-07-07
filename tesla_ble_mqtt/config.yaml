@@ -19,24 +19,23 @@ startup: services
 options:
   vin_list: ""
   ble_mac_list: ""
-  presence_detection_ttl: 180
-  debug: false
   mqtt_server: ""
   mqtt_port: "1883"
   mqtt_username: ""
   mqtt_password: ""
-  send_cmd_retry_delay: "5"
 
 schema:
   vin_list: 'match(^([A-HJ-NPR-Z0-9]{17})(\|[A-HJ-NPR-Z0-9]{17})*$)'
   ble_mac_list: 'match(^([0-9A-Fa-f]{2}(:[0-9A-Fa-f]{2}){5})(\|[0-9A-Fa-f]{2}(:[0-9A-Fa-f]{2}){5})*$)?'
-  presence_detection_ttl: "int(0,)"
-  debug: bool
   mqtt_server: str
   mqtt_port: str?
   mqtt_username: str?
   mqtt_password: password?
-  send_cmd_retry_delay: "int(1,)"
+
+  debug: bool?
+  presence_detection_ttl: "int(0,)?"
+  ble_cmd_retry_delay: "int(1,)?"
+
 # ingress: true
 # panel_icon: mdi:forward
 # backup_exclude:
