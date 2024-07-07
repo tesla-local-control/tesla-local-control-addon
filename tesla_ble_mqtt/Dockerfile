@@ -19,7 +19,9 @@ RUN apk add --no-cache \
   bluez \
   bluez-deprecated \
   mosquitto-clients \
-  openssl
+  openssl \
+  sed \
+  vim
 
 # Copy files for add-on
 COPY app /app/
