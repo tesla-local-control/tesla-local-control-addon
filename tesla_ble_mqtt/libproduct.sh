@@ -1,7 +1,7 @@
 #
 # Home Assistant Add-On product's library
 #
-function initProduct() {
+function initConfigVariables() {
 
   ### Required Configuration Settings
   export BLE_MAC_LIST="$(bashio::config 'ble_mac_list')"
@@ -43,4 +43,34 @@ function initProduct() {
   export HA_BACKEND_DISABLE=""
   export PRESENCE_EXPIRE_TIME_LIST=""
 
+}
+
+#
+# Definition functions to call bashio::log
+#
+function log_debug() {
+  bashio::log.info "$1"
+}
+function log_info() {
+  bashio::log.info "$1"
+}
+function log_notice() {
+  bashio::log.notice "$1"
+}
+function log_warning() {
+  bashio::log.warning "$1"
+}
+function log_error() {
+  bashio::log.error "$1"
+}
+function log_fatal() {
+  bashio::log.fatal "$1"
+}
+
+
+#
+# initProduct
+#
+function initProduct() {
+  initConfigVariables
 }
