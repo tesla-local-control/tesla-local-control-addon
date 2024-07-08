@@ -1,5 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 #
+export NOCOLOR='\033[0m'
+export GREEN='\033[0;32m'
+export CYAN='\033[0;36m'
+export YELLOW='\033[1;32m'
+export MAGENTA='\033[0;35m'
+export RED='\033[0;31m'
+
 protected_branch='main'
 current_branch=$(git rev-parse --abbrev-ref HEAD)
 
@@ -41,8 +48,8 @@ IFS="$SAVEIFS"
 # Prevent commit on main branch
 #
 if [ $protected_branch = $current_branch ]; then
-  echo "You should not commit to $protected_branch!"
-  echo 'To bypass the protection, add to the git commit command "--no-verify"'
+  echo -e "${YELLOW}You should not commit to branch ${RED}$protected_branch${NOCOLOR}"
+  echo -e "To bypass the protection, add ${GREEN}--no-verify${NOCOLOR} to the git commit command"
   exit 1 # push will not execute
 fi
 
