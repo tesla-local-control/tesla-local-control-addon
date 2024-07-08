@@ -3,8 +3,7 @@
 ## 0.0.11
 
 ### Breaking change & Upgrade Instruction
-- No need to provide MAC addresses anymore for presence detection
-- **BREAKING CHANGE - save config before update**: Now supports **list** of VINS. You will need to adjust configuration. Existing **entities** from v0.0.10f will not be affected.
+- **BREAKING CHANGE - save config before update**: Now supports **list** of VINS and MAC addresses. You will need to adjust configuration. Existing **entities** from v0.0.10f will not be affected.
 - Cut & Paste your current vin to vin_list
 - Cut & Paste your current mac_addr to mac_addr_list
 
