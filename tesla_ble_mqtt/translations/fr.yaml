@@ -3,10 +3,10 @@ configuration:
     name: Un ou plusieurs NIVs séparés par un | (pipe); NIV affiché dans l'application Tesla
     description: Ex. Simple 5YJ3E1EB6JF111222; Multiple 5YJ3E1EB6JF111222|5YJ3E1EB6JF333444|...
   ble_presence_detection_ttl:
-    name: TTL pour la détection de présence de véhicule par proximitée BLE
-    description: TTL en seconde pour véhicule non présent; Défault 240, Utiliser 0 pour désactivé la détection
+    name: TTL ou le véhicule est considéré encore présent suite au dernier message reçu
+    description: TTL en seconde pour considérer un véhicule non présent; Défault 240, mettre 0 pour désactivé la détection
   ble_mac_list:
-    name: Un ou plusieurs BLE MACs (aa:bb:cc:dd:ee:ff) séparés par un | (pipe); Optionnel pour la détection de véhicule
+    name: Une ou plusieurs BLE MACs (aa:bb:cc:dd:ee:ff) séparées par un , ou | ou espace blanc; Optionnel pour la détection de véhicule(s)
     description: Utilisez Android "BLE scanner" ou iOS "nRF Connect"; 1) localiser le BLE Local Name de votre véhicule. Le nom commence par la lettre S et termine par C. Trouvez pour cette entrée le MAC Address. Si vous avez plusieurs véhicules, utiliser la puissance du signal pour déterminer lequel d'entre-eux chosir.
   mqtt_server:
     name: MQTT Serveur
@@ -20,12 +20,6 @@ configuration:
   mqtt_password:
     name: Mot de passe MQTT
     description: Mot de passe de l'utilisateur MQTT
-  vin:
-    name: NIV du véhicule
-    description: Numéro d'Identification de Véhicule affiché dans l'application Tesla
-  ble_mac:
-    name: BLE MAC (optionnel pour détection de proximité)
-    description: Adresse MAC BLE (aa:bb:cc:dd:ee:ff). Utiliser Android "BLE scanner" ou iOS "nRF Connect" pour trouver l'adresse MAC Tesla associée au nom BLE ressemblant à S___________C
   debug:
     name: Journalisation du débogage
     description: Imprimer des messages détaillés dans le journal pour le débogage

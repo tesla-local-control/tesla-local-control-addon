@@ -15,18 +15,18 @@ If you have already created a key pair that you want to reuse, place the private
 
 
 You will need to provide:
-- vin_list                  : VIN single or multiple separated by a | (pipe); Required
-- ble_mac_list              : BLE MAC Addr list single or multiple separated by a | (pipe); Optional for car presence detection
-- presence_detection_ttl    : TTL in seconds when car is considered gone after last received BLE advertisement; 0 to disable detection
-- mqtt_server               : Hostname or IP of your MQTT server; Default 127.0.0.1
-- mqtt_port                 : MQTT service port; Default 1883
-- mqtt_useranme             : MQTT Username; Default anonymous
-- mqtt_password             : MQTT Password
-- ble_cmd_retry_delay       : Delay to retry sending a command to the car over BLE; Default 5
+- vin_list : VIN single or multiple separated by either of | , or space; Required
+- ble_mac_list : BLE MAC Addr list single or multiple separated by a | (pipe); Optional for car presence detection
+- presence_detection_loop_delay: The delay between each time the process checks for the presence of your car(s)
+- presence_detection_ttl : TTL in seconds when car is considered gone after last received BLE advertisement; 0 to disable detection
+- mqtt_server : Hostname or IP of your MQTT server; Default 127.0.0.1
+- mqtt_port : MQTT service port; Default 1883
+- mqtt_useranme : MQTT Username; Default anonymous
+- mqtt_password : MQTT Password
+- ble_cmd_retry_delay : Delay to retry sending a command to the car over BLE; Default 5
+- Start the add-on, check the logs for anything suspecious.
 
-ATTENTION: If you have multiple cars and require presence detection, tesla_vin_list tesla_vin{n} and ble_mac_list ble_mac{n} must match the same car. For example, the BLE MAC Addr in the 2nd position must match the same car's VIN in the 2nd position of the tesla_vin_list.
-
-Start the add-on, check the logs for anything suspecious.
+ATTENTION: If you have multiple cars and require presence detection, the cars' position in vin_list vin{n} must match the position in the ble_mac_list. In other words, the BLE MAC Addr in the 2nd position must match the same car's VIN in the 2nd position of the tesla_vin_list.
 
 ## 1.2 For the standalone Docker version please see https://github.com/tesla-local-control/tesla_ble_mqtt_docker
 
@@ -43,4 +43,6 @@ Start the add-on, check the logs for anything suspecious.
 
 ## Troubleshooting
 
-[Repo Issues](https://github.com/raphmur/tesla-local-control-addon/issues)
+[Core Issues](https://github.com/tesla-local-control/tesla_ble_mqtt_core/issues)
+[Addon Issues](https://github.com/tesla-local-control/tesla-local-control-addon/issues)
+[Stanalone Docker Issues](https://github.com/tesla-local-control/tesla_ble_mqtt_docker/issues)
