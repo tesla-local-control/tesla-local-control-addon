@@ -1,5 +1,5 @@
 name: "Tesla Local Commands"
-version: "0.0.10f"
+version: "0.0.11"
 slug: "tesla_local_commands"
 description: "Local BLE calls to control your Tesla."
 url: "https://github.com/tesla-local-control/tesla-local-control-addon"
