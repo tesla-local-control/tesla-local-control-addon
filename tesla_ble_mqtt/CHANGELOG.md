@@ -2,8 +2,6 @@
 
 ## 0.0.11
 
-### Changed
-
 ### Breaking change & Upgrade Instruction
 - No need to provide MAC addresses anymore for presence detection
 - **BREAKING CHANGE - save config before update**: Now supports **list** of VINS. You will need to adjust configuration. Existing **entities** from v0.0.10f will not be affected.
@@ -11,14 +9,17 @@
 - Cut & Paste your current mac_addr to mac_addr_list
 
 ### Changed
-- Added support for multi-cars
-- Added toggle to enable or disable vehicule detection
-- Fix mosquitto calls
-- Add bluez-deprecated pkg (ciptool hciattach hciconfig hcidump hcitool meshctl rfcomm sdptool)
-- Improved presence detection
-- Improved logging (bashio timestamps, verbosity, colors)
-- Added "debug" entity which sends only one charge amps command: https://github.com/tesla-local-control/tesla_ble_mqtt_core/issues/19
-- Clarified issues with BLE device overheating causing performance issues: https://github.com/tesla-local-control/tesla-local-control-addon/issues/27
+- NEW Feature: Support for unlimited cars (VINs + MAC Addrs)
+- NEW Feature: Added a TTL for car presence, when gone the sensor in HA stays ON until the TTL expires
+- NEW Feature: Added "debug" entity which sends only one charge amps command: Issue [#19](https://github.com/tesla-local-control/tesla_ble_mqtt_core/issues/19)
+- NEW Setting: BLE Proximity Detection TTL (Detection is on by default; set to 0 to disable)
+- NEW Setting: Presence Detection Loop Delay (how often to check the presence of your car(s))
+- NEW Setting: Toggle to enable/disable HA backend (Standalone version only)
+- CHG: Improved presence detection reliability (using car's MAC addr and BLE Local Name)
+- CHG: Support bashio::log w/ timestamp (HA add-on)
+- CHG: Reduce logging; Improved colors consistency; More to be removed once code is considered stable
+- CHG: Add bluez-deprecated pkg (ciptool hciattach hciconfig hcidump hcitool meshctl rfcomm sdptool)
+- WARNING: [BLE device possible overheating](https://github.com/tesla-local-control/tesla-local-control-addon/issues/27) causing performance issues
 
 ## 0.0.10f
 
