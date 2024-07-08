@@ -17,6 +17,7 @@ This repository contains the following add-ons
 ![Supports aarch64 Architecture][aarch64-shield]
 ![Supports amd64 Architecture][amd64-shield]
 
+![Reported Installations][installations-shield-stable]
 
 <!--
 Notes to developers after forking or using the github template feature:
@@ -39,4 +40,4 @@ Notes to developers after forking or using the github template feature:
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 
-[installations-shield-stable]: https://img.shields.io/badge/dynamic/json?url=https://analytics.home-assistant.io/addons.json&query=$["d5cb030e_tesla_local_commands"].total&label=Reported%20Installations&link=https://analytics.home-assistant.io/add-ons
+[installations-shield-stable]: https://img.shields.io/badge/dynamic/json?url=https://analytics.home-assistant.io/addons.json&query=$["da013fb0_tesla_local_commands"].total&label=Reported%20Installations&link=https://analytics.home-assistant.io/add-ons
