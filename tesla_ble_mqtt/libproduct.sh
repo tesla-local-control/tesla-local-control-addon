@@ -14,7 +14,7 @@ function initConfigVariables() {
   ### Optional Configuration Settings
   if bashio::config.exists 'ble_cmd_retry_delay'; then
     export BLE_CMD_RETRY_DELAY="$(bashio::config 'ble_cmd_retry_delay')"
-    else
+  else
     export BLE_CMD_RETRY_DELAY=""
   fi
 
