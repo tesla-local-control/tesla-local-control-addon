@@ -40,7 +40,7 @@ function initConfigVariables() {
   export BLE_LN_LIST=""
   export BLECTL_FILE_INPUT=""
   export COLOR=true
-  export HA_BACKEND_DISABLE=""
+  export ENABLE_HA_FEATURES=""
   export PRESENCE_EXPIRE_TIME_LIST=""
 
 }
