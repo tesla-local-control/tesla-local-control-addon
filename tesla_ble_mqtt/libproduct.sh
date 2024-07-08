@@ -1,0 +1,76 @@
+#
+# Home Assistant Add-On product's library
+#
+function initConfigVariables() {
+
+  ### Required Configuration Settings
+  export BLE_MAC_LIST="$(bashio::config 'ble_mac_list')"
+  export MQTT_SERVER="$(bashio::config 'mqtt_server')"
+  export MQTT_PORT="$(bashio::config 'mqtt_port')"
+  export MQTT_USERNAME="$(bashio::config 'mqtt_username')"
+  export MQTT_PASSWORD="$(bashio::config 'mqtt_password')"
+  export VIN_LIST="$(bashio::config 'vin_list')"
+
+  ### Optional Configuration Settings
+  if bashio::config.exists 'ble_cmd_retry_delay'; then
+    export BLE_CMD_RETRY_DELAY="$(bashio::config 'ble_cmd_retry_delay')"
+  else
+    export BLE_CMD_RETRY_DELAY=""
+  fi
+
+  if bashio::config.exists 'debug'; then
+    export DEBUG="$(bashio::config 'debug')"
+  else
+    export DEBUG=""
+  fi
+
+  if bashio::config.exists 'presence_detection_ttl'; then
+    export PRESENCE_DETECTION_TTL="$(bashio::config 'presence_detection_ttl')"
+  else
+    export PRESENCE_DETECTION_TTL=""
+  fi
+
+  if bashio::config.exists 'presence_detection_loop_delay'; then
+    export PRESENCE_DETECTION_LOOP_DELAY="$(bashio::config 'presence_detection_loop_delay')"
+  else
+    export PRESENCE_DETECTION_LOOP_DELAY=""
+  fi
+
+  # Prevent bashio to complain for "unbound variable"
+  export BLE_LN_LIST=""
+  export BLECTL_FILE_INPUT=""
+  export COLOR=true
+  export HA_BACKEND_DISABLE=""
+  export PRESENCE_EXPIRE_TIME_LIST=""
+
+}
+
+#
+# Definition functions to call bashio::log
+#
+function log_debug() {
+  bashio::log.info "$1"
+}
+function log_info() {
+  bashio::log.info "$1"
+}
+function log_notice() {
+  bashio::log.notice "$1"
+}
+function log_warning() {
+  bashio::log.warning "$1"
+}
+function log_error() {
+  bashio::log.error "$1"
+}
+function log_fatal() {
+  bashio::log.fatal "$1"
+}
+
+
+#
+# initProduct
+#
+function initProduct() {
+  initConfigVariables
+}

@@ -1,8 +1,8 @@
 # Tesla Local Control add-on
 
-This package contains all the necessary tweaks to make [tesla_ble_mqtt_docker](https://github.com/iainbullock/tesla_ble_mqtt_docker) work as a Home Assistant add on, using onboard bluetooth devices.
+- This package contains all the necessary tweaks to make [tesla_ble_mqtt_docker](https://github.com/iainbullock/tesla_ble_mqtt_docker) work as a Home Assistant add on, using onboard bluetooth devices.
 It will run the official Tesla Vehicle SDK commands via BLE to activate various entities in your Tesla.
-This is to bypass the current Fleet API rate limitation and does not rely on the API.
+- This is to bypass the current Fleet API rate limitation and does not rely on the API.
 
 
 [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https://github.com/tesla-local-control/tesla-local-control-addon)
