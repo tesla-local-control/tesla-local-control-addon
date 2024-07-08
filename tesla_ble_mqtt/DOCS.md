@@ -44,5 +44,5 @@ ATTENTION: If you have multiple cars and require presence detection, the cars' p
 ## Troubleshooting
 
 [Core Issues](https://github.com/tesla-local-control/tesla_ble_mqtt_core/issues)
-[Addon Issues](https://github.com/tesla-local-control/tesla-local-control-addon/issues)
+[Home Assistant Addon Issues](https://github.com/tesla-local-control/tesla-local-control-addon/issues)
 [Stanalone Docker Issues](https://github.com/tesla-local-control/tesla_ble_mqtt_docker/issues)
