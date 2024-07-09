@@ -7,7 +7,7 @@ export YELLOW='\033[1;32m'
 export MAGENTA='\033[0;35m'
 export RED='\033[0;31m'
 
-PROTECTED_BRANCH='main'
+PROTECTED_BRANCH_REGEX='(main|stage)'
 # Get name of current branch
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 # Get the root directory of the main repository
@@ -91,7 +91,7 @@ echo "Changelog has been updated and staged for commit."
 ### Prevent commit on main branch
 ##
 #
-if [ $PROTECTED_BRANCH == $CURRENT_BRANCH ]; then
+if echo $CURRENT_BRANCH | grep -Eq $PROTECTED_BRANCH_REGEX; then
   echo -e "${YELLOW}You should not commit to branch ${RED}$PROTECTED_BRANCH${NOCOLOR}"
   echo -e "To bypass the protection, add ${GREEN}--no-verify${NOCOLOR} to the git commit command"
   exit 1 # push will not execute
