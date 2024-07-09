@@ -13,7 +13,7 @@
 - NEW Feature: Added "debug" entity which sends only one charge amps command: Issue [#19](https://github.com/tesla-local-control/tesla_ble_mqtt_core/issues/19)
 - NEW Setting: BLE Proximity Detection TTL (Detection is on by default; set to 0 to disable)
 - NEW Setting: Presence Detection Loop Delay (how often to check the presence of your car(s))
-- NEW Setting: Toggle to enable/disable HA backend (Standalone version only)
+- NEW Setting: Toggle to enable/disable Home Assistant Features (Standalone version only)
 - CHG: Improved presence detection reliability (using car's MAC addr and BLE Local Name)
 - CHG: Support bashio::log w/ timestamp (HA add-on)
 - CHG: Reduce logging; Improved colors consistency; More to be removed once code is considered stable
