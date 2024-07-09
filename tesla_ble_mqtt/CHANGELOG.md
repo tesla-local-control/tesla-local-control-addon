@@ -20,14 +20,14 @@
 - CHG: Add bluez-deprecated pkg (ciptool hciattach hciconfig hcidump hcitool meshctl rfcomm sdptool)
 - WARNING: [BLE device possible overheating](https://github.com/tesla-local-control/tesla-local-control-addon/issues/27) causing performance issues
 
-## 0.0.10f
+
+## 0.0.10
+
+- Toggle to enable/disable car presence detection
+- Added multi-level & multi-color logs
+- Initial core component release (git submodule)
 
 ### Changed
-
-- **WARNING**: Now supports 3 VINS. You will need to adjust configuration (VIN1/2/3 & BLE MAC)
-- **WARNING**: Presence detection only works for VIN1
-- Rework project files structure
-- Improve logging
 
 ## 0.0.9
 

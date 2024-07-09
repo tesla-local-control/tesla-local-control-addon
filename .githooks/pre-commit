@@ -7,11 +7,14 @@ export YELLOW='\033[1;32m'
 export MAGENTA='\033[0;35m'
 export RED='\033[0;31m'
 
-protected_branch='main'
-current_branch=$(git rev-parse --abbrev-ref HEAD)
+PROTECTED_BRANCH='main'
+# Get name of current branch
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+# Get the root directory of the main repository
+MAIN_REPO_DIR=$(git rev-parse --show-toplevel)
 
 ### Find and fix trailing white space and tabs
-#   Replace tabs with white space
+##  Replace tabs with white space
 #   Bypass it with the --no-verify option to git-commit
 #
 if git rev-parse --verify HEAD >/dev/null 2>&1; then
@@ -44,15 +47,57 @@ for FILE in $(
 done
 # restore $IFS
 IFS="$SAVEIFS"
+#
+##
 ### END Find and fix trailing white space and tabs
 
-### Prevent commit on main branch
+
+### Changelog automatic sync (cp) & commit
+##
 #
-if [ $protected_branch = $current_branch ]; then
-  echo -e "${YELLOW}You should not commit to branch ${RED}$protected_branch${NOCOLOR}"
+# Define the submodule path relative to the main repository root
+SUBMODULE_RELATIVE_PATH="tesla_ble_mqtt/app/"
+
+# Construct the absolute path to the submodule
+SUBMODULE_DIR="$MAIN_REPO_DIR/$SUBMODULE_RELATIVE_PATH"
+
+# Path to the changelog file in the submodule
+SUBMODULE_CHANGELOG="$SUBMODULE_DIR/CHANGELOG.md"
+
+# Path to where you want to copy the changelog in the main repository
+MAIN_REPO_CHANGELOG="$MAIN_REPO_DIR/tesla_ble_mqtt/CHANGELOG.md"
+
+# Ensure the submodule is updated
+git submodule update --init --recursive
+
+# Check if the submodule changelog exists
+if [ ! -f "$SUBMODULE_CHANGELOG" ]; then
+  echo "Submodule changelog file does not exist."
+  exit 1
+fi
+
+# Copy the changelog from the submodule to the main repository
+cp "$SUBMODULE_CHANGELOG" "$MAIN_REPO_CHANGELOG"
+
+# Stage the changelog file for commit
+git add "$MAIN_REPO_CHANGELOG"
+
+echo "Changelog has been updated and staged for commit."
+#
+##
+### END Changelog automatic sync (cp) & commit
+
+
+### Prevent commit on main branch
+##
+#
+if [ $PROTECTED_BRANCH == $CURRENT_BRANCH ]; then
+  echo -e "${YELLOW}You should not commit to branch ${RED}$PROTECTED_BRANCH${NOCOLOR}"
   echo -e "To bypass the protection, add ${GREEN}--no-verify${NOCOLOR} to the git commit command"
   exit 1 # push will not execute
 fi
+#
+##
 ### END Prevent commit on main branch
 
 # Exit script with the exit-code of git's check for white space characters
