@@ -27,7 +27,8 @@
 - **WARNING**: Now supports 3 VINS. You will need to adjust configuration (VIN1/2/3 & BLE MAC)
 - **WARNING**: Presence detection only works for VIN1
 - Rework project files structure
-- Improve logging
+- Improve logging (multi-level & color)
+- Toggle to enable/disable car presence detection
 
 ## 0.0.9
 
