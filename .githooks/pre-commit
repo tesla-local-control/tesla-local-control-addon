@@ -88,7 +88,7 @@ echo "Changelog has been updated and staged for commit."
 ### END Changelog automatic sync (cp) & commit
 
 
-### Prevent commit on main branch
+### Prevent commit on PROTECTED_BRANCH_REGEX branch(es)
 ##
 #
 if echo $CURRENT_BRANCH | grep -Eq $PROTECTED_BRANCH_REGEX; then
@@ -98,7 +98,7 @@ if echo $CURRENT_BRANCH | grep -Eq $PROTECTED_BRANCH_REGEX; then
 fi
 #
 ##
-### END Prevent commit on main branch
+### END Prevent commit on PROTECTED_BRANCH_REGEX branch(es)
 
 # Exit script with the exit-code of git's check for white space characters
 exec git diff-index --check --cached $against --
