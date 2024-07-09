@@ -1,13 +1,14 @@
-<!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
+# Changelog
 
 ## 0.0.11
 
-### Breaking change & Upgrade Instruction
+### Changed
+
+#### *Breaking change & Upgrade Instruction
 - **BREAKING CHANGE - save config before update**: Now supports **list** of VINS and MAC addresses. You will need to adjust configuration. Existing **entities** from v0.0.10f will not be affected.
 - Cut & Paste your current vin to vin_list
 - Cut & Paste your current mac_addr to mac_addr_list
 
-### Changed
 - NEW Feature: Support for unlimited cars (VINs + MAC Addrs)
 - NEW Feature: Added a TTL for car presence, when gone the sensor in HA stays ON until the TTL expires
 - NEW Feature: Added "debug" entity which sends only one charge amps command: Issue [#19](https://github.com/tesla-local-control/tesla_ble_mqtt_core/issues/19)
