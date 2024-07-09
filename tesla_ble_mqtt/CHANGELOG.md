@@ -1,8 +1,8 @@
-<!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
+# Changelog
 
 ## 0.0.11
 
-### Breaking change & Upgrade Instruction
+#### Breaking change & Upgrade Instruction
 - **BREAKING CHANGE - save config before update**: Now supports **list** of VINS and MAC addresses. You will need to adjust configuration. Existing **entities** from v0.0.10f will not be affected.
 - Cut & Paste your current vin to vin_list
 - Cut & Paste your current mac_addr to mac_addr_list
@@ -13,7 +13,7 @@
 - NEW Feature: Added "debug" entity which sends only one charge amps command: Issue [#19](https://github.com/tesla-local-control/tesla_ble_mqtt_core/issues/19)
 - NEW Setting: BLE Proximity Detection TTL (Detection is on by default; set to 0 to disable)
 - NEW Setting: Presence Detection Loop Delay (how often to check the presence of your car(s))
-- NEW Setting: Toggle to enable/disable HA backend (Standalone version only)
+- NEW Setting: Toggle to enable/disable Home Assistant Features (Standalone version only)
 - CHG: Improved presence detection reliability (using car's MAC addr and BLE Local Name)
 - CHG: Support bashio::log w/ timestamp (HA add-on)
 - CHG: Reduce logging; Improved colors consistency; More to be removed once code is considered stable
@@ -27,7 +27,8 @@
 - **WARNING**: Now supports 3 VINS. You will need to adjust configuration (VIN1/2/3 & BLE MAC)
 - **WARNING**: Presence detection only works for VIN1
 - Rework project files structure
-- Improve logging
+- Improve logging (multi-level & color)
+- Toggle to enable/disable car presence detection
 
 ## 0.0.9
 
