@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.0.11
+## 0.1.0
 
 #### Breaking change & Upgrade Instruction
 - **BREAKING CHANGE - save config before update**: Now supports **list** of VINS and MAC addresses. You will need to adjust configuration. Existing **entities** from v0.0.10f will not be affected.
