@@ -4,9 +4,13 @@
 
 ### Changed
 
+<p>WARNING WARNING WARNING<br>
+DO NOT UPGRADE PRIOR TO READ THE 0.1.0 UPGRADE INSTRUCTIONS.
+WARNING WARNING WARNING</p>
+
 - CHG: Fix upgrade forcing to redeploy the key to the car
 
-## 0.1.0
+## 0.1.1
 
 ### Changed
 
