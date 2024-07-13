@@ -12,7 +12,7 @@ It will run the official Tesla Vehicle SDK commands via BLE to activate various 
 
 This repository contains the following add-ons
 
-### [Tesla BLE MQTT](./tesla_ble_mqtt_docker)
+### [Tesla BLE MQTT](./tesla_ble_mqtt)
 
 ![Supports aarch64 Architecture][aarch64-shield]
 ![Supports amd64 Architecture][amd64-shield]
