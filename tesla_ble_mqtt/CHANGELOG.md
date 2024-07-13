@@ -2,27 +2,11 @@
 
 ## 0.1.0
 
-### Changed
+### BREAKING CHANGE
 
-<p>${\textsf{\color{red}WARNING WARNING WARNING}}$<br>
-DO NOT UPGRADE PRIOR TO READ THE BELOW UPGRADE INSTRUCTIONS, SEE AFTER LIST OF CHANGES
-<br>${\textsf{\color{red}WARNING WARNING WARNING}}$</p>
-
-- NEW Feature: Support for unlimited cars (VINs + MAC Addrs)
-- NEW Setting: BLE Proximity Detection TTL; helps reduce false negative presence with sporadic BLE advertisement (0 to disable)
-- NEW Feature: Added "debug" entity which sends only one charge amps command: Issue [#19](https://github.com/tesla-local-control/tesla_ble_mqtt_core/issues/19)
-- NEW Feature: Device's cards and buttons are made visible based on logic that takes into account the state of generated keys, sent and accepted public key by the vehicle.
-- NEW Setting: Presence Detection Loop Delay (how often to check the presence of your car(s))
-- NEW Setting: Toggle to enable/disable Home Assistant Features (Standalone version only)
-- CHG: Improved presence detection reliability (using car's MAC addr and BLE Local Name)
-- CHG: Added retry functionality on MQTT publish failure (service/network issue)
-- CHG: Rename entities for consistency & better wording (see table below)
-- CHG: Code Quality Linting (shellcheck & shfmt) [ @epenet contribution TY ]
-- CHG: Support bashio::log w/ timestamp (HA add-on)
-- CHG: Reduce logging; Improved colors consistency; More to be removed in next release
-- CHG: Add bluez-deprecated pkg (ciptool hciattach hciconfig hcidump hcitool meshctl rfcomm sdptool)
-- CHG: Refactor MQTT listener; removed blocking event
-- WARNING: [BLE device possible overheating](https://github.com/tesla-local-control/tesla-local-control-addon/issues/27) causing performance issues
+**!!! WARNING WARNING WARNING !!!**
+**DO NOT UPGRADE PRIOR TO READ THE BELOW UPGRADE INSTRUCTIONS, SEE AFTER LIST OF CHANGES**
+**!!! WARNING WARNING WARNING !!!**
 
 #### Upgrade Instructions & ${\textsf{\color{red}BREAKING CHANGES}}$
 - **Before update** save your configuration values (VIN, MAC address and MQTT values)
@@ -46,6 +30,24 @@ DO NOT UPGRADE PRIOR TO READ THE BELOW UPGRADE INSTRUCTIONS, SEE AFTER LIST OF C
    | heated_seat_right | heater-seat-front-right* |
    | sw_heater         | steering-wheel-heater    |
    \* in preparation "someday" for rear seats
+   
+### Changed   
+
+- NEW Feature: Support for unlimited cars (VINs + MAC Addrs)
+- NEW Setting: BLE Proximity Detection TTL; helps reduce false negative presence with sporadic BLE advertisement (0 to disable)
+- NEW Feature: Added "debug" entity which sends only one charge amps command: Issue [#19](https://github.com/tesla-local-control/tesla_ble_mqtt_core/issues/19)
+- NEW Feature: Device's cards and buttons are made visible based on logic that takes into account the state of generated keys, sent and accepted public key by the vehicle.
+- NEW Setting: Presence Detection Loop Delay (how often to check the presence of your car(s))
+- NEW Setting: Toggle to enable/disable Home Assistant Features (Standalone version only)
+- CHG: Improved presence detection reliability (using car's MAC addr and BLE Local Name)
+- CHG: Added retry functionality on MQTT publish failure (service/network issue)
+- CHG: Rename entities for consistency & better wording (see table below)
+- CHG: Code Quality Linting (shellcheck & shfmt) [ @epenet contribution TY ]
+- CHG: Support bashio::log w/ timestamp (HA add-on)
+- CHG: Reduce logging; Improved colors consistency; More to be removed in next release
+- CHG: Add bluez-deprecated pkg (ciptool hciattach hciconfig hcidump hcitool meshctl rfcomm sdptool)
+- CHG: Refactor MQTT listener; removed blocking event
+- WARNING: [BLE device possible overheating](https://github.com/tesla-local-control/tesla-local-control-addon/issues/27) causing performance issues
 
 #### Contributors - Thank you!
 - @epenet Code Quality Linting
