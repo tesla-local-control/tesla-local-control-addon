@@ -10,7 +10,7 @@ WARNING WARNING WARNING</p>
 
 - CHG: Fix upgrade forcing to redeploy the key to the car
 
-## 0.1.1
+## 0.1.0
 
 ### Changed
 
