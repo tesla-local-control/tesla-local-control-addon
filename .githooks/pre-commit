@@ -10,9 +10,9 @@ export RED='\033[0;31m'
 protected_branch='main'
 current_branch=$(git rev-parse --abbrev-ref HEAD)
 
-# Find and fix trailing white space and tabs
-# Replace tabs with white space
-# Bypass it with the --no-verify option to git-commit
+### Find and fix trailing white space and tabs
+#   Replace tabs with white space
+#   Bypass it with the --no-verify option to git-commit
 #
 if git rev-parse --verify HEAD >/dev/null 2>&1; then
   against=HEAD
@@ -44,14 +44,16 @@ for FILE in $(
 done
 # restore $IFS
 IFS="$SAVEIFS"
+### END Find and fix trailing white space and tabs
 
-# Prevent commit on main branch
+### Prevent commit on main branch
 #
 if [ $protected_branch = $current_branch ]; then
   echo -e "${YELLOW}You should not commit to branch ${RED}$protected_branch${NOCOLOR}"
   echo -e "To bypass the protection, add ${GREEN}--no-verify${NOCOLOR} to the git commit command"
   exit 1 # push will not execute
 fi
+### END Prevent commit on main branch
 
 # Exit script with the exit-code of git's check for white space characters
 exec git diff-index --check --cached $against --

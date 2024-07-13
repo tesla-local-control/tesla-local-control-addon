@@ -3,11 +3,28 @@
 Send commands via MQTT to a Tesla car using Bluetooth Low Energy (BLE)
 
 
-This Addon is a package of [tesla_ble_mqtt_core]https://github.com/tesla-local-control/tesla_ble_mqtt_core
+This Addon is a package of [tesla_ble_mqtt_core](https://github.com/tesla-local-control/tesla_ble_mqtt_core)
 It runs the official Tesla Vehicle SDK commands via BLE to activate various entities in your Tesla.
 This is to bypass the current Fleet API rate limitation as it does not rely on the API.
 
-See tab "Documentation" for more details
+
+See tab **Documentation** for more details
+
+> [!WARNING]
+> Using onboard bluetooth on Raspberry Pi has proven is sensitive to overheating, especially if your car is far from the device.
+> You can try setting up the integration iBeacons and check that the signal strength is above -80 dBm.
+> You can also a small fan to cool down the RPi Wifi/Bluetooth chipset. There are ready made cases with this for ~10-15€/$
+>
+> How to know you are affected?
+> - Commands are not getting to the car, you see a lot of
+>   - `Error: failed to find BLE beacon for [VIN] (SxxxxxxxxC): can't scan/dial: ...`
+>   - `Error: context deadline exceeded`
+> - In HA Core logs, you see these, especially the ERROR:
+>   - `WARNING (MainThread) [bluetooth_auto_recovery.recover] Could not determine the power state of the Bluetooth adapter hci0 [xx:xx:xx:xx:xx:xx] due to timeout after 5 seconds`
+>   - `ERROR (MainThread) [habluetooth.scanner] hci0 (E4:5F:01:D9:EC:B5): Failed to restart Bluetooth scanner: hci0 (xx:xx:xx:xx:xx:xx): Failed to start Bluetooth: adapter 'hci0' not found; Try power cycling the Bluetooth hardware.`
+>   - `WARNING (MainThread) [bluetooth_auto_recovery.recover] Could not cycle the Bluetooth adapter hci0 [xx:xx:xx:xx:xx:xx]: [Errno 16] Resource busy`
+>   - `WARNING (MainThread) [bluetooth_auto_recovery.recover] Could not reset the power state of the Bluetooth adapter hci0 [xx:xx:xx:xx:xx:xx] due to timeout after 5 seconds`
+>   - `ERROR (MainThread) [habluetooth.scanner] hci0 (E4:5F:01:D9:EC:B5): Failed to restart Bluetooth scanner: hci0 (xx:xx:xx:xx:xx:xx): Failed to start Bluetooth: adapter 'hci0' not found; Try power cycling the Bluetooth hardware.`
 
 
 ## Credits

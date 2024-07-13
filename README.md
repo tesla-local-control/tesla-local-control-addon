@@ -1,8 +1,8 @@
 # Tesla Local Control add-on
 
-This package contains all the necessary tweaks to make [tesla_ble_mqtt_docker](https://github.com/iainbullock/tesla_ble_mqtt_docker) work as a Home Assistant add on, using onboard bluetooth devices.
+- This package contains all the necessary tweaks to make [tesla_ble_mqtt_docker](https://github.com/iainbullock/tesla_ble_mqtt_docker) work as a Home Assistant add on, using onboard bluetooth devices.
 It will run the official Tesla Vehicle SDK commands via BLE to activate various entities in your Tesla.
-This is to bypass the current Fleet API rate limitation and does not rely on the API.
+- This is to bypass the current Fleet API rate limitation and does not rely on the API.
 
 
 [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https://github.com/tesla-local-control/tesla-local-control-addon)
@@ -39,4 +39,4 @@ Notes to developers after forking or using the github template feature:
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 
-[installations-shield-stable]: https://img.shields.io/badge/dynamic/json?url=https://analytics.home-assistant.io/addons.json&query=$["d5cb030e_tesla_local_commands"].total&label=Reported%20Installations&link=https://analytics.home-assistant.io/add-ons
+[installations-shield-stable]: https://img.shields.io/badge/dynamic/json?url=https://analytics.home-assistant.io/addons.json&query=$["da013fb0_tesla_local_commands"].total&label=Reported%20Installations&link=https://analytics.home-assistant.io/add-ons

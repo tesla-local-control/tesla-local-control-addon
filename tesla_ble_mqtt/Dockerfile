@@ -19,10 +19,12 @@ RUN apk add --no-cache \
   bluez \
   bluez-deprecated \
   mosquitto-clients \
-  openssl
-  
-# Copy data for add-on
+  openssl \
+  sed
+
+# Copy files for add-on
 COPY app /app/
+COPY libproduct.sh /app/
 RUN chmod a+x /app/run.sh
 RUN sed -i 's|#!/bin/ash|#!/command/with-contenv bashio|' /app/run.sh
 
