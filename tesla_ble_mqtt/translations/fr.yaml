@@ -1,7 +1,7 @@
 configuration:
   vin_list:
-    name: Un ou plusieurs NIVs séparés par un | (pipe); NIV affiché dans l'application Tesla
-    description: Ex. Simple 5YJ3E1EB6JF111222; Multiple 5YJ3E1EB6JF111222|5YJ3E1EB6JF333444|...
+    name: Un ou plusieurs NIVs séparés par un ,;| NIV affiché dans l'application Tesla
+    description: Ex. Simple 5YJ3E1EB6JF111222 Multiple 5YJ3E1EB6JF111222|5YJ3E1EB6JF333444|...
   ble_presence_detection_ttl:
     name: TTL ou le véhicule est considéré encore présent suite au dernier message reçu
     description: TTL en seconde pour considérer un véhicule non présent; Défault 240, mettre 0 pour désactivé la détection
