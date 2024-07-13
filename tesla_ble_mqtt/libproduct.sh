@@ -19,7 +19,7 @@ function initConfigVariables() {
   fi
 
   if bashio::config.exists 'debug'; then
-    DEBUG="$(bashio::config 'debug')"
+    export DEBUG="$(bashio::config 'debug')"
     if [ $DEBUG == "true" ]; then
       bashio::log.level debug
     fi
@@ -74,6 +74,4 @@ function log_fatal() {
 #
 # initProduct
 #
-function initProduct() {
-  initConfigVariables
-}
+initConfigVariables
