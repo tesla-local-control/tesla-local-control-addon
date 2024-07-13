@@ -2,33 +2,63 @@
 
 ## 0.1.0
 
-#### Breaking change & Upgrade Instruction
-- **BREAKING CHANGE - save config before update**: Now supports **list** of VINS and MAC addresses. You will need to adjust configuration. Existing **entities** from v0.0.10f will not be affected.
-- Cut & Paste your current vin to vin_list
-- Cut & Paste your current mac_addr to mac_addr_list
-
 ### Changed
+
+<p>${\textsf{\color{red}WARNING WARNING WARNING}}$<br>
+DO NOT UPGRADE PRIOR TO READ THE BELOW UPGRADE INSTRUCTIONS, SEE AFTER LIST OF CHANGES
+<br>${\textsf{\color{red}WARNING WARNING WARNING}}$</p>
+
 - NEW Feature: Support for unlimited cars (VINs + MAC Addrs)
-- NEW Feature: Added a TTL for car presence, when gone the sensor in HA stays ON until the TTL expires
+- NEW Setting: BLE Proximity Detection TTL; helps reduce false negative presence with sporadic BLE advertisement (0 to disable)
 - NEW Feature: Added "debug" entity which sends only one charge amps command: Issue [#19](https://github.com/tesla-local-control/tesla_ble_mqtt_core/issues/19)
-- NEW Setting: BLE Proximity Detection TTL (Detection is on by default; set to 0 to disable)
+- NEW Feature: Device's cards and buttons are made visible based on logic that takes into account the state of generated keys, sent and accepted public key by the vehicle.
 - NEW Setting: Presence Detection Loop Delay (how often to check the presence of your car(s))
 - NEW Setting: Toggle to enable/disable Home Assistant Features (Standalone version only)
 - CHG: Improved presence detection reliability (using car's MAC addr and BLE Local Name)
+- CHG: Added retry functionality on MQTT publish failure (service/network issue)
+- CHG: Rename entities for consistency & better wording (see table below)
+- CHG: Code Quality Linting (shellcheck & shfmt) [ @epenet contribution TY ]
 - CHG: Support bashio::log w/ timestamp (HA add-on)
-- CHG: Reduce logging; Improved colors consistency; More to be removed once code is considered stable
+- CHG: Reduce logging; Improved colors consistency; More to be removed in next release
 - CHG: Add bluez-deprecated pkg (ciptool hciattach hciconfig hcidump hcitool meshctl rfcomm sdptool)
+- CHG: Refactor MQTT listener; removed blocking event
 - WARNING: [BLE device possible overheating](https://github.com/tesla-local-control/tesla-local-control-addon/issues/27) causing performance issues
 
-## 0.0.10f
+#### Upgrade Instructions & ${\textsf{\color{red}BREAKING CHANGES}}$
+- **Before update** save your configuration values (VIN, MAC address and MQTT values)
+- You will need to adjust your configuration
+- Now supports **list** of VINS and MAC addresses.
+- Paste your current vin to vin_list, if you own more than 1 Tesla add them all!
+- Paste your current mac_addr to mac_addr_list (optional for presence detection)
+- Paste your MQTT values
+- Existing **entities** from v0.0.10f will not be affected with a few exceptions***
+
+#### Entities renamed
+
+<p>For consistency, moving foward entity name uses only alphadigits and as a seperator - (no more _).<br>
+/!\ It will affect your current Home Assistant MQTT entities (if you use them)></p>
+
+   | Old Entity Name   | New Entity Name          |
+   |:------------------|:-------------------------|
+   | auto_seat-climate | auto-seat-and-climate    |
+   | flash_lights      | flash-lights             |
+   | heated_seat_left  | heater-seat-front-left*  |
+   | heated_seat_right | heater-seat-front-right* |
+   | sw_heater         | steering-wheel-heater    |
+   \* in preparation "someday" for rear seats
+
+#### Contributors - Thank you!
+- @epenet Code Quality Linting
+
+## 0.0.10
 
 ### Changed
 
-- **WARNING**: Now supports 3 VINS. You will need to adjust configuration (VIN1/2/3 & BLE MAC)
-- **WARNING**: Presence detection only works for VIN1
-- Rework project files structure
-- Improve logging (multi-level & color)
 - Toggle to enable/disable car presence detection
+- Added multi-level & multi-color logs
+- Initial core component release (git submodule)
+
+### Changed
 
 ## 0.0.9
 
