@@ -1,12 +1,25 @@
 # Changelog
 
-## 0.1.1
+## 0.2.0
 
 ### Changed
 
-<p>WARNING WARNING WARNING<br>
-DO NOT UPGRADE PRIOR TO READ THE 0.1.0 UPGRADE INSTRUCTIONS<br>
-WARNING WARNING WARNING</p>
+<p>**WARNING WARNING WARNING**<br>
+Upgrading from 0.0.10 or previous? DO NOT UPGRADE PRIOR TO READ THE 0.1.0 UPGRADE INSTRUCTIONS.</p>
+
+- NEW Feature: BLE MAC address auto-detection (unless presence detection is disable)
+- CHG: Removed ble\_mac\_list; obsoleted by mac-auto-detection
+- CHG: Removed scan-bleln-macaddr; obsoleted by mac-auto-detection
+
+## 0.1.2
+
+### Changed
+
+- CHG: Fix allow empty setting BLE MAC addr (Docker standalone)
+
+## 0.1.1
+
+### Changed
 
 - CHG: Fix upgrade forcing to redeploy the key to the car
 
