@@ -17,6 +17,8 @@ This repository contains the following add-ons
 ![Supports aarch64 Architecture][aarch64-shield]
 ![Supports amd64 Architecture][amd64-shield]
 
+![Reported Installations][installations-shield-stable]
+
 
 <!--
 Notes to developers after forking or using the github template feature:
