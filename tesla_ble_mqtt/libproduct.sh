@@ -4,7 +4,6 @@
 function initConfigVariables() {
 
   ### Required Configuration Settings
-  export BLE_MAC_LIST="$(bashio::config 'ble_mac_list')"
   export MQTT_SERVER="$(bashio::config 'mqtt_server')"
   export MQTT_PORT="$(bashio::config 'mqtt_port')"
   export MQTT_USERNAME="$(bashio::config 'mqtt_username')"
@@ -41,6 +40,8 @@ function initConfigVariables() {
 
   # Prevent bashio to complain for "unbound variable"
   export BLE_LN_LIST=""
+  export BLE_MAC_LIST=""
+  export BLTCTL_COMMAND_DEVICES=""
   export BLECTL_FILE_INPUT=""
   export COLOR=true
   export ENABLE_HA_FEATURES=""

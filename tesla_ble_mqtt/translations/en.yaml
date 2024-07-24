@@ -2,9 +2,6 @@ configuration:
   vin_list:
     name: Single or multiple VINs separated by either of ,;| VIN found in Tesla app
     description: Single 5YJ3E1EB6JF111222 Multiple 5YJ3E1EB6JF111222|5YJ3E1EB6JF333444|...
-  ble_mac_list:
-    name: Single or multiple BLE MACs (aa:bb:cc:dd:ee:ff) separated by a | (pipe); Optional for proximity detection
-    description: Use Android "BLE scanner" or iOS "nRF Connect"; First locate your car's BLE Local Name, it starts with letter S and ends with C. In the app for the car, find the MAC address. If you have multiple Twsla cars, use the signal strength to figure out which one to pick.
   presence_detection_ttl:
     name: Presence detection TTL
     description: TTL in second when the car is considered gone after the last BLE ping; Default 240; 0 to disable detection
