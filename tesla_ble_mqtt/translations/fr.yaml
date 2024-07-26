@@ -5,9 +5,6 @@ configuration:
   ble_presence_detection_ttl:
     name: TTL ou le véhicule est considéré encore présent suite au dernier message reçu
     description: TTL en seconde pour considérer un véhicule non présent; Défault 240, mettre 0 pour désactivé la détection
-  ble_mac_list:
-    name: Une ou plusieurs BLE MACs (aa:bb:cc:dd:ee:ff) séparées par un , ou | ou espace blanc; Optionnel pour la détection de véhicule(s)
-    description: Utilisez Android "BLE scanner" ou iOS "nRF Connect"; 1) localiser le BLE Local Name de votre véhicule. Le nom commence par la lettre S et termine par C. Trouvez pour cette entrée le MAC Address. Si vous avez plusieurs véhicules, utiliser la puissance du signal pour déterminer lequel d'entre-eux chosir.
   mqtt_server:
     name: MQTT Serveur
     description: Adresse IP or Hostname pour le serveur MQTT

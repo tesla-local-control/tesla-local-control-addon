@@ -7,42 +7,56 @@ The advantage of the MQTT setup is that it can run on a device separate to your 
 
 # Installation and setup
 
-If you have already created a key pair that you want to reuse, place the private key in `/share/tesla_ble_mqtt`
+If you have already created a key pair that you want to reuse, place the private key in `/share/tesla_ble_mqtt`.
+The key must have the following naming scheme: `/share/tesla_ble_mqtt/VIN_private.pem` and `/share/tesla_ble_mqtt/VIN_public.pem` where `VIN` is your car VIN.
+/!\ To access this repository you will need access to the host filesystem and not only access to the config folder.
 
-## 1.1 HA Add-on: install below and configure
+## Install the addon and configure
 
 [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https://github.com/tesla-local-control/tesla-local-control-addon)
 
+#### Install the addon directly from Home Assistant. Add the custom repository: `https://github.com/tesla-local-control/tesla-local-control-addon`
 
-You will need to provide:
-- vin_list : VIN single or multiple separated by either of | , or space; Required
-- ble_mac_list : BLE MAC Addr list single or multiple separated by a | (pipe); Optional for car presence detection
-- presence_detection_loop_delay: The delay between each time the process checks for the presence of your car(s)
-- presence_detection_ttl : TTL in seconds when car is considered gone after last received BLE advertisement; 0 to disable detection
-- mqtt_server : Hostname or IP of your MQTT server; Default 127.0.0.1
-- mqtt_port : MQTT service port; Default 1883
-- mqtt_useranme : MQTT Username; Default anonymous
-- mqtt_password : MQTT Password
-- ble_cmd_retry_delay : Delay to retry sending a command to the car over BLE; Default 5
-- Start the add-on, check the logs for anything suspecious.
+#### Fill in the required settings:
+- vin_list: single VIN or list of VINs separated by either of | , or space; Required
+- mqtt_server: Hostname or IP of your MQTT server; Default 127.0.0.1
+- mqtt_port: MQTT service port; Default 1883
+- mqtt_useranme: MQTT Username; Default anonymous
+- mqtt_password: MQTT Password
+- debug: Activate if you are having issues, you will most likely not need it; Default off
 
-ATTENTION: If you have multiple cars and require presence detection, the cars' position in vin_list vin{n} must match the position in the ble_mac_list. In other words, the BLE MAC Addr in the 2nd position must match the same car's VIN in the 2nd position of the tesla_vin_list.
+The module will periodically scan for your car presence by default. You can use the optional settings to adjust the behaviour:
+- presence_detection_ttl: TTL in seconds when car is considered gone after last received BLE advertisement; **0 to disable presece detection**
+- presence_detection_loop_delay: delay between each presence check with BLE scanning
+Other optional settings:
+- ble_cmd_retry_delay: Delay to retry sending a command to the car over BLE; Default 5. Don't go too far below this value.
 
-## 1.2 For the standalone Docker version please see https://github.com/tesla-local-control/tesla_ble_mqtt_docker
+#### Start the add-on, check the logs for anything suspecious.
+Check the apparition of new devices called Tesla_BLE_VIN (one per VIN) that should have appeared. Click it to view the the associated entities in path: Settings -> Devices & Services -> Devices (tab) -> Tesla_BLE_MQTT
 
-## 2.0 Check in HA for new devices named Tesla_BLE_MQTT_VIN ???
+## Pair key with your car (if not already done)
 
-- A new device called Tesla_BLE_MQTT should have automatically appeared. Click it to view the the associated entities.
-- If this is the first time you have run the container, press the 'Generate Keys' button in HA (Settings -> Devices & Services -> Devices (tab) -> Tesla_BLE_MQTT). This will generate the public and private keys as per Shanker's blog
-- **Wake up your car using the Tesla App**. Then press the 'Deploy Key' button. This will deploy the public key to the car. You will then need to access your car and use a Key Card to accept the public key into the car (see the blog for screenshots)
-  - If the command succeed to initiate the pairing with the car, the following will show in the add-on logs: `Sent add-key request to [YOUR_CAR_VIN]. Confirm by tapping NFC card on center console.` Go in your car and tap your NFC card on the center console and on the car's screen `Phone Key pairing request`, confirm your accept the pairing
-  - If the command failed, the following error will show up: `Error: failed to find BLE beacon for [YOUR_CAR_VIN]. (xxx): can’t scan: context deadline exceeded`. You car might just be too far from your Bluetooth adapter. The command will be tried in case bluetooth is weak or unavailable...
-- Then you are ready. Press the other button entities to send various commands... You can use the relevant service calls in HA automations if you wish
+If this is the first time you run the addon, you will need to pair with your car. For this:
+1. Ensure your car is not too far from your HA system (within BLE reach)
+2. Press the 'Generate Keys' button in HA. This will generate the public and private keys
+3. Go inside your car and authenticate by placing your key card on the center console
+4. In HA press the button 'Deploy Key' (you can use the companion app). This will deploy the public key to the car.
+   If the command succeeds, the following will show in the add-on logs: `KEY DELIVERED; IN YOUR CAR, CHECK THE CAR's CENTRAL SCREEN AND ACCEPT THE KEY USING YOUR NFC CARD`
+5. You will then see a message on screen to accept the new key. Press accept.
+   If the command succeeds, the following will show in the add-on logs: `acceptKeyConfirmationLoop; congratulation, the public key has been  accepted vin:$vin`
 
+If any of points 4 or 5 fails, you will see these messages in the logs: `Could not send the key; Is the car awake and sufficiently close to the bluetooth adapter?` or other relevant messages. Your car might just be too far from your Bluetooth adapter. The command will be tried in case bluetooth is weak or unavailable...
+
+## Explore
+
+Then you are ready. Press the other button entities to send various commands... You can use the relevant service calls in HA automations if you wish.
+Be careful, as for now the car is not sending back state to the HA entities.
+
+This addon does not behave like the "Tesla Custom Integration". For example, when you are sending a command to your car with your phone, this entity Tesla_BLE_VIN will not update. It is currently not possible.
 
 
 ## Troubleshooting
 
-[Core Issues](https://github.com/tesla-local-control/tesla_ble_mqtt_core/issues)
-[Home Assistant Addon Issues](https://github.com/tesla-local-control/tesla-local-control-addon/issues)
-[Stanalone Docker Issues](https://github.com/tesla-local-control/tesla_ble_mqtt_docker/issues)
+Please use [tesla-local-control-addon Issues](https://github.com/tesla-local-control/tesla-local-control-addon/issues)
+
+If you have already identified a bug in the code, please see [tesla_ble_mqtt_core Issues](https://github.com/tesla-local-control/tesla_ble_mqtt_core/issues)
