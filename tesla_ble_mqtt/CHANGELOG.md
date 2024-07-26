@@ -2,14 +2,58 @@
 
 ## 0.2.0
 
-### Changed
-
-<p>**WARNING WARNING WARNING**<br>
+### <p>**WARNING WARNING WARNING**<br>
 Upgrading from 0.0.10 or previous? DO NOT UPGRADE PRIOR TO READ THE 0.1.0 UPGRADE INSTRUCTIONS.</p>
 
-- NEW Feature: BLE MAC address auto-detection (unless presence detection is disable)
-- CHG: Removed ble\_mac\_list; obsoleted by mac-auto-detection
-- CHG: Removed scan-bleln-macaddr; obsoleted by mac-auto-detection
+### <p>**BREAKING CHANGE**<br>
+On/off and Open/Close entities have been grouped under switches and covers.</p>
+/!\ It will affect your current Home Assistant MQTT entities (if you use them)
+
+   | Old Entity Name   | New Entity Name          |
+   |:------------------|:-------------------------|
+   | windows-close     | windows (open/close)     |
+   | windows-vent      | "                        |
+   | charging-start    | charger (start/stop)     |
+   | charging-stop     | "                        |
+   | charge-port-open  | charge-port (open/close) |
+   | charge-port-close | "                        |
+   | climate-on        | climate (on/off)         |
+   | climate-off       | "                        |
+   | trunk-open        | trunk (open/close)       |
+   | trunk-close       | "                        |
+
+
+### Changed
+
+- NEW Feature: Car's BLE MAC address is now auto-detected
+- NEW Feature: Info Bluetooth Adapter, view in add-on's Log tab
+- NEW Feature: Added more car specific commands; see below for the list
+- NEW Feature: Migrated buttons to covers and switches
+- NEW: Icons were added in the UI!
+- CHG: Increased tesla-control command-timeout from 5s to 20s
+- CHG: Removed Setting ble\_mac\_list; obsoleted by BLE MAC address auto-detection
+- CHG: Removed scan-bleln-macaddr, obsoleted by BLE MAC address auto-detection
+
+- Added commands
+
+   | Commands   | Note    |
+   |:------------------|:---------------|
+   | autosecure-modelx     | Model X     |
+   | auto-seat-and-climate | |
+   | body-controller-state | |
+   | drive     |     |
+   | flash-lights     |      |
+   | frunk-open     |      |
+   | honk     |      |
+   | lock     |      |
+   | media-toggle-playback     |      |
+   | tonneau-close     | Cybertruck     |
+   | tonneau-open     | Cybertruck     |
+   | tonneau-stop     | Cybertruck     |
+   | trunk-close     |      |
+   | trunk-move     |      |
+   | trunk-open     |      |
+   | unlock     |      |
 
 ## 0.1.2
 

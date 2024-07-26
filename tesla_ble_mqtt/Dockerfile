@@ -26,6 +26,6 @@ RUN apk add --no-cache \
 COPY app /app/
 COPY libproduct.sh /app/
 RUN chmod a+x /app/run.sh
-RUN sed -i 's|#!/bin/ash|#!/command/with-contenv bashio|' /app/run.sh
+RUN sed -i 's|#!/bin/ash.*|#!/command/with-contenv bashio|' /app/run.sh
 
 CMD [ "/app/run.sh" ]
