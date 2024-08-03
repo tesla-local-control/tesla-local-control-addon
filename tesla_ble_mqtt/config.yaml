@@ -31,6 +31,7 @@ schema:
   mqtt_password: password?
 
   debug: bool?
+  temperature_unit_fahrenheit: bool?
   presence_detection_ttl: "int(0,)?"
   presence_detection_loop_delay: "int(1,)?"
   ble_cmd_retry_delay: "int(1,)?"

@@ -38,6 +38,12 @@ function initConfigVariables() {
     export PRESENCE_DETECTION_LOOP_DELAY=""
   fi
 
+  if bashio::config.exists 'temperature_unit_fahrenheit'; then
+    export TEMPERATURE_UNIT_FAHRENHEIT="$(bashio::config 'temperature_unit_fahrenheit')"
+  else
+    export TEMPERATURE_UNIT_FAHRENHEIT=""
+  fi
+
   # Prevent bashio to complain for "unbound variable"
   export BLE_LN_LIST=""
   export BLE_MAC_LIST=""
