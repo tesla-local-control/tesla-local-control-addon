@@ -17,9 +17,15 @@ configuration:
   mqtt_password:
     name: MQTT Password
     description: MQTT User's password
+  max_current:
+    name: Maximum vehicle charging current with this connector
+    description: As given in the Tesla app or by the charger itself
   debug:
     name: Debug Logging
     description: Print verbose messages to the log for debugging
+  debug:
+    name: Use degrees Farenheit
+    description: For air conditionning settings
   ble_cmd_retry_delay:
     name: Delay to retry a command
     description: Delay in second to retry sending a command to the vehicle over BLE; Default 5

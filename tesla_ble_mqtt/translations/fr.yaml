@@ -17,9 +17,15 @@ configuration:
   mqtt_password:
     name: Mot de passe MQTT
     description: Mot de passe de l'utilisateur MQTT
+  max_current:
+    name: Courant maximum admissible par le véhicule sur ce connecteur
+    description: Tel que donné dans l'appli Tesla, sur le connecteur actuellement utilisé
   debug:
     name: Journalisation du débogage
     description: Imprimer des messages détaillés dans le journal pour le débogage
+  debug:
+    name: Utilisation des degrés Farenheit
+    description: Pour les commandes de température d'habitacle
   ble_cmd_retry_delay:
     name: Délai pour re-essayer une commande
     description: Délai en seconde pour re-essayer d'envoyer une commande au véhicule via BLE; Défault 5
