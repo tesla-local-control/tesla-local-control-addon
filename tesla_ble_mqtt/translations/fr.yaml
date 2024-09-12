@@ -17,6 +17,9 @@ configuration:
   mqtt_password:
     name: Mot de passe MQTT
     description: Mot de passe de l'utilisateur MQTT
+  max_current:
+    name: Courant maximum admissible par le véhicule sur ce connecteur
+    description: Tel que donné dans l'appli Tesla, sur le connecteur actuellement utilisé
   debug:
     name: Journalisation du débogage
     description: Imprimer des messages détaillés dans le journal pour le débogage

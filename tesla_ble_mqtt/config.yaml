@@ -1,7 +1,7 @@
 name: "Tesla Local Commands"
-version: "0.2.0-1"
+version: "0.2.2"
 slug: "tesla_local_commands"
-description: "Local BLE calls to control your Tesla."
+description: "Control your Tesla locally with bluetooth"
 url: "https://github.com/tesla-local-control/tesla-local-control-addon"
 stage: experimental
 host_network: true
@@ -22,6 +22,7 @@ options:
   mqtt_port: "1883"
   mqtt_username: ""
   mqtt_password: ""
+  max_current: "48"
 
 schema:
   vin_list: 'match(^([A-HJ-NPR-Z0-9]{17})(\|[A-HJ-NPR-Z0-9]{17})*$)'
@@ -29,6 +30,7 @@ schema:
   mqtt_port: str?
   mqtt_username: str?
   mqtt_password: password?
+  max_current: "int(0,)?"
 
   debug: bool?
   temperature_unit_fahrenheit: bool?

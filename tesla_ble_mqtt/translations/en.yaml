@@ -17,6 +17,9 @@ configuration:
   mqtt_password:
     name: MQTT Password
     description: MQTT User's password
+  max_current:
+    name: Maximum vehicle charging current with this connector
+    description: As given in the Tesla app or by the charger itself
   debug:
     name: Debug Logging
     description: Print verbose messages to the log for debugging

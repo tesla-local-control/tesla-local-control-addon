@@ -8,6 +8,8 @@ function initConfigVariables() {
   export MQTT_PORT="$(bashio::config 'mqtt_port')"
   export MQTT_USERNAME="$(bashio::config 'mqtt_username')"
   export MQTT_PASSWORD="$(bashio::config 'mqtt_password')"
+  export MAX_CURRENT="$(bashio::config 'max_current')"
+  export TEMPERATURE_UNIT_FAHRENHEIT="$(bashio::config 'temperature_unit_fahrenheit')"
   export VIN_LIST="$(bashio::config 'vin_list')"
 
   ### Optional Configuration Settings
