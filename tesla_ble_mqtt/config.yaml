@@ -1,7 +1,7 @@
 name: "Tesla Local Commands"
 version: "0.2.2"
 slug: "tesla_local_commands"
-description: "Local BLE calls to control your Tesla."
+description: "Control your Tesla locally with bluetooth"
 url: "https://github.com/tesla-local-control/tesla-local-control-addon"
 stage: experimental
 host_network: true
