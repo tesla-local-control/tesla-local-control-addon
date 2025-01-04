@@ -6,7 +6,7 @@ RUN apk add --no-cache go git
 # install Tesla Go packages
 RUN git clone https://github.com/teslamotors/vehicle-command.git /vehicle-command
 WORKDIR /vehicle-command
-RUN git checkout tags/v0.1.0
+# RUN git checkout tags/v0.1.0
 RUN go get ./... && \
   go build ./... && \
   go install ./...
@@ -21,7 +21,8 @@ RUN apk add --no-cache \
   bluez-deprecated \
   mosquitto-clients \
   openssl \
-  sed
+  sed \
+  jq
 
 # Copy files for add-on
 COPY app /app/

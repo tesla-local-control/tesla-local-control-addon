@@ -1,6 +1,7 @@
 # Home Assistant Add-on: Tesla Local Commands
 
-Send commands via MQTT to a Tesla car using Bluetooth Low Energy (BLE)
+Read state and send commands via MQTT to a Tesla car using Bluetooth Low Energy (BLE)
+**NEW**: from version 0.3.0 this also sets up sensors with your car data, without going through the Fleet API.
 
 
 This Addon is a package of [tesla_ble_mqtt_core](https://github.com/tesla-local-control/tesla_ble_mqtt_core)
