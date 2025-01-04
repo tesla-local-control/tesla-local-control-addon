@@ -1,5 +1,5 @@
 name: "Tesla Local Commands"
-version: "0.2.2"
+version: "0.3.0"
 slug: "tesla_local_commands"
 description: "Control your Tesla locally with bluetooth"
 url: "https://github.com/tesla-local-control/tesla-local-control-addon"
