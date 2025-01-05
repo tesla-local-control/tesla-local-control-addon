@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0.1
+
+- CHG: Documentation about how to update sensors
+
 ## 0.3.0
 
 - MAJOR NEW Feature: Read car state using bluetooth (BLE) without using Fleet API calls.
