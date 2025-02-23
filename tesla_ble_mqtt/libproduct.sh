@@ -13,10 +13,22 @@ function initConfigVariables() {
   export VIN_LIST="$(bashio::config 'vin_list')"
 
   ### Optional Configuration Settings
+  if bashio::config.exists 'presence_detection_loop_delay'; then
+    export PRESENCE_DETECTION_LOOP_DELAY="$(bashio::config 'presence_detection_loop_delay')"
+  else
+    export PRESENCE_DETECTION_LOOP_DELAY=""
+  fi
+  
   if bashio::config.exists 'ble_cmd_retry_delay'; then
     export BLE_CMD_RETRY_DELAY="$(bashio::config 'ble_cmd_retry_delay')"
   else
     export BLE_CMD_RETRY_DELAY=""
+  fi
+
+  if bashio::config.exists 'presence_detection_ttl'; then
+    export PRESENCE_DETECTION_TTL="$(bashio::config 'presence_detection_ttl')"
+  else
+    export PRESENCE_DETECTION_TTL=""
   fi
 
   if bashio::config.exists 'debug'; then
@@ -26,18 +38,6 @@ function initConfigVariables() {
     fi
   else
     export DEBUG=""
-  fi
-
-  if bashio::config.exists 'presence_detection_ttl'; then
-    export PRESENCE_DETECTION_TTL="$(bashio::config 'presence_detection_ttl')"
-  else
-    export PRESENCE_DETECTION_TTL=""
-  fi
-
-  if bashio::config.exists 'presence_detection_loop_delay'; then
-    export PRESENCE_DETECTION_LOOP_DELAY="$(bashio::config 'presence_detection_loop_delay')"
-  else
-    export PRESENCE_DETECTION_LOOP_DELAY=""
   fi
 
   if bashio::config.exists 'temperature_unit_fahrenheit'; then

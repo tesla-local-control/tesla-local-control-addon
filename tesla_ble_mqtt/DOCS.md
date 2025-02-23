@@ -49,11 +49,12 @@ If any of points 4 or 5 fails, you will see these messages in the logs: `Could n
 
 ## Explore
 
-When all setup, you will have the entities available under the newly created MQTT device `Tesla_BLE_[VIN]`:
-- Controls: to send commands to your car. WARNING: currently this module does not update the entity state based on the success or not of the command.
-- Configuration: used above
-- Diagnostics: to get information on the bluetooth device, send specific commands to your Tesla or **Force updating the sensors**
-- Sensors: to read state of your car. WARNING: To update the sensors, you must push the button **Force Data Update** in the Diagnostics section. WARNING: it will wake the car up, so be caution with automation and periodically refreshing.
+Then you are ready. Press the other button entities to send various commands... You can use the relevant service calls in HA automations if you wish.
+Be careful, as for now the car is not sending back state to the HA entities.
+
+This addon does not behave like the "Tesla Custom Integration". For example, when you are sending a command to your car with your phone, this entity Tesla_BLE_VIN will not update. It is currently not possible.
+
+From version 0.5.0, the module can periodically poll your Tesla to update the sensors. **Be careful if you go below 11min period as it will keep the car awake.**
 
 
 ## Troubleshooting

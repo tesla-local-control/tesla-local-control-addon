@@ -24,8 +24,8 @@ configuration:
     name: Journalisation du débogage
     description: Imprimer des messages détaillés dans le journal pour le débogage
   temperature_unit_fahrenheit:
-    name: Utiliser Fahrenheit comme unité de température
-    description: Définir la plage de température basé sur Fahrenheit; Défault faux (Celsius)
+    name: Utilisation des degrés Farenheit
+    description: Pour les commandes de température d'habitacle
   ble_cmd_retry_delay:
     name: Délai pour re-essayer une commande
     description: Délai en seconde pour re-essayer d'envoyer une commande au véhicule via BLE; Défault 5
