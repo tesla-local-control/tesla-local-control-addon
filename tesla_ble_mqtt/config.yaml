@@ -1,5 +1,5 @@
 name: "Tesla Local Commands"
-version: "0.3.0.1"
+version: "0.5.0"
 slug: "tesla_local_commands"
 description: "Control your Tesla locally with bluetooth"
 url: "https://github.com/tesla-local-control/tesla-local-control-addon"
@@ -33,7 +33,6 @@ schema:
   max_current: "int(0,)?"
 
   debug: bool?
-  temperature_unit_fahrenheit: bool?
   presence_detection_ttl: "int(0,)?"
   presence_detection_loop_delay: "int(1,)?"
   ble_cmd_retry_delay: "int(1,)?"
