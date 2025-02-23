@@ -2,13 +2,13 @@
 
 Read state and send commands via MQTT to a Tesla car using Bluetooth Low Energy (BLE)
 **NEW**: Version 0.3.0 introduced the use of sensors with your car data, without going through the Fleet API. **Now from version 0.5.0 this module allows for periodic sensors update** on standard entities from your Tesla (as with Fleet API) only using Bluetooth! No need for Fleet API when at home!
-
 Of course if the car is asleep, it will not wake it up.
-
 
 This Addon is a package of [tesla_ble_mqtt_core](https://github.com/tesla-local-control/tesla_ble_mqtt_core)
 It runs the official Tesla Vehicle SDK commands via BLE to activate various entities in your Tesla.
 This is to bypass the current Fleet API rate limitation as it does not rely on the API.
+
+Advanced settings have been implemented and will be exposed in a future release.
 
 
 ## Prerequisites
