@@ -23,9 +23,6 @@ configuration:
   debug:
     name: Debug Logging
     description: Print verbose messages to the log for debugging
-  temperature_unit_fahrenheit:
-    name: Use degrees Farenheit
-    description: For air conditionning settings
   ble_cmd_retry_delay:
     name: Delay to retry a command
     description: Delay in second to retry sending a command to the vehicle over BLE; Default 5
