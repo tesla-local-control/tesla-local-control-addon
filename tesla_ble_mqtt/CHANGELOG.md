@@ -1,8 +1,14 @@
 # Changelog
 
+## 0.5.1
+   Minor update to fix https://github.com/tesla-local-control/tesla-local-control-addon/issues/148:
+   “Since Supervisor 2026.04.0, the BUILD_FROM argument is no longer provided by default. Use explicit FROM ghcr.io/home-assistant/base:latest in your Dockerfile to achieve the same build result as before. Using a pinned version of the base image is recommended for better build stability.”
+
+   Thanks to https://github.com/aaserali for idenfiying the issue, and to https://github.com/m7les for providing the fix (https://github.com/tesla-local-control/tesla-local-control-addon/pull/149)
+
 ## 0.5.0
  
- **Major release that improves Bluetooth stability and allows for periodically getting your car's state information (sensors and other entities). Whilst the car is at home, there is now no need for FleetAPI!**
+ **Major release that improves Bluetooth stability and allows for periodically getting your car's state information (sensors and other entities). Whilst the car is at home, there is now no need for FleetAPI!**
 
 - Details of Bluetooth stability improvements:
    - Terminate tesla-control processes that run longer than $TC_KILL_TIMEOUT seconds. Discussion: https://github.com/tesla-local-control/tesla_ble_mqtt_core/issues/142
@@ -64,13 +70,9 @@
 - Fixes:
    - Temp units incorrect for new Inside Temp and Outside Temp #135 (_core)
 
-## 0.3.0.1
-
-- CHG: Documentation about how to update sensors
-
 ## 0.3.0
 
-- MAJOR NEW Feature: Read car state using bluetooth (BLE) without using Fleet API calls.
+- MAJOR NEW Feature: Read car state using BLE
 
 ### Changes
 
@@ -104,13 +106,14 @@
 #### Contributors - Thank you!
 - @g4rb4g3 Clear logging on charging current setting
 
-## 0.2.0-1
+## 0.2.1
 
-Minor version - no change in core code
+### <p>**WARNING WARNING WARNING**<br>
+Upgrading from 0.0.10 or previous? DO NOT UPGRADE PRIOR TO READ THE 0.1.0 UPGRADE INSTRUCTIONS.</p>
 
 ### Changed
 
-- CHG: Freeze version of vehicle-command module to ensure compatibility with Alpine Linux available go version (<1.23)
+- NEW Feature: Allow to set temperature unit F|C via bool
 
 ## 0.2.0
 
