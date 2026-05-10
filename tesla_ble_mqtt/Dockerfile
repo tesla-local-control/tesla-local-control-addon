@@ -1,5 +1,4 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM as builder
+FROM ghcr.io/home-assistant/base:latest as builder
 
 RUN apk add --no-cache go git
 
@@ -23,7 +22,7 @@ RUN go get ./... && \
   go build ./... && \
   go install ./...
 
-FROM $BUILD_FROM
+FROM ghcr.io/home-assistant/base:latest
 
 COPY --from=builder /root/go/bin/tesla-control /usr/bin/
 
